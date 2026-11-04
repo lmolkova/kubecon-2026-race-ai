@@ -167,14 +167,17 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 # Usage, latency, and errors
 
-| Recorded data | Dashboard question |
-| --- | --- |
-| Input + output tokens | Where did the tokens go? |
-| Cache read + cache creation tokens | How much usage involved caching? |
-| Tokens by modality | How much was text, image, or audio? |
-| Time to first chunk | How quickly did streaming begin? |
-| Duration | Which operation was slow? |
-| Calls + errors | How often does this fail? |
+<table>
+<thead><tr><th>Dashboard question</th><th class="fragment" data-fragment="data">Recorded data</th></tr></thead>
+<tbody>
+<tr><td>Where did the tokens go?</td><td class="fragment" data-fragment="data">Input + output tokens</td></tr>
+<tr><td>How much usage involved caching?</td><td class="fragment" data-fragment="data">Cache read + cache creation tokens</td></tr>
+<tr><td>How much was text, image, or audio?</td><td class="fragment" data-fragment="data">Tokens by modality</td></tr>
+<tr><td>How quickly did streaming begin?</td><td class="fragment" data-fragment="data">Time to first chunk</td></tr>
+<tr><td>Which operation was slow?</td><td class="fragment" data-fragment="data">Duration</td></tr>
+<tr><td>How often does this fail?</td><td class="fragment" data-fragment="data">Calls + errors</td></tr>
+</tbody>
+</table>
 
 ---
 
