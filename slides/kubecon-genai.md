@@ -220,9 +220,8 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 - **26 newcomers to OTel** across Python GenAI + JS AI work
 - **13 Python instrumentation packages · 4 beta release rounds**
 - JS is adopting the shared-utility and conformance approach
-- **359 PRs merged in Python GenAI since launch**
 
-<img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI contributions since launch: 359 non-bot merged PRs, with monthly counts from May through October 2026" style="display: block; width: 100%; max-height: 360px; object-fit: contain; margin: 12px auto 0;" />
+<img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: about 1 to 19 a month in python-contrib from November 2024, rising to 115 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
 
 ---
 
@@ -243,7 +242,7 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 
 [open-telemetry/semantic-conventions-conformance](https://github.com/open-telemetry/semantic-conventions-conformance)
 
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start;">
+<div class="code-grid" style="display: grid; grid-template-columns: auto auto auto; gap: 24px; align-items: start;">
 <div>
 
 **1. Run a library scenario**

@@ -35,7 +35,7 @@ broken context.
 
 ## Assets and evidence
 
-- `assets/python-genai-contributions-monthly.svg`: monthly non-bot merged PRs in Python GenAI since launch.
+- `assets/python-genai-contributions-monthly.svg`: monthly non-bot merged PRs to Python GenAI instrumentation, stacked by repository (python-contrib in grey, python-genai in OTel blue), with a marker at the May 12, 2026 repository launch.
 
 - `assets/aspire-genai-conversation-long.png`: final inference with the question, tool calls, results, and answer.
 - `assets/aspire-inference-attributes.png`: attributes table of the first inference span.
