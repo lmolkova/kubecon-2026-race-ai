@@ -103,7 +103,7 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 <tbody>
 <tr><td>One schema across all<br>instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
 <tr><td>Proper correlation between them</td><td class="fragment" data-fragment="otel">Context propagation</td></tr>
-<tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">GenAI spans, metrics, and events</td></tr>
+<tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">One SDK and OTLP for all three signals</td></tr>
 <tr><td>One config for content capture</td><td class="fragment" data-fragment="otel">A shared content-capture setting</td></tr>
 <tr><td>Large content separate from telemetry,<br>while still reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
 </tbody>
