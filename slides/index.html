@@ -139,14 +139,20 @@
     }
 
     function fragments(index) {
-      return [...slides[index].querySelectorAll(".fragment")];
+      const groups = new Map();
+      for (const item of slides[index].querySelectorAll(".fragment")) {
+        const key = item.dataset.fragment ?? item;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(item);
+      }
+      return [...groups.values()];
     }
 
     function show(index, revealed = 0) {
       current = Math.max(0, Math.min(index, slides.length - 1));
       const items = fragments(current);
       step = Math.max(0, Math.min(revealed, items.length));
-      items.forEach((item, i) => item.classList.toggle("shown", i < step));
+      items.forEach((group, i) => group.forEach(item => item.classList.toggle("shown", i < step)));
       slides.forEach((slide, i) => {
         slide.classList.toggle("active", i === current);
         slide.setAttribute("aria-hidden", String(i !== current));
