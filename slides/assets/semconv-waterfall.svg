@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1694" height="690" viewBox="0 0 1694 690" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1694" height="506" viewBox="0 0 1694 506" role="img" aria-labelledby="title desc">
 <title id="title">GenAI operations in a trace waterfall</title>
 <desc id="desc">Agent or workflow contains sibling tool execution, inference, and retrieval operations. HTTP is beneath inference. Embeddings and database operations are beneath retrieval. Agent or workflow, tools, and inference are bold to mark the stability targets. HTTP and database operations use core semantic conventions and are grey. Tool execution includes app tools, skills and agents-as-a-tool. Bar positions are illustrative, not a measured demo trace.</desc>
-<metadata>{"kind":"illustrative-operation-coverage","rows":[{"name":"Agent / workflow","original_label_x":24.0,"original_label_y":64.0,"bold":true,"notes":[],"core":false,"color":"#096b88","original_bar_x":740.0,"original_bar_width":640.0,"start_fraction":0.0,"width_fraction":1.0,"depth":0,"parent_row":null,"row":0},{"name":"Tool execution","original_label_x":88.0,"original_label_y":136.0,"bold":true,"notes":["app tools, skills, agents-as-a-tool"],"core":false,"color":"#096b88","original_bar_x":770.0,"original_bar_width":150.0,"start_fraction":0.046875,"width_fraction":0.234375,"depth":1,"parent_row":0,"row":1},{"name":"Inference","original_label_x":88.0,"original_label_y":198.0,"bold":true,"notes":[],"core":false,"color":"#096b88","original_bar_x":940.0,"original_bar_width":200.0,"start_fraction":0.3125,"width_fraction":0.3125,"depth":1,"parent_row":0,"row":2},{"name":"HTTP","original_label_x":138.0,"original_label_y":260.0,"bold":false,"notes":["core semconv"],"core":true,"color":"#d1d5db","original_bar_x":955.0,"original_bar_width":165.0,"start_fraction":0.3359375,"width_fraction":0.2578125,"depth":2,"parent_row":2,"row":3},{"name":"Retrieval","original_label_x":88.0,"original_label_y":322.0,"bold":false,"notes":[],"core":false,"color":"#6c9faf","original_bar_x":1155.0,"original_bar_width":175.0,"start_fraction":0.6484375,"width_fraction":0.2734375,"depth":1,"parent_row":0,"row":4},{"name":"Embeddings","original_label_x":138.0,"original_label_y":384.0,"bold":false,"notes":[],"core":false,"color":"#6c9faf","original_bar_x":1165.0,"original_bar_width":70.0,"start_fraction":0.6640625,"width_fraction":0.109375,"depth":2,"parent_row":4,"row":5},{"name":"DB","original_label_x":138.0,"original_label_y":446.0,"bold":false,"notes":["core semconv"],"core":true,"color":"#d1d5db","original_bar_x":1245.0,"original_bar_width":70.0,"start_fraction":0.7890625,"width_fraction":0.109375,"depth":2,"parent_row":4,"row":6},{"name":"…","original_label_x":88.0,"original_label_y":508.0,"bold":false,"notes":[],"core":false,"color":"#6c9faf","original_bar_x":1340.0,"original_bar_width":40.0,"start_fraction":0.9375,"width_fraction":0.0625,"depth":1,"parent_row":0,"row":7}]}</metadata>
+<metadata>{"kind":"illustrative-operation-coverage","rows":[{"name":"Agent / workflow","original_label_x":24.0,"original_label_y":64.0,"bold":true,"notes":[],"core":false,"color":"#14959b","original_bar_x":740.0,"original_bar_width":640.0,"start_fraction":0.0,"width_fraction":1.0,"depth":0,"parent_row":null,"row":0},{"name":"Tool execution","original_label_x":88.0,"original_label_y":136.0,"bold":true,"notes":["app tools, skills, agents-as-a-tool"],"core":false,"color":"#14959b","original_bar_x":770.0,"original_bar_width":150.0,"start_fraction":0.046875,"width_fraction":0.234375,"depth":1,"parent_row":0,"row":1},{"name":"Inference","original_label_x":88.0,"original_label_y":198.0,"bold":true,"notes":[],"core":false,"color":"#14959b","original_bar_x":940.0,"original_bar_width":200.0,"start_fraction":0.3125,"width_fraction":0.3125,"depth":1,"parent_row":0,"row":2},{"name":"HTTP","original_label_x":138.0,"original_label_y":260.0,"bold":false,"notes":["core semconv"],"core":true,"color":"#d1d5db","original_bar_x":955.0,"original_bar_width":165.0,"start_fraction":0.3359375,"width_fraction":0.2578125,"depth":2,"parent_row":2,"row":3},{"name":"Retrieval","original_label_x":88.0,"original_label_y":322.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":1155.0,"original_bar_width":175.0,"start_fraction":0.6484375,"width_fraction":0.2734375,"depth":1,"parent_row":0,"row":4},{"name":"Embeddings","original_label_x":138.0,"original_label_y":384.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":1165.0,"original_bar_width":70.0,"start_fraction":0.6640625,"width_fraction":0.109375,"depth":2,"parent_row":4,"row":5},{"name":"DB","original_label_x":138.0,"original_label_y":446.0,"bold":false,"notes":["core semconv"],"core":true,"color":"#d1d5db","original_bar_x":1245.0,"original_bar_width":70.0,"start_fraction":0.7890625,"width_fraction":0.109375,"depth":2,"parent_row":4,"row":6},{"name":"…","original_label_x":88.0,"original_label_y":508.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":1340.0,"original_bar_width":40.0,"start_fraction":0.9375,"width_fraction":0.0625,"depth":1,"parent_row":0,"row":7}]}</metadata>
 <style>
   text { font-family: Arial, sans-serif; fill: #172b4d; }
   .span-name { font-size: 24px; }
@@ -16,51 +16,60 @@
   <marker id="red-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c62828"/></marker>
   <marker id="blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
 </defs>
-<rect width="1694" height="690" fill="white"/>
+<rect width="1694" height="506" fill="white"/>
 <g id="conventions-panel">
-<text x="40" y="26" class="column-heading">Name</text>
-<path class="grid" d="M870 38V607"/>
-<path class="grid" d="M1070 38V607"/>
-<path class="grid" d="M1270 38V607"/>
-<path class="grid" d="M1470 38V607"/>
-<path class="grid" d="M1670 38V607"/>
-<path class="tree" data-parent-row="0" d="M50 71V590 M50 134H58 M50 210H58 M50 362H58 M50 590H58"/>
-<path class="tree" data-parent-row="2" d="M78 223V286 M78 286H86"/>
-<path class="tree" data-parent-row="4" d="M78 375V514 M78 438H86 M78 514H86"/>
+<style>#conventions-panel .span-name { font-size: 30px; } #conventions-panel .column-heading, #conventions-panel .span-note { font-size: 25px; }</style>
+<text x="40" y="32.5" class="column-heading">Name</text>
+<path class="grid" d="M870 47.5V457.75"/>
+<path class="grid" d="M1070 47.5V457.75"/>
+<path class="grid" d="M1270 47.5V457.75"/>
+<path class="grid" d="M1470 47.5V457.75"/>
+<path class="grid" d="M1670 47.5V457.75"/>
+<path class="tree" data-parent-row="0" d="M50 88.75V436.5 M50 124.5H58 M50 176.5H58 M50 280.5H58 M50 436.5H58"/>
+<path class="tree" data-parent-row="2" d="M78 192.75V228.5 M78 228.5H86"/>
+<path class="tree" data-parent-row="4" d="M78 296.75V384.5 M78 332.5H86 M78 384.5H86"/>
 <g id="conventions-row-0" class="trace-row" data-row="0" data-depth="0" data-parent-row="">
-<text x="40" y="66" font-weight="700" class="span-name">Agent / workflow</text>
-<rect class="bar illustrative-bar" x="870" y="50" width="800" height="16" rx="4" fill="#096b88" data-original-x="740.0" data-original-width="640.0"/>
+<rect class="service-marker" x="26" y="61.25" width="5" height="22.5" fill="#14959b"/>
+<text x="40" y="82.5" font-weight="700" class="span-name">Agent / workflow</text>
+<rect class="bar illustrative-bar" x="870" y="62.5" width="800" height="20" rx="5" fill="#14959b" data-original-x="740.0" data-original-width="640.0"/>
 </g>
 <g id="conventions-row-1" class="trace-row" data-row="1" data-depth="1" data-parent-row="0">
-<text x="68" y="142" font-weight="700" class="span-name">Tool execution</text>
-<text x="288" y="142" class="span-note">app tools, skills, agents-as-a-tool</text>
-<rect class="bar illustrative-bar" x="907.5" y="126" width="187.5" height="16" rx="4" fill="#096b88" data-original-x="770.0" data-original-width="150.0"/>
+<rect class="service-marker" x="54" y="113.25" width="5" height="22.5" fill="#14959b"/>
+<text x="68" y="134.5" font-weight="700" class="span-name">Tool execution</text>
+<text x="302" y="134.5" class="span-note">app tools, skills, agents-as-a-tool</text>
+<rect class="bar illustrative-bar" x="907.5" y="114.5" width="187.5" height="20" rx="5" fill="#14959b" data-original-x="770.0" data-original-width="150.0"/>
 </g>
 <g id="conventions-row-2" class="trace-row" data-row="2" data-depth="1" data-parent-row="0">
-<text x="68" y="218" font-weight="700" class="span-name">Inference</text>
-<rect class="bar illustrative-bar" x="1120" y="202" width="250" height="16" rx="4" fill="#096b88" data-original-x="940.0" data-original-width="200.0"/>
+<rect class="service-marker" x="54" y="165.25" width="5" height="22.5" fill="#14959b"/>
+<text x="68" y="186.5" font-weight="700" class="span-name">Inference</text>
+<rect class="bar illustrative-bar" x="1120" y="166.5" width="250" height="20" rx="5" fill="#14959b" data-original-x="940.0" data-original-width="200.0"/>
 </g>
 <g id="conventions-row-3" class="trace-row core" data-row="3" data-depth="2" data-parent-row="2">
-<text x="96" y="294" class="span-name">HTTP</text>
-<text x="196" y="294" class="span-note">core semconv</text>
-<rect class="bar illustrative-bar" x="1138.75" y="278" width="206.25" height="16" rx="4" fill="#d1d5db" data-original-x="955.0" data-original-width="165.0"/>
+<rect class="service-marker" x="82" y="217.25" width="5" height="22.5" fill="#d1d5db"/>
+<text x="96" y="238.5" class="span-name">HTTP</text>
+<text x="198" y="238.5" class="span-note">core semconv</text>
+<rect class="bar illustrative-bar" x="1138.75" y="218.5" width="206.25" height="20" rx="5" fill="#d1d5db" data-original-x="955.0" data-original-width="165.0"/>
 </g>
 <g id="conventions-row-4" class="trace-row" data-row="4" data-depth="1" data-parent-row="0">
-<text x="68" y="370" class="span-name">Retrieval</text>
-<rect class="bar illustrative-bar" x="1388.75" y="354" width="218.75" height="16" rx="4" fill="#6c9faf" data-original-x="1155.0" data-original-width="175.0"/>
+<rect class="service-marker" x="54" y="269.25" width="5" height="22.5" fill="#14959b"/>
+<text x="68" y="290.5" class="span-name">Retrieval</text>
+<rect class="bar illustrative-bar" x="1388.75" y="270.5" width="218.75" height="20" rx="5" fill="#14959b" data-original-x="1155.0" data-original-width="175.0"/>
 </g>
 <g id="conventions-row-5" class="trace-row" data-row="5" data-depth="2" data-parent-row="4">
-<text x="96" y="446" class="span-name">Embeddings</text>
-<rect class="bar illustrative-bar" x="1401.25" y="430" width="87.5" height="16" rx="4" fill="#6c9faf" data-original-x="1165.0" data-original-width="70.0"/>
+<rect class="service-marker" x="82" y="321.25" width="5" height="22.5" fill="#14959b"/>
+<text x="96" y="342.5" class="span-name">Embeddings</text>
+<rect class="bar illustrative-bar" x="1401.25" y="322.5" width="87.5" height="20" rx="5" fill="#14959b" data-original-x="1165.0" data-original-width="70.0"/>
 </g>
 <g id="conventions-row-6" class="trace-row core" data-row="6" data-depth="2" data-parent-row="4">
-<text x="96" y="522" class="span-name">DB</text>
-<text x="161" y="522" class="span-note">core semconv</text>
-<rect class="bar illustrative-bar" x="1501.25" y="506" width="87.5" height="16" rx="4" fill="#d1d5db" data-original-x="1245.0" data-original-width="70.0"/>
+<rect class="service-marker" x="82" y="373.25" width="5" height="22.5" fill="#d1d5db"/>
+<text x="96" y="394.5" class="span-name">DB</text>
+<text x="162" y="394.5" class="span-note">core semconv</text>
+<rect class="bar illustrative-bar" x="1501.25" y="374.5" width="87.5" height="20" rx="5" fill="#d1d5db" data-original-x="1245.0" data-original-width="70.0"/>
 </g>
 <g id="conventions-row-7" class="trace-row" data-row="7" data-depth="1" data-parent-row="0">
-<text x="68" y="598" class="span-name">…</text>
-<rect class="bar illustrative-bar" x="1620" y="582" width="50" height="16" rx="4" fill="#6c9faf" data-original-x="1340.0" data-original-width="40.0"/>
+<rect class="service-marker" x="54" y="425.25" width="5" height="22.5" fill="#14959b"/>
+<text x="68" y="446.5" class="span-name">…</text>
+<rect class="bar illustrative-bar" x="1620" y="426.5" width="50" height="20" rx="5" fill="#14959b" data-original-x="1340.0" data-original-width="40.0"/>
 </g>
 </g>
 </svg>
