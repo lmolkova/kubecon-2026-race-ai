@@ -61,7 +61,7 @@
         .service { font-size: 28px; font-weight: 600; text-anchor: start; }
         .detail { font-size: 22px; fill: var(--cp-text-muted); }
         .source { stroke-width: 2; }
-        .openinference { fill: #14959b; stroke: #14959b; }
+        .openinference { fill: #0f8188; stroke: #0f8188; }
         .native-otel { fill: #425cc7; stroke: #425cc7; }
         .langsmith { fill: #a3367a; stroke: #a3367a; }
         .source-name { fill: #ffffff; font-size: 20px; font-weight: 600; }
@@ -121,6 +121,7 @@
       <text x="849" y="701" class="detail">+ Anthropic SDK</text>
       <rect x="694" y="720" width="155" height="40" class="source openinference"/>
       <rect x="849" y="720" width="155" height="40" class="source native-otel"/>
+      <path d="M 849 720 V 760" stroke="#ffffff" stroke-width="3"/>
       <text x="771.5" y="747" class="source-name" style="font-size: 18px;">OpenInference</text>
       <text x="926.5" y="747" class="source-name" style="font-size: 18px;">native OTel</text>
       <rect x="902" y="585" width="96" height="30" rx="15" class="badge"/>

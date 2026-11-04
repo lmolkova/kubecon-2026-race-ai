@@ -29,7 +29,7 @@ Sources and qualifications are collected in [sources.md](sources.md).
 
 Diagram and chart colors follow the OpenTelemetry logo. OTel blue `#425cc7`
 is the main series color and marks diagnostic-agent spans. OTel amber
-`#f5a800` marks runbook spans. Teal `#14959b` marks OpenInference and the
+`#f5a800` marks runbook spans. Teal `#0f8188` marks OpenInference and the
 provider bill, and plum `#a3367a` marks LangSmith OTLP. Red is reserved for
 broken context.
 
