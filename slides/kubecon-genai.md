@@ -98,13 +98,16 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 
 # What OpenTelemetry provides
 
-| Wish | OpenTelemetry |
-| --- | --- |
-| One schema across all instrumentations | GenAI semantic conventions, checked by conformance tests |
-| Proper correlation between them | Context propagation |
-| Traces, metrics, and logs | GenAI spans, metrics, and events |
-| One config for content capture | A shared content-capture setting |
-| Large content separate from telemetry, but reachable | An upload hook that stores content and links to it |
+<table>
+<thead><tr><th>Wish</th><th>OpenTelemetry</th></tr></thead>
+<tbody>
+<tr><td>One schema across all instrumentations</td><td class="fragment">GenAI semantic conventions, checked by conformance tests</td></tr>
+<tr><td>Proper correlation between them</td><td class="fragment">Context propagation</td></tr>
+<tr><td>Traces, metrics, and logs</td><td class="fragment">GenAI spans, metrics, and events</td></tr>
+<tr><td>One config for content capture</td><td class="fragment">A shared content-capture setting</td></tr>
+<tr><td>Large content separate from telemetry, but reachable</td><td class="fragment">An upload hook that stores content and links to it</td></tr>
+</tbody>
+</table>
 
 ---
 

@@ -14,6 +14,8 @@ python -m http.server 8765 --bind 127.0.0.1
 
 Open http://127.0.0.1:8765/slides/ in a browser. Use the arrow keys to
 change slides and **F** or **Full screen** for presentation mode.
+Elements with `class="fragment"` appear one at a time as you advance;
+going back into a slide shows all of them.
 The viewer loads the Markdown source and local assets directly.
 Internet access to `cdn.jsdelivr.net` is required for the Markdown and
 Mermaid renderers. Reload the page after editing the source.
