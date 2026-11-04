@@ -1,6 +1,6 @@
 # Sources and notes
 
-## Demo evidence: slides 3–9, 14
+## Demo evidence: slides 3–9, 13
 
 - Code: [demo](../demos/kubecon-genai/demo.py), [locked versions](../demos/kubecon-genai/uv.lock).
 - Main trace: `b2fb5dc7fc85244d41a7f3667beaec03`.
@@ -9,9 +9,9 @@
 - Model IDs: `gpt-4.1`, `claude-sonnet-4-6`, and `gpt-4.1-mini`.
 - Original Aspire screenshots recaptured in light mode on November 3, 2026; the full waterfall and separate orphan HTTP capture are retained in `assets/aspire-waterfall.png` and `assets/aspire-orphan-http.png`.
 - Slides 4 and 9 are vector redraws of those saved captures, retaining all 22 main-trace spans and the separate orphan span, displayed names, resources, nesting, and markers. Original displayed durations are retained in SVG metadata, not a visible column. Bar shapes are traced from screenshot pixels; no exact start/end timestamps were recovered. Slide 9's boxes and arrows mark intended parents without changing the captured hierarchy or combining the two time scales.
-- The four trace images on slides 3, 4, 9, and 13 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
+- The four trace images on slides 3, 4, 9, and 12 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
 - Slide 3 keeps conceptual span names and intended nesting, but its 12 bars follow the corresponding visible bar bounds on slide 4's 0–0.7 s axis. Model calls use the model-span rows, not their duplicate HTTP observations. These are approximate screenshot positions, not recovered OTLP timestamps; the SVG metadata records the source-row mapping and bounds.
-- Slide 13's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
+- Slide 12's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
 - Slide 3 uses the captured trace's service colours and span markers, with larger labels and row spacing to use the available slide height. Teal identifies diagnostic-agent and gold identifies runbook. Its 12 labels and hierarchy are unchanged.
 - The query tool fetches OTLP JSON from Aspire into local SQLite without renaming or reparenting spans.
 - Two GPT-4.1 calls: 420 input / 90 output tokens, OpenInference schema.
@@ -29,7 +29,7 @@
 - Slide 6 is an illustrative cost chart, not captured telemetry or billing. Both series use USD by usage date; provider data has an invented one-day delay. The demo's 60% missing input tokens does not imply 60% missing cost.
 - Slide 7's [instrumentation diagram](assets/instrumentation-architecture.svg) shows application calls and instrumentation sources, not measured span parentage.
 
-## Conventions and development: slides 11–19, 23–25
+## Conventions and development: slides 11–18, 22–24
 
 - [GenAI conventions](https://github.com/open-telemetry/semantic-conventions-genai).
 - [Reference scenario policy](https://github.com/open-telemetry/semantic-conventions-genai/blob/main/AGENTS.md), and [reference contribution guide](https://github.com/open-telemetry/semantic-conventions-genai/blob/main/reference/CONTRIBUTING.md).
@@ -51,7 +51,7 @@ The roadmap is direction, not a delivery commitment. Separate established
 signal definitions, active stabilization, and proposed extensions verbally.
 Do not imply that planning, arbitrary steps, or every signal has stable coverage.
 
-## Conformance: slides 20–22
+## Conformance: slides 19–21
 
 - [Comparison dashboard](https://open-telemetry.github.io/semantic-conventions-conformance/#?q=anthropic).
 - [Native Anthropic report](https://open-telemetry.github.io/semantic-conventions-conformance/#/target/gen-ai/python/anthropic/native).
@@ -67,7 +67,7 @@ are different findings. The successful inference scenario need not emit `error.t
 The report's signal classifications do not exhaust all telemetry emitted.
 Do not claim Weaver alone proves context propagation or semantic correctness.
 
-## Community adoption: slide 26
+## Community adoption: slide 25
 
 - [OpenInference #3024](https://github.com/Arize-ai/openinference/pull/3024): opt-in GenAI attributes alongside existing fields.
 - [Donation PR #1](https://github.com/open-telemetry/donation-openinference/pull/1): merged June 16, 2026; this is the date shown on the donation slide.

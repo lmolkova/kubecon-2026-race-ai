@@ -94,10 +94,6 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 
 # What did we do in OTel
 
----
-
-# What OpenTelemetry provides
-
 <table>
 <thead><tr><th>Wish</th><th class="fragment" data-fragment="otel">OpenTelemetry</th></tr></thead>
 <tbody>

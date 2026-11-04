@@ -51,13 +51,13 @@ Screenshot trace: `b2fb5dc7fc85244d41a7f3667beaec03`.
 Both slide queries were executed against this capture: 2 / 280 and 5 / 900; the latter double-counts the Anthropic inference.
 Queries use the SQLite `span_data` view, with attributes exposed as quoted columns.
 The screenshots are saved locally so the deck does not depend on live services.
-Slides 3, 4, 9, and 13 share an SVG waterfall layout.
+Slides 3, 4, 9, and 12 share an SVG waterfall layout.
 The images omit titles, capture summaries, footer captions, and per-span
 duration columns; time axes and parentage annotations remain.
 The captured views preserve every displayed trace row; bar shapes follow the
 saved screenshot pixels, not recovered start/end timestamps.
 Slide 3's names and nesting remain illustrative; its bar positions follow the
-saved capture on the same 0–0.7 s axis. Slide 13's operation-coverage example
+saved capture on the same 0–0.7 s axis. Slide 12's operation-coverage example
 remains illustrative.
 
 ## Live demo fallback
