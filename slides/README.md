@@ -25,6 +25,14 @@ Stop the server with **Ctrl+C**.
 Speaker notes are omitted. TODOs remain in the slide source.
 Sources and qualifications are collected in [sources.md](sources.md).
 
+## Colors
+
+Diagram and chart colors follow the OpenTelemetry logo. OTel blue `#425cc7`
+is the main series color and marks diagnostic-agent spans. OTel amber
+`#f5a800` marks runbook spans. Teal `#0f8188` marks OpenInference and the
+provider bill, and plum `#a3367a` marks LangSmith OTLP. Red is reserved for
+broken context.
+
 ## Assets and evidence
 
 - `assets/python-genai-contributions-monthly.svg`: monthly non-bot merged PRs in Python GenAI since launch.
