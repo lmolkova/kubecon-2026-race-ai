@@ -53,15 +53,20 @@
     }
   </style>
       <title id="diagram-title">How did we instrument the application?</title>
-      <desc id="diagram-description">A LangGraph workflow calls ChatOpenAI, a local diagnostic agent through inspect_workload, and a remote runbook agent through consult_runbook over HTTP. The diagnostic agent calls ChatAnthropic with the Anthropic SDK. The runbook agent calls the OpenAI SDK. OpenInference instruments the workflow, diagnostic agent, and their model calls; the Anthropic call also uses native OTel. LangSmith OTLP instruments the runbook agent and model call.</desc>
+      <desc id="diagram-description">A LangGraph workflow calls ChatOpenAI, a local diagnostic agent through inspect_workload, and a remote runbook agent through consult_runbook over HTTP. The diagnostic agent calls ChatAnthropic with the Anthropic SDK. The runbook agent calls the OpenAI SDK. OpenInference instruments the workflow, diagnostic agent, and their model calls; the Anthropic call also uses native OTel, so it produces two inference spans. LangSmith OTLP instruments the runbook agent and model call. Each box has a footer strip colored and labeled by instrumentation source: purple for OpenInference, blue for native OTel, and orange for LangSmith OTLP.</desc>
       <style>
         svg { font-family: "Segoe UI", Aptos, Calibri, sans-serif; }
         text { fill: var(--cp-text); font-size: 26px; text-anchor: middle; }
         .title { font-size: 44px; font-weight: 600; text-anchor: start; }
         .service { font-size: 28px; font-weight: 600; text-anchor: start; }
         .detail { font-size: 22px; fill: var(--cp-text-muted); }
-        .instrumentation-label { font-size: 18px; fill: var(--cp-text-muted); }
-        .instrumentation { font-size: 20px; }
+        .source { stroke-width: 2; }
+        .openinference { fill: #6d4bc4; stroke: #6d4bc4; }
+        .native-otel { fill: #425cc7; stroke: #425cc7; }
+        .langsmith { fill: #c2410c; stroke: #c2410c; }
+        .source-name { fill: #ffffff; font-size: 20px; font-weight: 600; }
+        .badge { fill: var(--cp-accent); }
+        .badge-text { fill: var(--cp-accent-fg); font-size: 18px; font-weight: 600; }
         .operation { font-weight: 600; }
         .container { fill: none; stroke: var(--cp-border-strong); stroke-width: 1.5; }
         .node { fill: var(--cp-surface); stroke: var(--cp-border-strong); stroke-width: 2; }
@@ -82,50 +87,54 @@
       <path d="M 196 440 V 332 H 410" class="connector"/>
       <path d="M 316 512 H 410" class="connector"/>
       <path d="M 196 584 V 680 H 410" class="connector"/>
-      <path d="M 662 680 H 696" class="connector"/>
+      <path d="M 662 680 H 690" class="connector"/>
       <path d="M 662 512 H 1076" class="connector"/>
       <path d="M 1214 584 V 604" class="connector"/>
       <text x="303" y="661" class="detail" style="font-size: 20px;">inspect_workload tool</text>
       <text x="869" y="493" class="detail">HTTP</text>
 
       <rect x="76" y="440" width="240" height="144" class="node"/>
-      <text x="196" y="476" class="operation" style="font-size: 24px;">diagnose_workload</text>
-      <text x="196" y="507" class="detail">LangGraph workflow</text>
-      <text x="196" y="536" class="instrumentation-label">Instrumentation:</text>
-      <text x="196" y="563" class="instrumentation">OpenInference</text>
+      <text x="196" y="480" class="operation" style="font-size: 24px;">diagnose_workload</text>
+      <text x="196" y="512" class="detail">LangGraph workflow</text>
+      <rect x="76" y="544" width="240" height="40" class="source openinference"/>
+      <text x="196" y="571" class="source-name">OpenInference</text>
 
       <rect x="414" y="260" width="248" height="144" class="node"/>
-      <text x="538" y="296" class="operation">Model call</text>
-      <text x="538" y="327" class="detail">ChatOpenAI</text>
-      <text x="538" y="356" class="instrumentation-label">Instrumentation:</text>
-      <text x="538" y="383" class="instrumentation">OpenInference</text>
+      <text x="538" y="300" class="operation">Model call</text>
+      <text x="538" y="332" class="detail">ChatOpenAI</text>
+      <rect x="414" y="364" width="248" height="40" class="source openinference"/>
+      <text x="538" y="391" class="source-name">OpenInference</text>
 
       <rect x="414" y="456" width="248" height="112" class="node"/>
       <text x="538" y="501" class="operation">consult_runbook</text>
       <text x="538" y="536" class="detail">Tool</text>
 
       <rect x="414" y="608" width="248" height="144" class="node"/>
-      <text x="538" y="644" class="operation">diagnostic</text>
-      <text x="538" y="675" class="detail">LangGraph agent</text>
-      <text x="538" y="704" class="instrumentation-label">Instrumentation:</text>
-      <text x="538" y="731" class="instrumentation">OpenInference</text>
+      <text x="538" y="648" class="operation">diagnostic</text>
+      <text x="538" y="680" class="detail">LangGraph agent</text>
+      <rect x="414" y="712" width="248" height="40" class="source openinference"/>
+      <text x="538" y="739" class="source-name">OpenInference</text>
 
-      <rect x="700" y="588" width="288" height="184" class="node"/>
-      <text x="844" y="624" class="operation">Model call</text>
-      <text x="844" y="658" class="detail">ChatAnthropic</text>
-      <text x="844" y="689" class="detail">+ Anthropic SDK</text>
-      <text x="844" y="718" class="instrumentation-label">Instrumentation:</text>
-      <text x="844" y="747" class="instrumentation">OpenInference + native OTel</text>
+      <rect x="694" y="600" width="310" height="160" class="node"/>
+      <text x="849" y="640" class="operation">Model call</text>
+      <text x="849" y="672" class="detail">ChatAnthropic</text>
+      <text x="849" y="701" class="detail">+ Anthropic SDK</text>
+      <rect x="694" y="720" width="155" height="40" class="source openinference"/>
+      <rect x="849" y="720" width="155" height="40" class="source native-otel"/>
+      <text x="771.5" y="747" class="source-name" style="font-size: 18px;">OpenInference</text>
+      <text x="926.5" y="747" class="source-name" style="font-size: 18px;">native OTel</text>
+      <rect x="902" y="585" width="96" height="30" rx="15" class="badge"/>
+      <text x="950" y="607" class="badge-text">2 spans</text>
 
       <rect x="1080" y="440" width="268" height="144" class="node"/>
-      <text x="1214" y="476" class="operation">runbook</text>
-      <text x="1214" y="507" class="detail">LangGraph agent</text>
-      <text x="1214" y="536" class="instrumentation-label">Instrumentation:</text>
-      <text x="1214" y="563" class="instrumentation">LangSmith OTLP</text>
+      <text x="1214" y="480" class="operation">runbook</text>
+      <text x="1214" y="512" class="detail">LangGraph agent</text>
+      <rect x="1080" y="544" width="268" height="40" class="source langsmith"/>
+      <text x="1214" y="571" class="source-name">LangSmith OTLP</text>
 
       <rect x="1080" y="608" width="268" height="144" class="node"/>
-      <text x="1214" y="644" class="operation">Model call</text>
-      <text x="1214" y="675" class="detail">OpenAI SDK</text>
-      <text x="1214" y="704" class="instrumentation-label">Instrumentation:</text>
-      <text x="1214" y="731" class="instrumentation">LangSmith OTLP</text>
+      <text x="1214" y="648" class="operation">Model call</text>
+      <text x="1214" y="680" class="detail">OpenAI SDK</text>
+      <rect x="1080" y="712" width="268" height="40" class="source langsmith"/>
+      <text x="1214" y="739" class="source-name">LangSmith OTLP</text>
     </svg>
