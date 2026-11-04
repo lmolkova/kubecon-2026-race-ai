@@ -53,7 +53,7 @@
     }
   </style>
       <title id="diagram-title">How did we instrument the application?</title>
-      <desc id="diagram-description">A LangGraph workflow calls ChatOpenAI, a local diagnostic agent through inspect_workload, and a remote runbook agent through consult_runbook over HTTP. The diagnostic agent calls ChatAnthropic with the Anthropic SDK. The runbook agent calls the OpenAI SDK. OpenInference instruments the workflow, diagnostic agent, and their model calls; the Anthropic call also uses native OTel, so it produces two inference spans. LangSmith OTLP instruments the runbook agent and model call. Each box has a footer strip colored and labeled by instrumentation source: purple for OpenInference, blue for native OTel, and orange for LangSmith OTLP.</desc>
+      <desc id="diagram-description">A LangGraph workflow calls ChatOpenAI, a local diagnostic agent through inspect_workload, and a remote runbook agent through consult_runbook over HTTP. The diagnostic agent calls ChatAnthropic with the Anthropic SDK. The runbook agent calls the OpenAI SDK. OpenInference instruments the workflow, diagnostic agent, and their model calls; the Anthropic call also uses native OTel, so it produces two inference spans. LangSmith OTLP instruments the runbook agent and model call. Each box has a footer strip colored and labeled by instrumentation source: teal for OpenInference, blue for native OTel, and plum for LangSmith OTLP.</desc>
       <style>
         svg { font-family: "Segoe UI", Aptos, Calibri, sans-serif; }
         text { fill: var(--cp-text); font-size: 26px; text-anchor: middle; }
@@ -61,12 +61,12 @@
         .service { font-size: 28px; font-weight: 600; text-anchor: start; }
         .detail { font-size: 22px; fill: var(--cp-text-muted); }
         .source { stroke-width: 2; }
-        .openinference { fill: #6d4bc4; stroke: #6d4bc4; }
+        .openinference { fill: #14959b; stroke: #14959b; }
         .native-otel { fill: #425cc7; stroke: #425cc7; }
-        .langsmith { fill: #c2410c; stroke: #c2410c; }
+        .langsmith { fill: #a3367a; stroke: #a3367a; }
         .source-name { fill: #ffffff; font-size: 20px; font-weight: 600; }
-        .badge { fill: var(--cp-accent); }
-        .badge-text { fill: var(--cp-accent-fg); font-size: 18px; font-weight: 600; }
+        .badge { fill: #f5a800; }
+        .badge-text { fill: #242424; font-size: 18px; font-weight: 600; }
         .operation { font-weight: 600; }
         .container { fill: none; stroke: var(--cp-border-strong); stroke-width: 1.5; }
         .node { fill: var(--cp-surface); stroke: var(--cp-border-strong); stroke-width: 2; }

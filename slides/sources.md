@@ -12,7 +12,7 @@
 - The four trace images on slides 3, 4, 9, and 12 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
 - Slide 3 keeps conceptual span names and intended nesting, but its 12 bars follow the corresponding visible bar bounds on slide 4's 0–0.7 s axis. Model calls use the model-span rows, not their duplicate HTTP observations. These are approximate screenshot positions, not recovered OTLP timestamps; the SVG metadata records the source-row mapping and bounds.
 - Slide 12's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
-- Slide 3 uses the captured trace's service colours and span markers, with larger labels and row spacing to use the available slide height. Teal identifies diagnostic-agent and gold identifies runbook. Its 12 labels and hierarchy are unchanged.
+- Slide 3 uses the captured trace's span markers, with larger labels and row spacing to use the available slide height. Blue identifies diagnostic-agent and amber identifies runbook, matching the redrawn captures. Its 12 labels and hierarchy are unchanged.
 - The query tool fetches OTLP JSON from Aspire into local SQLite without renaming or reparenting spans.
 - Two GPT-4.1 calls: 420 input / 90 output tokens, OpenInference schema.
 - ChatAnthropic also emits an OpenInference inference span: 200 / 50, duplicating the native Anthropic usage.
@@ -24,7 +24,7 @@
 - The compact mapping SQL handles this fixture, not arbitrary versions or duplicate instrumentation.
 - `missing_usage` preserves absent usage; `SUM` does not turn it into measured zero.
 - Ancestry: GPT-4.1 belongs directly to the workflow. Anthropic bypasses its diagnostic agent. LangSmith preserves runbook-to-model parenting, but the runbook bypasses its tool. The query does not classify LangSmith's `chain` as an agent, so classified agent ancestry remains null; the OpenInference ChatAnthropic span retains inspect_workload ancestry, while the native span does not.
-- HTTPX is enabled in runbook. Its outgoing HTTP span is exported in the separate trace above with an unexported parent; the blue arrow marks the intended ChatOpenAI parent.
+- HTTPX is enabled in runbook. Its outgoing HTTP span is exported in the separate trace above with an unexported parent; the lower red arrow marks the intended ChatOpenAI parent.
 - HTTP metrics and ordinary application logs are not evidence of GenAI signal parity.
 - Slide 6 is an illustrative cost chart, not captured telemetry or billing. Both series use USD by usage date; provider data has an invented one-day delay. The demo's 60% missing input tokens does not imply 60% missing cost.
 - Slide 7's [instrumentation diagram](assets/instrumentation-architecture.svg) shows application calls and instrumentation sources, not measured span parentage.
