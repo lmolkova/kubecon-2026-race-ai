@@ -95,6 +95,7 @@ package, attribute, signal, configuration option, or propagation path conforms.
 - Source: `opentelemetry.instrumentation.genai.langchain` version `1.3b0`.
 - `assets/otel-inference-attributes.json` preserves the exported values. The content slide decodes the message JSON, omits null names, and shows the first of two tool calls.
 - `assets/aspire-inference-attributes.png` shows only the first inference span's attributes table.
+- The slide 13 attributes table copies that span's `gen_ai.*` values from `assets/otel-inference-attributes.json`. Message and tool-definition values are shortened to the first part, tool call, or tool and omit null names. The chat span has no agent identity attributes, so the top `gen_ai.agent.name` row comes from the `invoke_agent diagnostic` span instead. Its value is the `name="diagnostic"` passed to `create_agent` in `demos/kubecon-genai/demo.py`.
 - `assets/aspire-genai-conversation-long.png` shows the final inference span `6483b37c228ebddd` in the same trace: the question, two tool calls, both tool results, and the final answer. It reports 300 input and 60 output tokens.
 - Agent IDs, versions, descriptions, separate instructions, and request-parameter fields are convention coverage, not claims that every demo span emitted them.
 - Attribute definitions: `model/gen-ai/registry.yaml`; structured messages and tool definitions: `model/gen-ai/gen-ai-*-messages.json` and `model/gen-ai/gen-ai-tool-definitions.json`.
