@@ -101,11 +101,11 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 <table>
 <thead><tr><th>Wish</th><th class="fragment" data-fragment="otel">OpenTelemetry</th></tr></thead>
 <tbody>
-<tr><td>One schema across all instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
+<tr><td>One schema across<br>all instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
 <tr><td>Proper correlation between them</td><td class="fragment" data-fragment="otel">Context propagation</td></tr>
 <tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">GenAI spans, metrics, and events</td></tr>
 <tr><td>One config for content capture</td><td class="fragment" data-fragment="otel">A shared content-capture setting</td></tr>
-<tr><td>Large content separate from telemetry, but reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
+<tr><td>Large content separate from telemetry,<br>but reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
 </tbody>
 </table>
 
