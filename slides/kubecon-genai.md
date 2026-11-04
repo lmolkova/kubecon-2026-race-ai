@@ -98,15 +98,14 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 
 # What OpenTelemetry provides
 
-```mermaid
-flowchart LR
-  S[Semantic conventions] --> I[Instrumentation]
-  I --> K[OTel SDK]
-  K --> O[OTLP]
-  O --> B[Your observability tools]
-  C[Context and configuration] --> I
-  C --> K
-```
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 40px;">
+<div style="display: flex; flex-direction: column; gap: 14px;"><div style="min-height: 96px; font-size: 21px; font-style: italic; color: var(--cp-text-muted);">One schema across all instrumentations</div><div style="text-align: center; color: var(--cp-text-muted);">↓</div><div style="flex: 1; padding: 20px; border: 3px solid var(--cp-accent); border-radius: 12px; background: var(--cp-accent-soft); font-weight: 600;">GenAI semantic conventions<div style="margin-top: 14px; font-size: 20px; font-weight: 400;">checked by conformance tests</div></div></div>
+<div style="display: flex; flex-direction: column; gap: 14px;"><div style="min-height: 96px; font-size: 21px; font-style: italic; color: var(--cp-text-muted);">Proper correlation between them</div><div style="text-align: center; color: var(--cp-text-muted);">↓</div><div style="flex: 1; padding: 20px; border: 3px solid var(--cp-border); border-radius: 12px; background: var(--cp-surface-soft); font-weight: 600;">Context propagation<div style="margin-top: 14px; font-size: 20px; font-weight: 400;">parent span flows across libraries and services</div></div></div>
+<div style="display: flex; flex-direction: column; gap: 14px;"><div style="min-height: 96px; font-size: 21px; font-style: italic; color: var(--cp-text-muted);">Traces, metrics, and logs</div><div style="text-align: center; color: var(--cp-text-muted);">↓</div><div style="flex: 1; padding: 20px; border: 3px solid var(--cp-accent); border-radius: 12px; background: var(--cp-accent-soft); font-weight: 600;">Shared GenAI util<div style="margin-top: 14px; font-size: 20px; font-weight: 400;">emits spans, metrics, and events, exported over OTLP</div></div></div>
+<div style="display: flex; flex-direction: column; gap: 14px;"><div style="min-height: 96px; font-size: 21px; font-style: italic; color: var(--cp-text-muted);">One config for content capture</div><div style="text-align: center; color: var(--cp-text-muted);">↓</div><div style="flex: 1; padding: 20px; border: 3px solid var(--cp-border); border-radius: 12px; background: var(--cp-surface-soft); font-weight: 600;">Configuration<div style="margin-top: 14px; font-size: 20px; font-weight: 400;">one setting for every OTel GenAI instrumentation</div></div></div>
+<div style="display: flex; flex-direction: column; gap: 14px;"><div style="min-height: 96px; font-size: 21px; font-style: italic; color: var(--cp-text-muted);">Large content separate from telemetry, but reachable</div><div style="text-align: center; color: var(--cp-text-muted);">↓</div><div style="flex: 1; padding: 20px; border: 3px solid var(--cp-accent); border-radius: 12px; background: var(--cp-accent-soft); font-weight: 600;">Content upload hook<div style="margin-top: 14px; font-size: 20px; font-weight: 400;">stores content externally, keeps a reference on the span</div></div></div>
+</div>
+<p style="margin-top: 28px; font-size: 20px; color: var(--cp-text-muted);">Highlighted: covered in the next sections.</p>
 
 ---
 
