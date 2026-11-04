@@ -4,6 +4,24 @@ Open [kubecon-genai.md](kubecon-genai.md). Slides are separated by `---`.
 Use a Markdown slide renderer with Mermaid support, including `xychart-beta`.
 The deck is Markdown source, not a rendered PowerPoint or PDF.
 
+## Presentation mode
+
+From the repository root, run:
+
+```sh
+python -m http.server 8765 --bind 127.0.0.1
+```
+
+Open http://127.0.0.1:8765/slides/ in a browser. Use the arrow keys to
+change slides and **F** or **Full screen** for presentation mode.
+Elements with `class="fragment"` appear one at a time as you advance;
+going back into a slide shows all of them. Fragments with the same
+`data-fragment` value appear together.
+The viewer loads the Markdown source and local assets directly.
+Internet access to `cdn.jsdelivr.net` is required for the Markdown and
+Mermaid renderers. Reload the page after editing the source.
+Stop the server with **Ctrl+C**.
+
 Speaker notes are omitted. TODOs remain in the slide source.
 Sources and qualifications are collected in [sources.md](sources.md).
 
@@ -15,11 +33,12 @@ Sources and qualifications are collected in [sources.md](sources.md).
 - `assets/aspire-inference-attributes.png`: attributes table of the first inference span.
 - `assets/otel-inference-attributes.json`: complete captured attribute values for that span.
 - `assets/semconv-waterfall.svg`: operation coverage, stability targets, and core convention boundaries.
-- `assets/expected-waterfall.svg`: intended span names and nesting, illustrative timing.
+- `assets/expected-waterfall.svg`: intended span names and nesting, with approximate timing aligned to the saved capture, matching service colours and span markers, and an enlarged layout.
 - `assets/usage-vs-bill.svg`: imaginary live cost estimate and delayed provider billing.
-- `assets/aspire-waterfall.png`: actual happy-case waterfall, light mode, all 22 spans.
-- `assets/aspire-parent-gap.svg`: full trace with a boxed runbook subtree and two arrows marking intended parents.
-- `assets/aspire-orphan-http.png`: the detached runbook HTTP span in a separate trace.
+- `assets/aspire-waterfall.svg`: vector redraw of the saved happy-case capture, preserving all 22 spans, nesting, resources, and markers, with original duration values in SVG metadata.
+- `assets/aspire-waterfall.png`: original Aspire capture in light mode, retained as evidence.
+- `assets/aspire-parent-gap.svg`: the same 22-span redraw with a boxed runbook subtree, two intended-parent arrows, and the separate orphan trace on its own time scale.
+- `assets/aspire-orphan-http.png`: original capture of the detached runbook HTTP span in a separate trace.
 - `assets/aspire-trace.png`: earlier single-service hierarchy crop, not used in the deck.
 - `assets/conformance-inference.png`: live dashboard, filtered to Anthropic.
 - `assets/conformance-findings.png`: archived capture, not used in the deck.
@@ -32,7 +51,14 @@ Screenshot trace: `b2fb5dc7fc85244d41a7f3667beaec03`.
 Both slide queries were executed against this capture: 2 / 280 and 5 / 900; the latter double-counts the Anthropic inference.
 Queries use the SQLite `span_data` view, with attributes exposed as quoted columns.
 The screenshots are saved locally so the deck does not depend on live services.
-The waterfall excludes unused dashboard space and preserves every trace row.
+Slides 3, 4, 9, and 12 share an SVG waterfall layout.
+The images omit titles, capture summaries, footer captions, and per-span
+duration columns; time axes and parentage annotations remain.
+The captured views preserve every displayed trace row; bar shapes follow the
+saved screenshot pixels, not recovered start/end timestamps.
+Slide 3's names and nesting remain illustrative; its bar positions follow the
+saved capture on the same 0–0.7 s axis. Slide 12's operation-coverage example
+remains illustrative.
 
 ## Live demo fallback
 

@@ -1,41 +1,107 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="764" viewBox="0 0 1400 764" role="img" aria-labelledby="title desc">
-  <title id="title">Expected trace waterfall</title>
-  <desc id="desc">POST /run contains diagnose_workload. The workflow makes two model calls and invokes two tools. The diagnostic agent runs locally. The runbook tool makes an HTTP client call to a separate service, whose HTTP server span contains the runbook agent and its model call. Bar lengths are illustrative.</desc>
-  <rect width="1400" height="764" fill="white"/>
-  <rect x="145" y="475" width="1235" height="151" rx="8" fill="#eff6ff"/>
-  <g font-family="Arial, sans-serif" font-size="24" fill="#172b4d">
-    <text x="28" y="38" font-weight="700">Expected trace</text>
-    <text x="650" y="38" fill="#596579">Time →</text>
-    <path d="M650 60V694 M830 60V694 M1010 60V694 M1190 60V694 M1370 60V694" stroke="#e5e9f0"/>
-    <g stroke="#ccd3df" fill="none" stroke-width="2">
-      <path d="M38 95V141H60 M70 150V661H92 M70 193H92 M70 245H92 M70 401H92 M102 254V297H124 M134 306V349H156 M102 410V453H124 M134 462V505H156 M166 514V557H188 M198 566V609H220"/>
-    </g>
-    <text x="28" y="90">POST /run</text>
-    <text x="60" y="142">invoke_workflow diagnose_workload</text>
-    <text x="92" y="194">chat gpt-4.1</text>
-    <text x="92" y="246">execute_tool inspect_workload</text>
-    <text x="124" y="298">invoke_agent diagnostic</text>
-    <text x="156" y="350">chat claude-sonnet-4-6</text>
-    <text x="92" y="402">execute_tool consult_runbook</text>
-    <text x="124" y="454">POST /runbook · HTTP client</text>
-    <text x="156" y="506">POST /runbook · HTTP server</text>
-    <text x="188" y="558">invoke_agent runbook</text>
-    <text x="220" y="610">chat gpt-4.1-mini</text>
-    <text x="92" y="662">chat gpt-4.1</text>
-    <text x="28" y="740" font-size="20" fill="#596579">Blue area: runbook service · intended nesting and names · illustrative timing</text>
-  </g>
-  <g rx="5">
-    <rect x="650" y="70" width="720" height="25" rx="5" fill="#64748b"/>
-    <rect x="670" y="122" width="680" height="25" rx="5" fill="#385caa"/>
-    <rect x="688" y="174" width="105" height="25" rx="5" fill="#008577"/>
-    <rect x="815" y="226" width="235" height="25" rx="5" fill="#9380c5"/>
-    <rect x="830" y="278" width="205" height="25" rx="5" fill="#385caa"/>
-    <rect x="846" y="330" width="175" height="25" rx="5" fill="#008577"/>
-    <rect x="830" y="382" width="350" height="25" rx="5" fill="#9380c5"/>
-    <rect x="842" y="434" width="326" height="25" rx="5" fill="#64748b"/>
-    <rect x="850" y="486" width="310" height="25" rx="5" fill="#64748b"/>
-    <rect x="860" y="538" width="290" height="25" rx="5" fill="#385caa"/>
-    <rect x="875" y="590" width="270" height="25" rx="5" fill="#008577"/>
-    <rect x="1210" y="642" width="115" height="25" rx="5" fill="#008577"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1694" height="714" viewBox="0 0 1694 714" role="img" aria-labelledby="title desc">
+<title id="title">Expected trace waterfall</title>
+<desc id="desc">POST /run contains diagnose_workload. The workflow makes two model calls and invokes two tools. The diagnostic agent runs locally. The runbook tool makes an HTTP client call to a separate service, whose HTTP server span contains the runbook agent and its model call. Names and nesting are conceptual. Bar positions follow the visible extents of the corresponding spans in the saved Aspire capture on the same 0 to 0.7 second axis. Timing is approximate screenshot geometry, not recovered OTLP timestamps. Teal identifies diagnostic-agent spans; gold identifies runbook spans.</desc>
+<metadata>{"kind":"illustrative","timing":{"kind":"screenshot-aligned","source":"aspire-waterfall.png","source_sha256":"cebb81c3aaaf1b9b823c6259391757cb8f412d34394ea72103db219e544458ea","trace_id":"b2fb5dc7fc85244d41a7f3667beaec03","ticks":["0s","0.17s","0.35s","0.52s","0.7s"],"source_axis_pixels":[875,1829],"geometry":"Visible bar bounds, including circular markers where present.","precision":"Approximate screenshot geometry, not recovered OTLP timestamps.","source_row_indexing":"Zero-based displayed rows of the 22-span capture."},"rows":[{"name":"POST /run","original_label_x":28.0,"original_label_y":90.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":650.0,"original_bar_width":720.0,"start_fraction":0.0,"width_fraction":1.0,"depth":0,"parent_row":null,"row":0,"service":"","server":true,"timing_source_row":0,"timing_source_bar_bounds":[875,1829]},{"name":"invoke_workflow diagnose_workload","original_label_x":60.0,"original_label_y":142.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":670.0,"original_bar_width":680.0,"start_fraction":0.4612159329140461,"width_fraction":0.5377358490566038,"depth":1,"parent_row":0,"row":1,"service":"","server":false,"timing_source_row":1,"timing_source_bar_bounds":[1315,1828]},{"name":"chat gpt-4.1","original_label_x":92.0,"original_label_y":194.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":688.0,"original_bar_width":105.0,"start_fraction":0.4643605870020964,"width_fraction":0.019916142557651992,"depth":2,"parent_row":1,"row":2,"service":"","server":false,"timing_source_row":3,"timing_source_bar_bounds":[1318,1337]},{"name":"execute_tool inspect_workload","original_label_x":92.0,"original_label_y":246.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":815.0,"original_bar_width":235.0,"start_fraction":0.4863731656184486,"width_fraction":0.05555555555555555,"depth":2,"parent_row":1,"row":3,"service":"","server":false,"timing_source_row":6,"timing_source_bar_bounds":[1339,1392]},{"name":"invoke_agent diagnostic","original_label_x":124.0,"original_label_y":298.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":830.0,"original_bar_width":205.0,"start_fraction":0.48951781970649894,"width_fraction":0.05241090146750524,"depth":3,"parent_row":3,"row":4,"service":"","server":false,"timing_source_row":7,"timing_source_bar_bounds":[1342,1392]},{"name":"chat claude-sonnet-4-6","original_label_x":156.0,"original_label_y":350.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":846.0,"original_bar_width":175.0,"start_fraction":0.4916142557651992,"width_fraction":0.049266247379454925,"depth":4,"parent_row":4,"row":5,"service":"","server":false,"timing_source_row":9,"timing_source_bar_bounds":[1344,1391]},{"name":"execute_tool consult_runbook","original_label_x":92.0,"original_label_y":402.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":830.0,"original_bar_width":350.0,"start_fraction":0.49266247379454925,"width_fraction":0.5,"depth":2,"parent_row":1,"row":6,"service":"","server":false,"timing_source_row":10,"timing_source_bar_bounds":[1345,1822]},{"name":"POST /runbook · HTTP client","original_label_x":124.0,"original_label_y":454.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":842.0,"original_bar_width":326.0,"start_fraction":0.4989517819706499,"width_fraction":0.4937106918238994,"depth":3,"parent_row":6,"row":7,"service":"","server":false,"timing_source_row":15,"timing_source_bar_bounds":[1351,1822]},{"name":"POST /runbook · HTTP server","original_label_x":156.0,"original_label_y":506.0,"bold":false,"notes":[],"core":false,"color":"#e9c877","original_bar_x":850.0,"original_bar_width":310.0,"start_fraction":0.5020964360587002,"width_fraction":0.4968553459119497,"depth":4,"parent_row":7,"row":8,"service":"runbook","server":true,"timing_source_row":16,"timing_source_bar_bounds":[1354,1828]},{"name":"invoke_agent runbook","original_label_x":188.0,"original_label_y":558.0,"bold":false,"notes":[],"core":false,"color":"#e9c877","original_bar_x":860.0,"original_bar_width":290.0,"start_fraction":0.510482180293501,"width_fraction":0.4811320754716981,"depth":5,"parent_row":8,"row":9,"service":"runbook","server":false,"timing_source_row":17,"timing_source_bar_bounds":[1362,1821]},{"name":"chat gpt-4.1-mini","original_label_x":220.0,"original_label_y":610.0,"bold":false,"notes":[],"core":false,"color":"#e9c877","original_bar_x":875.0,"original_bar_width":270.0,"start_fraction":0.9821802935010482,"width_fraction":0.008385744234800839,"depth":6,"parent_row":9,"row":10,"service":"runbook","server":false,"timing_source_row":19,"timing_source_bar_bounds":[1812,1820]},{"name":"chat gpt-4.1","original_label_x":92.0,"original_label_y":662.0,"bold":false,"notes":[],"core":false,"color":"#14959b","original_bar_x":1210.0,"original_bar_width":115.0,"start_fraction":0.9947589098532494,"width_fraction":0.0031446540880503146,"depth":2,"parent_row":1,"row":11,"service":"","server":false,"timing_source_row":12,"timing_source_bar_bounds":[1824,1827]}]}</metadata>
+<style>
+  text { font-family: Arial, sans-serif; fill: #172b4d; }
+  .span-name { font-size: 24px; }
+  .service { font-size: 22px; }
+  .column-heading { font-size: 20px; fill: #596579; }
+  .span-note { font-size: 20px; fill: #596579; }
+  .core .span-name, .core .span-note { fill: #596579; }
+  .tree { fill: none; stroke: #ccd3df; stroke-width: 2; }
+  .grid { fill: none; stroke: #e5e9f0; }
+</style>
+<defs>
+  <marker id="red-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c62828"/></marker>
+  <marker id="blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+</defs>
+<rect width="1694" height="714" fill="white"/>
+<g id="expected-panel">
+<style>#expected-panel .span-name { font-size: 30px; } #expected-panel .service { font-size: 27.5px; } #expected-panel .column-heading, #expected-panel .span-note { font-size: 25px; }</style>
+<text x="40" y="32.5" class="column-heading">Name</text>
+<text x="580" y="32.5" class="column-heading">Service</text>
+<rect class="service-area" x="136" y="471.0" width="1534" height="139.0" rx="4" fill="#eff6ff"/>
+<path class="grid" d="M870 47.5V665.75"/>
+<text x="870" y="32.5" text-anchor="start" class="column-heading">0s</text>
+<path class="grid" d="M1070 47.5V665.75"/>
+<text x="1070" y="32.5" text-anchor="middle" class="column-heading">0.17s</text>
+<path class="grid" d="M1270 47.5V665.75"/>
+<text x="1270" y="32.5" text-anchor="middle" class="column-heading">0.35s</text>
+<path class="grid" d="M1470 47.5V665.75"/>
+<text x="1470" y="32.5" text-anchor="middle" class="column-heading">0.52s</text>
+<path class="grid" d="M1670 47.5V665.75"/>
+<text x="1670" y="32.5" text-anchor="end" class="column-heading">0.7s</text>
+<path class="tree" data-parent-row="0" d="M50 88.75V124.5 M50 124.5H58"/>
+<path class="tree" data-parent-row="1" d="M78 140.75V644.5 M78 176.5H86 M78 228.5H86 M78 384.5H86 M78 644.5H86"/>
+<path class="tree" data-parent-row="3" d="M106 244.75V280.5 M106 280.5H114"/>
+<path class="tree" data-parent-row="4" d="M134 296.75V332.5 M134 332.5H142"/>
+<path class="tree" data-parent-row="6" d="M106 400.75V436.5 M106 436.5H114"/>
+<path class="tree" data-parent-row="7" d="M134 452.75V488.5 M134 488.5H142"/>
+<path class="tree" data-parent-row="8" d="M162 504.75V540.5 M162 540.5H170"/>
+<path class="tree" data-parent-row="9" d="M190 556.75V592.5 M190 592.5H198"/>
+<g id="expected-row-0" class="trace-row" data-row="0" data-depth="0" data-parent-row="">
+<g class="server-icon" transform="translate(24 62.5) scale(1.25)" stroke="#14959b" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
+<text x="40" y="82.5" class="span-name">POST /run</text>
+<rect class="bar illustrative-bar" x="870" y="62.5" width="800" height="20" rx="5" fill="#14959b" data-original-x="650.0" data-original-width="720.0"/>
+</g>
+<g id="expected-row-1" class="trace-row" data-row="1" data-depth="1" data-parent-row="0">
+<rect class="service-marker" x="54" y="113.25" width="5" height="22.5" fill="#14959b"/>
+<text x="68" y="134.5" class="span-name">invoke_workflow diagnose_workload</text>
+<rect class="bar illustrative-bar" x="1238.97275" y="114.5" width="430.18868" height="20" rx="5" fill="#14959b" data-original-x="670.0" data-original-width="680.0"/>
+</g>
+<g id="expected-row-2" class="trace-row" data-row="2" data-depth="2" data-parent-row="1">
+<rect class="service-marker" x="82" y="165.25" width="5" height="22.5" fill="#14959b"/>
+<text x="96" y="186.5" class="span-name">chat gpt-4.1</text>
+<rect class="bar illustrative-bar" x="1241.48847" y="166.5" width="15.93291" height="20" rx="5" fill="#14959b" data-original-x="688.0" data-original-width="105.0"/>
+</g>
+<g id="expected-row-3" class="trace-row" data-row="3" data-depth="2" data-parent-row="1">
+<rect class="service-marker" x="82" y="217.25" width="5" height="22.5" fill="#14959b"/>
+<text x="96" y="238.5" class="span-name">execute_tool inspect_workload</text>
+<rect class="bar illustrative-bar" x="1259.09853" y="218.5" width="44.44444" height="20" rx="5" fill="#14959b" data-original-x="815.0" data-original-width="235.0"/>
+</g>
+<g id="expected-row-4" class="trace-row" data-row="4" data-depth="3" data-parent-row="3">
+<rect class="service-marker" x="110" y="269.25" width="5" height="22.5" fill="#14959b"/>
+<text x="124" y="290.5" class="span-name">invoke_agent diagnostic</text>
+<rect class="bar illustrative-bar" x="1261.61426" y="270.5" width="41.92872" height="20" rx="5" fill="#14959b" data-original-x="830.0" data-original-width="205.0"/>
+</g>
+<g id="expected-row-5" class="trace-row" data-row="5" data-depth="4" data-parent-row="4">
+<rect class="service-marker" x="138" y="321.25" width="5" height="22.5" fill="#14959b"/>
+<text x="152" y="342.5" class="span-name">chat claude-sonnet-4-6</text>
+<rect class="bar illustrative-bar" x="1263.2914" y="322.5" width="39.413" height="20" rx="5" fill="#14959b" data-original-x="846.0" data-original-width="175.0"/>
+</g>
+<g id="expected-row-6" class="trace-row" data-row="6" data-depth="2" data-parent-row="1">
+<rect class="service-marker" x="82" y="373.25" width="5" height="22.5" fill="#14959b"/>
+<text x="96" y="394.5" class="span-name">execute_tool consult_runbook</text>
+<rect class="bar illustrative-bar" x="1264.12998" y="374.5" width="400" height="20" rx="5" fill="#14959b" data-original-x="830.0" data-original-width="350.0"/>
+</g>
+<g id="expected-row-7" class="trace-row" data-row="7" data-depth="3" data-parent-row="6">
+<rect class="service-marker" x="110" y="425.25" width="5" height="22.5" fill="#14959b"/>
+<text x="124" y="446.5" class="span-name">POST /runbook · HTTP client</text>
+<rect class="bar illustrative-bar" x="1269.16143" y="426.5" width="394.96855" height="20" rx="5" fill="#14959b" data-original-x="842.0" data-original-width="326.0"/>
+</g>
+<g id="expected-row-8" class="trace-row" data-row="8" data-depth="4" data-parent-row="7">
+<g class="server-icon" transform="translate(136 478.5) scale(1.25)" stroke="#e9c877" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
+<text x="152" y="498.5" class="span-name">POST /runbook · HTTP server</text>
+<text x="580" y="498.5" class="service">runbook</text>
+<rect class="bar illustrative-bar" x="1271.67715" y="478.5" width="397.48428" height="20" rx="5" fill="#e9c877" data-original-x="850.0" data-original-width="310.0"/>
+</g>
+<g id="expected-row-9" class="trace-row" data-row="9" data-depth="5" data-parent-row="8">
+<rect class="service-marker" x="166" y="529.25" width="5" height="22.5" fill="#e9c877"/>
+<text x="180" y="550.5" class="span-name">invoke_agent runbook</text>
+<text x="580" y="550.5" class="service">runbook</text>
+<rect class="bar illustrative-bar" x="1278.38574" y="530.5" width="384.90566" height="20" rx="5" fill="#e9c877" data-original-x="860.0" data-original-width="290.0"/>
+</g>
+<g id="expected-row-10" class="trace-row" data-row="10" data-depth="6" data-parent-row="9">
+<rect class="service-marker" x="194" y="581.25" width="5" height="22.5" fill="#e9c877"/>
+<text x="208" y="602.5" class="span-name">chat gpt-4.1-mini</text>
+<text x="580" y="602.5" class="service">runbook</text>
+<rect class="bar illustrative-bar" x="1655.74423" y="582.5" width="6.7086" height="20" rx="5" fill="#e9c877" data-original-x="875.0" data-original-width="270.0"/>
+</g>
+<g id="expected-row-11" class="trace-row" data-row="11" data-depth="2" data-parent-row="1">
+<rect class="service-marker" x="82" y="633.25" width="5" height="22.5" fill="#14959b"/>
+<text x="96" y="654.5" class="span-name">chat gpt-4.1</text>
+<rect class="bar illustrative-bar" x="1665.80713" y="634.5" width="2.51572" height="20" rx="5" fill="#14959b" data-original-x="1210.0" data-original-width="115.0"/>
+</g>
+</g>
 </svg>

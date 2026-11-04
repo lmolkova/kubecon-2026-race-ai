@@ -18,13 +18,13 @@ KubeCon + CloudNativeCon North America 2026
 
 # Our expectations
 
-![Expected waterfall: workflow, diagnostic agent, and HTTP client/server spans connecting the runbook service](assets/expected-waterfall.svg)
+![Expected waterfall with capture-aligned timing: workflow, diagnostic agent, and HTTP client/server spans connecting the runbook service](assets/expected-waterfall.svg)
 
 ---
 
 # The reality
 
-![Full trace waterfall in Aspire, light mode](assets/aspire-waterfall.png)
+![All 22 spans from the saved Aspire trace, redrawn as a waterfall with captured nesting, services, and timing](assets/aspire-waterfall.svg)
 
 ---
 
@@ -50,21 +50,7 @@ WHERE trace_id = :trace_id
 
 # How did we instrument the application?
 
-```mermaid
-flowchart TB
-  subgraph Main["Workflow service"]
-  W["diagnose_workload<br/>LangGraph<br/><b>Instrumentation: OpenInference</b>"]
-  W --> M["Model call<br/>ChatOpenAI<br/><b>Instrumentation: OpenInference</b>"]
-  W -->|inspect_workload tool| D["diagnostic<br/>LangGraph<br/><b>Instrumentation: OpenInference</b>"]
-  W --> T["consult_runbook tool"]
-  D --> A["Model call<br/>ChatAnthropic + Anthropic SDK<br/><b>Instrumentation: OpenInference + native OTel</b>"]
-  end
-  subgraph Runbook["Runbook service"]
-  R["runbook<br/>LangGraph<br/><b>Instrumentation: LangSmith OTLP</b>"]
-  R --> O["Model call<br/>OpenAI SDK<br/><b>Instrumentation: LangSmith OTLP</b>"]
-  end
-  T -->|HTTP| R
-```
+![Workflow, diagnostic agent, and runbook service with OpenInference, native OTel, and LangSmith OTLP instrumentation](assets/instrumentation-architecture.svg)
 
 ---
 
@@ -108,19 +94,16 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 
 # What did we do in OTel
 
----
-
-# What OpenTelemetry provides
-
-```mermaid
-flowchart LR
-  S[Semantic conventions] --> I[Instrumentation]
-  I --> K[OTel SDK]
-  K --> O[OTLP]
-  O --> B[Your observability tools]
-  C[Context and configuration] --> I
-  C --> K
-```
+<table>
+<thead><tr><th>Wish</th><th class="fragment" data-fragment="otel">OpenTelemetry</th></tr></thead>
+<tbody>
+<tr><td>One schema across all<br>instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
+<tr><td>Proper correlation between them</td><td class="fragment" data-fragment="otel">Context propagation</td></tr>
+<tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">One SDK and OTLP for all three signals</td></tr>
+<tr><td>One config for content capture</td><td class="fragment" data-fragment="otel">A shared content-capture setting</td></tr>
+<tr><td>Large content separate from telemetry,<br>while still reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
+</tbody>
+</table>
 
 ---
 
@@ -129,6 +112,8 @@ flowchart LR
 New home: [semantic-conventions-genai](https://github.com/open-telemetry/semantic-conventions-genai)
 
 ![GenAI trace waterfall; bold operations target stability, HTTP and DB use core conventions](assets/semconv-waterfall.svg)
+
+<p style="margin: -20px 0 0 28px; font-size: 22px; color: var(--cp-text-muted);"><strong>Bold</strong>: stability targets · Grey: stable core conventions</p>
 
 ---
 
