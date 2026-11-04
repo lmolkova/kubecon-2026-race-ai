@@ -45,6 +45,13 @@ Python: 358 merged PRs since repository creation on May 12; 47 PR authors;
 PRs, 8 authors, 2 additional newcomers. Combined distinct authors: 53; newcomers: 26.
 The weekly chart includes the partial first and last weeks; the mean excludes them.
 Four coordinated Python beta release rounds plus patches; 13 released packages.
+The monthly PR chart counts non-bot merged PRs per UTC month, November 2024
+through October 2026, as of November 4, 2026. In `opentelemetry-python-contrib`,
+a PR counts when at least half of its changed package-directory files are under
+`instrumentation-genai/` or `util/opentelemetry-util-genai/`. Every non-bot PR in
+`opentelemetry-python-genai` counts. Bots are GitHub Bot accounts, `[bot]` logins,
+and `opentelemetrybot`. Some GenAI packages still live in contrib, so both repos
+contribute after May 2026.
 Refresh counts before presenting. They are not live dashboard values.
 
 The roadmap is direction, not a delivery commitment. Separate established
