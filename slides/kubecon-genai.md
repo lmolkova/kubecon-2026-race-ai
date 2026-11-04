@@ -221,7 +221,7 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 - **13 Python instrumentation packages · 4 beta release rounds**
 - JS is adopting the shared-utility and conformance approach
 
-<img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: about 1 to 19 a month in python-contrib from November 2024, rising to 115 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
+<img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: 0 to 19 a month in python-contrib from November 2024, rising to 116 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
 
 ---
 
