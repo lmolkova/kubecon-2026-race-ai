@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="600" viewBox="0 0 1440 600" role="img" aria-labelledby="title desc">
+<title id="title">GenAI operations in a trace waterfall</title>
+<desc id="desc">Agent or workflow contains sibling tool execution, inference, and retrieval operations. HTTP is beneath inference. Embeddings and database operations are beneath retrieval. Agent or workflow, tools, and inference are bold to mark the stability targets. HTTP and database operations use core semantic conventions and are grey.</desc>
+<rect width="1440" height="600" fill="white"/>
+<g stroke="#edf0f3" stroke-width="1">
+<path d="M740 30V535M900 30V535M1060 30V535M1220 30V535M1380 30V535"/>
+</g>
+<g fill="none" stroke="#cbd5e1" stroke-width="2">
+<path d="M48 70V500M48 128H80M48 190H80M48 314H80M48 500H80M96 202V252H128M96 326V438M96 376H128M96 438H128"/>
+</g>
+<g font-family="Arial, sans-serif" font-size="26" fill="#172b4d">
+<text x="24" y="64" font-weight="700">Agent / workflow</text>
+<text x="88" y="136" font-weight="700">Tool execution</text>
+<text x="286" y="136" font-size="22">app tools, skills, agents-as-a-tool</text>
+<text x="88" y="198" font-weight="700">Inference</text>
+<text x="138" y="260" fill="#9299a3">HTTP</text>
+<text x="232" y="260" fill="#9299a3" font-size="22">core semconv</text>
+<text x="88" y="322">Retrieval</text>
+<text x="138" y="384">Embeddings</text>
+<text x="138" y="446" fill="#9299a3">DB</text>
+<text x="202" y="446" fill="#9299a3" font-size="22">core semconv</text>
+<text x="88" y="508">…</text>
+</g>
+<g rx="4">
+<rect x="740" y="43" width="640" height="24" rx="4" fill="#096b88"/>
+<rect x="770" y="115" width="150" height="24" rx="4" fill="#096b88"/>
+<rect x="940" y="177" width="200" height="24" rx="4" fill="#096b88"/>
+<rect x="955" y="239" width="165" height="24" rx="4" fill="#d1d5db"/>
+<rect x="1155" y="301" width="175" height="24" rx="4" fill="#6c9faf"/>
+<rect x="1165" y="363" width="70" height="24" rx="4" fill="#6c9faf"/>
+<rect x="1245" y="425" width="70" height="24" rx="4" fill="#d1d5db"/>
+<rect x="1340" y="487" width="40" height="24" rx="4" fill="#6c9faf"/>
+</g>
+<text x="24" y="574" font-family="Arial, sans-serif" font-size="21" fill="#475569">Bold: targeting stability</text>
+</svg>

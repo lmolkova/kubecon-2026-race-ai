@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="650" viewBox="0 0 1400 650" role="img" aria-labelledby="title desc">
+  <title id="title">The query estimate and the delayed provider bill</title>
+  <desc id="desc">Illustrative cumulative spending over seven days. The live query estimate reaches 400 dollars. Provider billing, available only through day six, already totals 900 dollars. Both series are aligned to usage date, not arrival date.</desc>
+  <rect width="1400" height="650" rx="16" fill="#fff"/>
+  <g font-family="Arial, sans-serif" fill="#172b4d">
+    <text x="50" y="48" font-size="26" font-weight="700">Model spend</text>
+    <text x="50" y="81" font-size="19" fill="#64748b">Cumulative USD · same application · by usage date</text>
+    <path d="M55 119H95" stroke="#2563eb" stroke-width="5"/>
+    <text x="108" y="126" font-size="21">Query estimate · live</text>
+    <path d="M470 119H510" stroke="#c85a17" stroke-width="5"/>
+    <text x="523" y="126" font-size="21">Provider bill · delayed</text>
+    <rect x="1080" y="166" width="180" height="340" fill="#f1f5f9"/>
+    <g stroke="#e2e8f0" stroke-width="1">
+      <path d="M180 506H1260 M180 421H1260 M180 336H1260 M180 251H1260 M180 166H1260"/>
+    </g>
+    <g font-size="19" fill="#64748b" text-anchor="end">
+      <text x="160" y="512">$0</text><text x="160" y="427">$250</text>
+      <text x="160" y="342">$500</text><text x="160" y="257">$750</text>
+      <text x="160" y="172">$1,000</text>
+    </g>
+    <g font-size="19" fill="#64748b" text-anchor="middle">
+      <text x="180" y="543">Mon</text><text x="360" y="543">Tue</text>
+      <text x="540" y="543">Wed</text><text x="720" y="543">Thu</text>
+      <text x="900" y="543">Fri</text><text x="1080" y="543">Sat</text>
+      <text x="1260" y="543">Sun · today</text>
+    </g>
+    <polyline points="180,492 270,489 360,478 450,465 540,457 630,446 720,430 810,418 900,413 990,399 1080,388 1170,380 1260,370" fill="none" stroke="#2563eb" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <polyline points="180,472 270,462 360,441 450,411 540,384 630,360 720,319 810,292 900,268 990,234 1080,200" fill="none" stroke="#c85a17" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="1080" cy="200" r="7" fill="#c85a17"/>
+    <circle cx="1260" cy="370" r="7" fill="#2563eb"/>
+    <text x="1040" y="185" font-size="24" font-weight="700" text-anchor="end" fill="#a3430f">$900 billed</text>
+    <text x="1245" y="355" font-size="24" font-weight="700" text-anchor="end" fill="#1d4ed8">$400 estimated</text>
+    <path d="M1080 166V506" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6"/>
+    <text x="1170" y="237" text-anchor="middle" font-size="19" fill="#64748b">Billing data</text>
+    <text x="1170" y="264" text-anchor="middle" font-size="19" fill="#64748b">still pending</text>
+    <text x="50" y="610" font-size="18" fill="#64748b">Illustrative data and reporting delay · query usage converted to estimated cost</text>
+  </g>
+</svg>

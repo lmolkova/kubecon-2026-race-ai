@@ -1,0 +1,67 @@
+services:
+  dashboard:
+    image: mcr.microsoft.com/aspire/dashboard@sha256:e4220c55fa3c3e40ad2d733ef07973392299b420e9bde6924e8f6a1e71ff01a8
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
+      Dashboard__Api__PrimaryApiKey: local-demo-dashboard-api-key
+    ports:
+      - "127.0.0.1:18888:18888"
+      - "127.0.0.1:4318:18890"
+  model-router:
+    build: .
+    command: [serve, model-router]
+    ports:
+      - "127.0.0.1:8001:8000"
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  agent:
+    build: .
+    command: [serve, agent]
+    environment:
+      MODEL_URL: http://model-router:8000
+      DEMO_INSTRUMENTATION: openinference
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://dashboard:18890
+      OTEL_METRIC_EXPORT_INTERVAL: "1000"
+      OTEL_INSTRUMENTATION_HTTP_CAPTURE_HEADERS_SERVER_RESPONSE: x-demo-run-id
+      RUNBOOK_URL: http://runbook:8000
+      OTEL_SERVICE_NAME: diagnostic-agent
+      ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE: content
+      OPENINFERENCE_HIDE_INPUTS: "false" # default
+      OPENINFERENCE_HIDE_OUTPUTS: "false" # default
+    depends_on:
+      model-router:
+        condition: service_healthy
+      runbook:
+        condition: service_healthy
+      dashboard:
+        condition: service_started
+    ports:
+      - "127.0.0.1:8000:8000"
+  runbook:
+    build:
+      context: .
+      dockerfile: Dockerfile.runbook
+    environment:
+      MODEL_URL: http://model-router:8000
+      DEMO_INSTRUMENTATION: langsmith
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://dashboard:18890
+      OTEL_METRIC_EXPORT_INTERVAL: "1000"
+      LANGSMITH_TRACING: "true"
+      OTEL_SERVICE_NAME: runbook
+      LANGSMITH_TRACING_MODE: otel
+      LANGSMITH_HIDE_INPUTS: "false" # default
+      LANGSMITH_HIDE_OUTPUTS: "false" # default
+    depends_on:
+      model-router:
+        condition: service_healthy
+      dashboard:
+        condition: service_started
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+
