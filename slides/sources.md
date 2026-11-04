@@ -7,7 +7,12 @@
 - Orphan trace: `01a1a3cdcf8a74568f6fdd9c7c86e09f`, HTTP span `f88b071f40ee83f4`.
 - Two application services; local mocks; four successful model requests.
 - Model IDs: `gpt-4.1`, `claude-sonnet-4-6`, and `gpt-4.1-mini`.
-- Aspire screenshots recaptured in light mode on November 3, 2026; full waterfall and a separate orphan HTTP trace; boxes and arrows are SVG overlays.
+- Original Aspire screenshots recaptured in light mode on November 3, 2026; the full waterfall and separate orphan HTTP capture are retained in `assets/aspire-waterfall.png` and `assets/aspire-orphan-http.png`.
+- Slides 4 and 9 are vector redraws of those saved captures, retaining all 22 main-trace spans and the separate orphan span, displayed names, resources, nesting, and markers. Original displayed durations are retained in SVG metadata, not a visible column. Bar shapes are traced from screenshot pixels; no exact start/end timestamps were recovered. Slide 9's boxes and arrows mark intended parents without changing the captured hierarchy or combining the two time scales.
+- The four trace images on slides 3, 4, 9, and 13 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
+- Slide 3 keeps conceptual span names and intended nesting, but its 12 bars follow the corresponding visible bar bounds on slide 4's 0–0.7 s axis. Model calls use the model-span rows, not their duplicate HTTP observations. These are approximate screenshot positions, not recovered OTLP timestamps; the SVG metadata records the source-row mapping and bounds.
+- Slide 13's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
+- Slide 3 uses the captured trace's service colours and span markers, with larger labels and row spacing to use the available slide height. Teal identifies diagnostic-agent and gold identifies runbook. Its 12 labels and hierarchy are unchanged.
 - The query tool fetches OTLP JSON from Aspire into local SQLite without renaming or reparenting spans.
 - Two GPT-4.1 calls: 420 input / 90 output tokens, OpenInference schema.
 - ChatAnthropic also emits an OpenInference inference span: 200 / 50, duplicating the native Anthropic usage.

@@ -18,13 +18,13 @@ KubeCon + CloudNativeCon North America 2026
 
 # Our expectations
 
-![Expected waterfall: workflow, diagnostic agent, and HTTP client/server spans connecting the runbook service](assets/expected-waterfall.svg)
+![Expected waterfall with capture-aligned timing: workflow, diagnostic agent, and HTTP client/server spans connecting the runbook service](assets/expected-waterfall.svg)
 
 ---
 
 # The reality
 
-![Full trace waterfall in Aspire, light mode](assets/aspire-waterfall.png)
+![All 22 spans from the saved Aspire trace, redrawn as a waterfall with captured nesting, services, and timing](assets/aspire-waterfall.svg)
 
 ---
 
