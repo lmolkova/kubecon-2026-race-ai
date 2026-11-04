@@ -22,6 +22,7 @@
 - HTTPX is enabled in runbook. Its outgoing HTTP span is exported in the separate trace above with an unexported parent; the blue arrow marks the intended ChatOpenAI parent.
 - HTTP metrics and ordinary application logs are not evidence of GenAI signal parity.
 - Slide 6 is an illustrative cost chart, not captured telemetry or billing. Both series use USD by usage date; provider data has an invented one-day delay. The demo's 60% missing input tokens does not imply 60% missing cost.
+- Slide 7's [instrumentation diagram](assets/instrumentation-architecture.svg) shows application calls and instrumentation sources, not measured span parentage.
 
 ## Conventions and development: slides 11–19, 23–25
 

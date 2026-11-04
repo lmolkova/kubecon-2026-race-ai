@@ -50,21 +50,7 @@ WHERE trace_id = :trace_id
 
 # How did we instrument the application?
 
-```mermaid
-flowchart TB
-  subgraph Main["Workflow service"]
-  W["diagnose_workload<br/>LangGraph<br/><b>Instrumentation: OpenInference</b>"]
-  W --> M["Model call<br/>ChatOpenAI<br/><b>Instrumentation: OpenInference</b>"]
-  W -->|inspect_workload tool| D["diagnostic<br/>LangGraph<br/><b>Instrumentation: OpenInference</b>"]
-  W --> T["consult_runbook tool"]
-  D --> A["Model call<br/>ChatAnthropic + Anthropic SDK<br/><b>Instrumentation: OpenInference + native OTel</b>"]
-  end
-  subgraph Runbook["Runbook service"]
-  R["runbook<br/>LangGraph<br/><b>Instrumentation: LangSmith OTLP</b>"]
-  R --> O["Model call<br/>OpenAI SDK<br/><b>Instrumentation: LangSmith OTLP</b>"]
-  end
-  T -->|HTTP| R
-```
+![Workflow, diagnostic agent, and runbook service with OpenInference, native OTel, and LangSmith OTLP instrumentation](assets/instrumentation-architecture.svg)
 
 ---
 
