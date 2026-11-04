@@ -117,6 +117,8 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 ![GenAI trace waterfall; bold operations target stability, HTTP and DB use core conventions](assets/semconv-waterfall.svg)
 
+<p style="margin: -20px 0 0 28px; font-size: 22px; color: var(--cp-text-muted);"><strong>Bold</strong>: stability targets · Grey: core conventions</p>
+
 ---
 
 # GenAI attributes
