@@ -113,7 +113,7 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 ![GenAI trace waterfall; bold operations target stability, HTTP and DB use core conventions](assets/semconv-waterfall.svg)
 
-<p style="margin: -20px 0 0 28px; font-size: 22px; color: var(--cp-text-muted);"><strong>Bold</strong>: stability targets · Grey: stable core conventions</p>
+<p style="margin: -20px 0 0 28px; font-size: 22px; color: var(--cp-text-muted);"><strong>Bold</strong>: stability targets</p>
 
 ---
 
@@ -163,18 +163,37 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 `gen_ai.output.messages`
 
 ```json
-[{"role": "assistant", "finish_reason": "tool_calls", "parts": [{
-  "type": "tool_call", "id": "call_diagnose",
-  "name": "inspect_workload",
-  "arguments": {"workload": "checkout"}
-}]}]
+[{"role": "assistant", "finish_reason": "tool_calls", "parts": [
+  {"type": "tool_call", "id": "call_diagnose",
+   "name": "inspect_workload", "arguments": {"workload": "checkout"}},
+  {"type": "tool_call", "id": "call_runbook",
+   "name": "consult_runbook", "arguments": {"topic": "OOMKilled"}}
+]}]
 ```
 
 ---
 
 # Conversation and tool results
 
-<img src="assets/aspire-genai-conversation-long.png" alt="Aspire conversation showing the user question, two assistant tool calls, diagnostic evidence, runbook recommendation, and final assistant answer" style="display: block; max-width: 100%; height: 590px; margin: auto; object-fit: contain;" />
+<div class="aspire" role="group" aria-label="Aspire-style view of the final inference span">
+<div class="aspire-header"><span class="aspire-title">diagnostic-agent: chat gpt-4.1</span><span class="aspire-span-id">6483b37</span><span class="aspire-llm">LLM</span><span class="aspire-tabs"><span class="active">Input &amp; output</span><span>Tools 2</span><span>Details</span></span><span class="aspire-stats">Duration <b>1.88ms</b> · Tokens <b>360</b></span></div>
+<div class="aspire-body">
+<p class="aspire-section">Input</p>
+<div class="aspire-grid">
+<div class="aspire-col-left">
+<div class="aspire-card"><span class="aspire-role aspire-user">User</span><span class="aspire-badge message">&#9993; Message</span><div class="aspire-content">Why is checkout restarting, and what should I do?</div></div>
+<div class="aspire-card"><span class="aspire-role aspire-assistant">Assistant</span><span class="aspire-badge tool-calls">&lt;/&gt; Tool calls</span><div class="aspire-content"><span class="fn">inspect_workload</span>({"workload": <span class="str">"checkout"</span>})
+<span class="fn">consult_runbook</span>({"topic": <span class="str">"OOMKilled"</span>})</div></div>
+<p class="aspire-section aspire-output-heading">Output</p>
+</div>
+<div>
+<div class="aspire-card"><span class="aspire-role aspire-user">User</span><span class="aspire-badge tool-response">&#9993; Tool response</span><div class="aspire-content">{"evidence": <span class="str">"checkout was OOMKilled; memory limit is 128Mi and peak usage is 192Mi."</span>}</div></div>
+<div class="aspire-card"><span class="aspire-role aspire-user">User</span><span class="aspire-badge tool-response">&#9993; Tool response</span><div class="aspire-content">{"recommendation": <span class="str">"Inspect the memory regression; raise the limit only after checking cluster capacity."</span>}</div></div>
+</div>
+</div>
+<div class="aspire-card" style="margin-bottom: 0;"><span class="aspire-role aspire-assistant">Assistant</span><span class="aspire-badge output">&#9993; Output</span><div class="aspire-content">Checkout exceeded its 128Mi memory limit. Investigate the regression and review capacity before changing limits.</div></div>
+</div>
+</div>
 
 ---
 
