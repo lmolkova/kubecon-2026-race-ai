@@ -91,6 +91,18 @@
       font-size: 19px; white-space: pre-wrap; overflow-wrap: anywhere;
     }
     code { font-family: Consolas, "Courier New", Courier, monospace; }
+    .hljs-keyword, .hljs-attr { color: #425cc7; font-weight: 600; }
+    .hljs-string { color: #0f766e; }
+    .hljs-number, .hljs-literal { color: #a3367a; }
+    .hljs-built_in, .hljs-type { color: #82500d; }
+    .hljs-comment { color: var(--cp-text-soft); font-style: italic; }
+    html[data-theme="dark"] .hljs-keyword,
+    html[data-theme="dark"] .hljs-attr { color: #a5b4fc; }
+    html[data-theme="dark"] .hljs-string { color: #5eead4; }
+    html[data-theme="dark"] .hljs-number,
+    html[data-theme="dark"] .hljs-literal { color: #f0abfc; }
+    html[data-theme="dark"] .hljs-built_in,
+    html[data-theme="dark"] .hljs-type { color: #fcd34d; }
     .code-grid pre { white-space: pre; overflow-wrap: normal; }
     table { width: 100%; border-collapse: collapse; font-size: 24px; }
     th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--cp-border); }
@@ -146,6 +158,7 @@
     .aspire-badge.output { color: #6b2410; background: #f6b39b; }
     .aspire-content {
       margin-top: 4px; font-family: Consolas, "Courier New", Courier, monospace;
+      font-weight: 600; color: #171717;
       font-size: 20px; line-height: 1.35; white-space: pre-wrap; overflow-wrap: anywhere;
     }
     .aspire-content .fn { color: #0451a5; }
@@ -277,6 +290,20 @@
         diagram.className = "mermaid";
         diagram.textContent = code.textContent;
         code.parentElement.replaceWith(diagram);
+      }
+      try {
+        const [{ default: hljs }, { default: sql }, { default: json }] = await Promise.all([
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/core.min.js"),
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/sql.min.js"),
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/json.min.js")
+        ]);
+        hljs.registerLanguage("sql", sql);
+        hljs.registerLanguage("json", json);
+        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json")) {
+          hljs.highlightElement(code);
+        }
+      } catch (error) {
+        console.warn("Code highlighting unavailable; showing plain code.", error);
       }
       const css = getComputedStyle(document.documentElement);
       mermaid.initialize({

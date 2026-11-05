@@ -19,7 +19,8 @@ going back into a slide shows all of them. Fragments with the same
 `data-fragment` value appear together.
 The viewer loads the Markdown source and local assets directly.
 Internet access to `cdn.jsdelivr.net` is required for the Markdown and
-Mermaid renderers. Reload the page after editing the source.
+Mermaid renderers and SQL/JSON syntax highlighting. SQL and JSON fenced blocks use highlight.js
+with light and dark colors. Reload the page after editing the source.
 Stop the server with **Ctrl+C**.
 
 Speaker notes are omitted. TODOs remain in the slide source.
