@@ -38,7 +38,7 @@ broken context.
 - `assets/python-genai-contributions-monthly.svg`: monthly non-bot merged PRs to Python GenAI instrumentation, stacked by repository (python-contrib in grey, python-genai in OTel blue), with a marker at the May 12, 2026 repository launch.
 
 - `assets/aspire-genai-conversation-long.png`: final inference with the question, tool calls, results, and answer.
-- `assets/aspire-inference-attributes.png`: attributes table of the first inference span.
+- `assets/aspire-inference-attributes.png`: Aspire's attributes table for the first inference span. Slide 13 shows these values as an HTML table.
 - `assets/otel-inference-attributes.json`: complete captured attribute values for that span.
 - `assets/semconv-waterfall.svg`: operation coverage, stability targets, and core convention boundaries.
 - `assets/expected-waterfall.svg`: intended span names and nesting, with approximate timing aligned to the saved capture, matching service colours and span markers, and an enlarged layout.
