@@ -19,7 +19,7 @@ going back into a slide shows all of them. Fragments with the same
 `data-fragment` value appear together.
 The viewer loads the Markdown source and local assets directly.
 Internet access to `cdn.jsdelivr.net` is required for the Markdown and
-Mermaid renderers and syntax highlighting. SQL, JSON, Python, and shell fenced blocks use highlight.js
+Mermaid renderers and syntax highlighting. SQL, JSON, Python, shell, and PromQL code use highlight.js
 with light colors. All slides use light backgrounds regardless of system theme.
 Reload the page after editing the source.
 Stop the server with **Ctrl+C**.

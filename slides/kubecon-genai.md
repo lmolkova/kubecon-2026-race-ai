@@ -8,21 +8,26 @@ KubeCon + CloudNativeCon North America 2026
 
 ---
 
+<!-- layout: text -->
+
 # “Trask, can you help with the dashboard?”
 
-- [x] Instrumentation installed
-- [x] OTLP export configured
+- [x] Instrumentations installed
+- [x] OTel configured
 - [x] Traces arriving
 - [ ] Dashboard
-- [ ] Validation
 
 ---
+
+<!-- layout: diagram -->
 
 # Our expectations
 
 ![Expected waterfall with capture-aligned timing: workflow, diagnostic agent, and HTTP client/server spans connecting the runbook service](assets/expected-waterfall.svg)
 
 ---
+
+<!-- layout: diagram -->
 
 # The reality
 
@@ -40,15 +45,25 @@ WHERE trace_id = :trace_id
   AND "gen_ai.operation.name" = 'chat';
 ```
 
-**2 calls · 280 input tokens**
+<div class="query-output">
+<p class="query-output-label">Query result · 1 row</p>
+<table aria-label="Query result: 2 calls and 280 input tokens">
+<thead><tr><th scope="col">calls</th><th scope="col">input_tokens</th></tr></thead>
+<tbody><tr><td>2</td><td>280</td></tr></tbody>
+</table>
+</div>
 
 ---
+
+<!-- layout: diagram -->
 
 # Dashboard usage vs. reality
 
 ![Live query estimate versus delayed provider billing](assets/usage-vs-bill.svg)
 
 ---
+
+<!-- layout: diagram -->
 
 # How did we instrument the application?
 
@@ -70,13 +85,21 @@ WITH calls AS (
     OR lower("langsmith.span.kind") = 'llm'
   )
 )
-SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
-       SUM(input_tokens IS NULL) AS missing_usage FROM calls;
+SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens
+FROM calls;
 ```
 
-**5 inference spans · 900 input tokens · 0 missing usage values**
+<div class="query-output">
+<p class="query-output-label">Query result · 1 row</p>
+<table aria-label="Query result: 5 calls and 900 input tokens">
+<thead><tr><th scope="col">calls</th><th scope="col">input_tokens</th></tr></thead>
+<tbody><tr><td>5</td><td>900</td></tr></tbody>
+</table>
+</div>
 
 ---
+
+<!-- layout: diagram -->
 
 # Where context gets lost
 
@@ -84,12 +107,14 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 
 ---
 
+<!-- layout: text -->
+
 # If I had a magic wand
 
 - One schema across all instrumentations
-- Proper correlation between them
+- End-to-end trace correlation
 - Traces, metrics, and logs
-- One config for content capture
+- Consistent configuration for content capture
 - Large content separate from telemetry, but reacheable
 
 ---
@@ -100,22 +125,22 @@ SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
 <thead><tr><th>Wish</th><th class="fragment" data-fragment="otel">OpenTelemetry</th></tr></thead>
 <tbody>
 <tr><td>One schema across all<br>instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
-<tr><td>Proper correlation between them</td><td class="fragment" data-fragment="otel">Context propagation</td></tr>
-<tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">One SDK and OTLP for all three signals</td></tr>
-<tr><td>One config for content capture</td><td class="fragment" data-fragment="otel">A shared content-capture setting</td></tr>
+<tr><td>End-to-end trace correlation</td><td class="fragment" data-fragment="otel">Context propagation, suppression, enrichment</td></tr>
+<tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">Instrumentation that emits all signals</td></tr>
+<tr><td>Consistent configuration</td><td class="fragment" data-fragment="otel">Shared content-capture settings</td></tr>
 <tr><td>Large content separate from telemetry,<br>while still reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
 </tbody>
 </table>
 
 ---
 
+<!-- layout: diagram -->
+
 # GenAI semantic conventions
 
 New home: [semantic-conventions-genai](https://github.com/open-telemetry/semantic-conventions-genai)
 
-![GenAI trace waterfall; bold operations target stability, HTTP and DB use core conventions](assets/semconv-waterfall.svg)
-
-<p style="margin: -20px 0 0 28px; font-size: 22px; color: var(--cp-text-muted);"><strong>Bold</strong>: stability targets</p>
+![GenAI trace waterfall; bold operations target stability, HTTP and DB use core conventions](assets/semconv-waterfall.svg?v=aligned-notes)
 
 ---
 
@@ -175,7 +200,7 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 ---
 
-# Conversation and tool results
+# Conversation view
 
 <div class="aspire" role="group" aria-label="Aspire-style view of the final inference span">
 <div class="aspire-header"><span class="aspire-title">diagnostic-agent: chat gpt-4.1</span><span class="aspire-span-id">6483b37</span><span class="aspire-llm">LLM</span><span class="aspire-tabs"><span class="active">Input &amp; output</span><span>Tools 2</span><span>Details</span></span><span class="aspire-stats">Duration <b>1.88ms</b> · Tokens <b>360</b></span></div>
@@ -199,19 +224,28 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 ---
 
-# Usage, latency, and errors
+# Common metrics
 
-<table>
-<thead><tr><th>Dashboard question</th><th class="fragment" data-fragment="data">Recorded data</th></tr></thead>
+<table class="promql-table">
+<thead><tr><th></th><th class="fragment" data-fragment="data">PromQL</th></tr></thead>
 <tbody>
-<tr><td>Where did the tokens go?</td><td class="fragment" data-fragment="data">Input + output tokens</td></tr>
-<tr><td>How much usage involved caching?</td><td class="fragment" data-fragment="data">Cache read + cache creation tokens</td></tr>
-<tr><td>How much was text, image, or audio?</td><td class="fragment" data-fragment="data">Tokens by modality</td></tr>
-<tr><td>How quickly did streaming begin?</td><td class="fragment" data-fragment="data">Time to first chunk</td></tr>
-<tr><td>Which operation was slow?</td><td class="fragment" data-fragment="data">Duration</td></tr>
-<tr><td>How often does this fail?</td><td class="fragment" data-fragment="data">Calls + errors</td></tr>
+<tr><td>Input / output tokens</td><td class="fragment" data-fragment="data"><pre><code>sum(increase({"gen_ai.client.inference.usage.input_tokens"}[5m]))
+sum(increase({"gen_ai.client.inference.usage.output_tokens"}[5m]))</code></pre></td></tr>
+<tr><td>Cache usage</td><td class="fragment" data-fragment="data"><pre><code>sum(increase({"gen_ai.client.inference.usage.cache_read.input_tokens"}[5m]))
+sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</code></pre></td></tr>
+<tr><td>Input tokens by modality</td><td class="fragment" data-fragment="data"><pre><code>sum by ("gen_ai.token.modality") (increase(
+  {"gen_ai.client.inference.usage.input_tokens"}[5m]))</code></pre></td></tr>
+<tr><td>p95 time to first chunk</td><td class="fragment" data-fragment="data"><pre><code>histogram_quantile(0.95, sum(rate(
+  {"gen_ai.client.inference.time_to_first_chunk"}[5m])))</code></pre></td></tr>
+<tr><td>p95 duration by operation</td><td class="fragment" data-fragment="data"><pre><code>histogram_quantile(0.95,
+  sum by ("gen_ai.operation.name") (rate(
+    {"gen_ai.client.inference.duration"}[5m])))</code></pre></td></tr>
+<tr><td>Failed calls per second</td><td class="fragment" data-fragment="data"><pre><code>sum(histogram_count(rate(
+  {"gen_ai.client.inference.duration", "error.type"!=""}[5m])))</code></pre></td></tr>
 </tbody>
 </table>
+
+<!-- Queries use native histograms and preserve original OTel metric and attribute names. Each expression is a separate query. Sources: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/client-inference.md https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md https://prometheus.io/docs/guides/utf8/ https://prometheus.io/docs/prometheus/latest/querying/functions/ -->
 
 ---
 
@@ -220,6 +254,8 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 # From conventions to instrumentation
 
 ---
+
+<!-- layout: text -->
 
 # OpenInference instrumentation donation
 
@@ -260,6 +296,8 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 <img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: 0 to 19 a month in python-contrib from November 2024, rising to 116 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
 
 ---
+
+<!-- layout: text -->
 
 # Native SDK instrumentation
 
@@ -354,6 +392,8 @@ TODO: Find a better screenshot.
 
 ---
 
+<!-- layout: text -->
+
 # Next: stability and adoption
 
 - Initial wave: inference, agents/workflows, and tools across signals
@@ -362,13 +402,14 @@ TODO: Find a better screenshot.
 
 ---
 
+<!-- layout: text -->
+
 # Next: richer agent telemetry
 
 - Trace steps, skills, and realtime interactions
 - Propagate conversation IDs and agent details in context - enable better cost / usage analysis on operation level
 - Capture evaluations and guardrail outcomes
 - Cover hosted agents and harnesses
-- 
 
 ---
 

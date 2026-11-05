@@ -9,5 +9,5 @@ WITH calls AS (
     OR lower("langsmith.span.kind") = 'llm'
   )
 )
-SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens,
-       SUM(input_tokens IS NULL) AS missing_usage FROM calls;
+SELECT COUNT(*) AS calls, SUM(input_tokens) AS input_tokens
+FROM calls;
