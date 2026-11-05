@@ -87,7 +87,10 @@
       font-family: Arial, sans-serif;
     }
     .branded-cover .content { padding-top: 140px; }
-    .branded-transition .content { padding-top: 166px; }
+    .slide.branded-transition {
+      background: url("assets/kubecon-2026-landscape.png") center bottom / 100% auto no-repeat, #e3f6ff;
+    }
+    .branded-transition .content { padding-top: 206px; }
     .branded-cover h1, .branded-transition h1 {
       max-width: 1080px; font-size: 58px; line-height: 1.12;
       margin-bottom: 24px; font-weight: 700;
@@ -97,18 +100,56 @@
     h1 { font-size: 44px; line-height: 1.15; margin: 0 0 28px; }
     p, ul, ol, pre, table { margin: 0 0 20px; }
     li { margin-bottom: 12px; }
+    .slide.text { font-size: 34px; line-height: 1.4; }
+    .text h1 { margin-bottom: 70px; }
+    .text li { margin-bottom: 20px; }
+    .text ul:has(input[type="checkbox"]) { padding-left: 0; }
+    li:has(> input[type="checkbox"]) { list-style: none; }
+    input[type="checkbox"] {
+      appearance: none; display: inline-grid; place-content: center;
+      width: 28px; height: 28px; margin: 0 14px 0 0;
+      vertical-align: -4px; border: 2px solid #425cc7;
+      border-radius: 4px; background: #fff; opacity: 1;
+    }
+    input[type="checkbox"]:checked { background: #425cc7; }
+    input[type="checkbox"]:checked::after {
+      content: ""; width: 7px; height: 13px;
+      border: solid #fff; border-width: 0 3px 3px 0;
+      transform: translateY(-2px) rotate(45deg);
+    }
     a { color: var(--cp-link); }
     img { display: block; max-width: 100%; max-height: 500px !important; margin: auto; object-fit: contain; }
+    .slide.diagram { padding: 24px 16px; }
+    .diagram .content { height: 672px; display: flex; flex-direction: column; gap: 10px; }
+    .diagram h1 { margin: 0 24px; }
+    .diagram .content > p { margin: 0 24px; }
+    .diagram .content > p:has(> img) {
+      flex: 1; min-height: 0; margin: 0; display: flex;
+    }
+    .diagram img { width: 100%; height: 100%; max-height: none !important; object-fit: contain; }
+    .diagram .diagram-caption { font-size: 22px; color: var(--cp-text-muted); }
     pre {
       padding: 20px; border-radius: 0.625rem; background: var(--cp-surface-soft);
       font-size: 19px; white-space: pre-wrap; overflow-wrap: anywhere;
     }
     code { font-family: Consolas, "Courier New", Courier, monospace; font-weight: 600; }
+    pre:has(> code.language-sql) { font-size: 28.5px; }
+    .query-output {
+      margin-top: 28px; padding: 18px 24px;
+      border-left: 5px solid #425cc7; background: #eef2ff;
+      font-family: Consolas, "Courier New", Courier, monospace;
+    }
+    .query-output-label { margin: 0 0 12px; font-size: 18px; color: #52617a; }
+    .query-output table { width: 620px; margin: 0; table-layout: fixed; }
+    .query-output th { padding: 0 20px 8px 0; font-size: 23px; color: #52617a; border-bottom: 1px solid #c7d2ef; }
+    .query-output td { padding: 8px 20px 0 0; font-size: 48px; line-height: 1.1; font-weight: 700; color: #304bb3; border: 0; }
     .hljs-keyword, .hljs-attr { color: #425cc7; font-weight: 600; }
     .hljs-string { color: #0f766e; }
     .hljs-number, .hljs-literal { color: #a3367a; }
     .hljs-built_in, .hljs-type { color: #82500d; }
     .hljs-comment { color: var(--cp-text-soft); font-style: italic; }
+    .language-promql .hljs-built_in, .language-promql .hljs-keyword { color: #425cc7; }
+    .language-promql .hljs-operator { color: #a3367a; }
     html[data-theme="dark"] .hljs-keyword,
     html[data-theme="dark"] .hljs-attr { color: #a5b4fc; }
     html[data-theme="dark"] .hljs-string { color: #5eead4; }
@@ -118,6 +159,10 @@
     html[data-theme="dark"] .hljs-type { color: #fcd34d; }
     .code-grid pre { white-space: pre; overflow-wrap: normal; }
     table { width: 100%; border-collapse: collapse; font-size: 24px; }
+    .promql-table { table-layout: fixed; font-size: 22px; }
+    .promql-table th:first-child { width: 23%; }
+    .promql-table td { padding: 10px 12px; vertical-align: middle; }
+    .promql-table pre { margin: 0; padding: 0; background: transparent; font-size: 19px; line-height: 1.35; }
     th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--cp-border); }
     .attr-key { list-style: none; padding-left: 0; }
     .attr-key li { position: relative; padding-left: 32px; }
@@ -291,7 +336,7 @@
       for (const chunk of splitSlides(await response.text())) {
         const slide = document.createElement("section");
         slide.className = "slide";
-        const layout = chunk.match(/<!-- layout: (branded-cover|branded-transition) -->/);
+        const layout = chunk.match(/<!-- layout: (branded-cover|branded-transition|diagram|text) -->/);
         if (layout) slide.classList.add(layout[1]);
         const content = document.createElement("div");
         content.className = "content";
@@ -318,7 +363,27 @@
         hljs.registerLanguage("json", json);
         hljs.registerLanguage("python", python);
         hljs.registerLanguage("bash", bash);
-        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json, pre > code.language-python, pre > code.language-sh, pre > code.language-bash")) {
+        hljs.registerLanguage("promql", () => ({
+          name: "PromQL",
+          keywords: {
+            keyword: "by without on ignoring group_left group_right bool offset and or unless",
+            built_in: "sum min max avg count stddev stdvar topk bottomk quantile count_values group increase rate irate delta idelta histogram_quantile histogram_count histogram_sum histogram_avg histogram_fraction",
+            literal: "Inf NaN"
+          },
+          contains: [
+            hljs.HASH_COMMENT_MODE,
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
+            { className: "string", begin: /`/, end: /`/ },
+            { className: "number", begin: /\b(?:\d+(?:ms|[smhdwy]))+\b/ },
+            hljs.C_NUMBER_MODE,
+            { className: "operator", begin: /!=|=~|!~|==|>=|<=|[+*/%^=<>-]/ }
+          ]
+        }));
+        for (const code of deck.querySelectorAll(".promql-table pre > code")) {
+          code.classList.add("language-promql");
+        }
+        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json, pre > code.language-python, pre > code.language-sh, pre > code.language-bash, pre > code.language-promql")) {
           hljs.highlightElement(code);
         }
       } catch (error) {
@@ -343,7 +408,10 @@
       await document.fonts.ready;
       for (const slide of slides) {
         const content = slide.firstElementChild;
-        const scale = Math.min(1, 624 / content.scrollHeight, 1184 / content.scrollWidth);
+        const style = getComputedStyle(slide);
+        const availableHeight = slide.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+        const availableWidth = slide.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+        const scale = Math.min(1, availableHeight / content.scrollHeight, availableWidth / content.scrollWidth);
         content.style.transform = `scale(${scale})`;
       }
       previous.onclick = backward;
