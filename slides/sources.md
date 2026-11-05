@@ -58,14 +58,16 @@ The roadmap is direction, not a delivery commitment. Separate established
 signal definitions, active stabilization, and proposed extensions verbally.
 Do not imply that planning, arbitrary steps, or every signal has stable coverage.
 
-## Conformance: slides 19–21
+## Conformance: slides 22–24
 
-- [Comparison dashboard](https://open-telemetry.github.io/semantic-conventions-conformance/#?q=anthropic).
+- [Comparison report](https://open-telemetry.github.io/semantic-conventions-conformance/#/signals/span%3Agen_ai.client.inference?q=anthropic&level=scored): `gen_ai.client.inference`, filtered to Anthropic, Required + recommended.
 - [Native Anthropic report](https://open-telemetry.github.io/semantic-conventions-conformance/#/target/gen-ai/python/anthropic/native).
 - [Conformance repository](https://github.com/open-telemetry/semantic-conventions-conformance).
 - [Weaver](https://github.com/open-telemetry/weaver).
 
 Screenshots were captured for this deck on November 1, 2026, client local date.
+Slide 24's table copies five rows from the comparison report as read on
+November 5, 2026. Re-check it before presenting.
 The live dashboard identifies GenAI registry revision `9ffc7e00c639`.
 This differs from the earlier pinned report in the research document.
 Use the screenshots as a dated observation, not a certification or vendor ranking.

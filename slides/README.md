@@ -55,7 +55,7 @@ broken context.
 - `assets/aspire-parent-gap.svg`: the same 22-span redraw with a boxed runbook subtree, two intended-parent arrows, and the separate orphan trace on its own time scale.
 - `assets/aspire-orphan-http.png`: original capture of the detached runbook HTTP span in a separate trace.
 - `assets/aspire-trace.png`: earlier single-service hierarchy crop, not used in the deck.
-- `assets/conformance-inference.png`: live dashboard, filtered to Anthropic.
+- `assets/conformance-inference.png`: archived dark-mode capture of the Anthropic comparison, not used in the deck. Slide 24 shows the same comparison as an HTML table.
 - `assets/conformance-findings.png`: archived capture, not used in the deck.
 - `queries/01-semconv.sql`: exact first on-slide query.
 - `queries/02-mixed.sql`: exact on-slide mapping query.
