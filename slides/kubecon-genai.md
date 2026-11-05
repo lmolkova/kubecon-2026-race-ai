@@ -1,3 +1,5 @@
+<!-- layout: branded-cover -->
+
 # The Race to Standardize AI Observability
 
 Liudmila Molkova, Google · Trask Stalnaker, Microsoft
@@ -213,6 +215,8 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 ---
 
+<!-- layout: branded-transition -->
+
 # From conventions to instrumentation
 
 ---
@@ -265,6 +269,8 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 - Need a way to lib developers to validate conformance
 
 ---
+
+<!-- layout: branded-transition -->
 
 # Every instrumentation needs conformance tests
 
@@ -372,8 +378,11 @@ TODO
 
 # Thank you!
 
-[GenAI conventions](https://github.com/open-telemetry/semantic-conventions-genai)
-
-[Conformance repository](https://github.com/open-telemetry/semantic-conventions-conformance)
-
-[Conformance reports](https://open-telemetry.github.io/semantic-conventions-conformance/)
+<div style="display: flex; align-items: center; gap: 56px;">
+<img src="assets/the-race-to-standardize-ai-observability_molkova-stalnaker_1246166_feedback-code.png" alt="Scan to leave feedback on The Race to Standardize AI Observability" style="width: 340px; height: 340px; margin: 0; flex-shrink: 0;" />
+<div>
+<p><a href="https://github.com/open-telemetry/semantic-conventions-genai">GenAI conventions</a></p>
+<p><a href="https://github.com/open-telemetry/semantic-conventions-conformance">Conformance repository</a></p>
+<p><a href="https://open-telemetry.github.io/semantic-conventions-conformance/">Conformance reports</a></p>
+</div>
+</div>
