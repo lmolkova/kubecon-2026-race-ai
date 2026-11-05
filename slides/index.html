@@ -223,6 +223,26 @@
     .aspire-content .str { color: #0b7a0b; }
     .fragment { visibility: hidden; }
     .slide.active .fragment.shown { visibility: visible; }
+    .conformance-grid { table-layout: fixed; margin: 8px 0 24px; font-size: 22px; }
+    .conformance-grid th, .conformance-grid td {
+      padding: 14px 8px; text-align: center; vertical-align: bottom;
+      border-bottom: 0; border-left: 4px solid var(--cp-surface);
+    }
+    .conformance-grid tbody th, .conformance-grid tbody td { border-bottom: 4px solid var(--cp-surface); }
+    .conformance-grid thead th { font-weight: 600; line-height: 1.2; color: var(--cp-text); }
+    .conformance-grid th:first-child { width: 390px; text-align: left; border-left: 0; }
+    .conformance-grid .conformance-group {
+      padding: 6px 8px; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: #52617a; background: #eef2ff; box-shadow: inset 0 -3px #425cc7;
+    }
+    .conformance-grid tbody th {
+      font-family: Consolas, "Courier New", Courier, monospace; font-weight: 600;
+      background: var(--cp-surface-soft); vertical-align: middle;
+    }
+    .conformance-grid td { font-size: 26px; font-weight: 700; vertical-align: middle; }
+    .conformance-grid td.yes { background: #1d7a5a; color: #ffffff; }
+    .conformance-grid td.no { background: #e6e6ea; color: #5c5c5c; }
+    .conformance-caption { font-size: 20px; color: var(--cp-text-muted); }
     .mermaid { display: flex; justify-content: center; }
     .mermaid svg { max-width: 100%; max-height: 500px; }
     nav {

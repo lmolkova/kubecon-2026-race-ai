@@ -373,11 +373,23 @@ weaver registry live-check \
 
 ---
 
-# Comparing instrumentation output
+# One library, five instrumentations, different spans
 
-TODO: Find a better screenshot.
+<table class="conformance-grid" aria-label="Attributes on the gen_ai.client.inference span emitted by five Python instrumentations of the Anthropic SDK">
+<thead>
+<tr><th></th><th colspan="5" class="conformance-group">Python calls to Anthropic, instrumented by</th></tr>
+<tr><th scope="col">Attribute</th><th scope="col">Anthropic<br>native</th><th scope="col">Open<br>Inference</th><th scope="col">Open<br>LLMetry</th><th scope="col">OTel</th><th scope="col">OTel via<br>LangChain</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">gen_ai.operation.name</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+<tr><th scope="row">gen_ai.usage.input_tokens</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+<tr><th scope="row">gen_ai.request.temperature</th><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+<tr><th scope="row">gen_ai.response.finish_reasons</th><td class="no">–</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+<tr><th scope="row">server.address</th><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="yes">✓</td><td class="no">–</td></tr>
+</tbody>
+</table>
 
-![Inference attribute comparison across Anthropic instrumentations](assets/conformance-inference.png)
+<p class="conformance-caption"><code>gen_ai.client.inference</code> span, measured by Weaver live-check. Snapshot from November 5, 2026. <a href="https://open-telemetry.github.io/semantic-conventions-conformance/#/signals/span%3Agen_ai.client.inference?q=anthropic&amp;level=scored">Live report</a></p>
 
 ---
 
