@@ -119,8 +119,8 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 # GenAI attributes
 
-<div style="display: flex; align-items: center; gap: 32px;">
-<div style="flex: 0 0 29%;">
+<div style="display: flex; align-items: center; gap: 24px;">
+<div style="flex: 0 0 26%;">
 <ul class="attr-key">
 <li style="--c: #d64545;">Agent / workflow identity</li>
 <li style="--c: #425cc7;">Model details and request parameters</li>
@@ -131,18 +131,18 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 </div>
 <div style="flex: 1; min-width: 0;">
 <table class="attr-table" aria-label="GenAI attributes from the demo trace">
-<tr style="--c: #d64545;"><td>gen_ai.agent.name</td><td>diagnostic</td></tr>
-<tr style="--c: #425cc7;"><td>gen_ai.operation.name</td><td>chat</td></tr>
-<tr style="--c: #425cc7;"><td>gen_ai.provider.name</td><td>openai</td></tr>
-<tr style="--c: #425cc7;"><td>gen_ai.request.model</td><td>gpt-4.1</td></tr>
-<tr style="--c: #425cc7;"><td>gen_ai.response.model</td><td>gpt-4.1</td></tr>
-<tr style="--c: #425cc7;"><td>gen_ai.response.id</td><td>chatcmpl-4021efaa4f924ee6a425ecde938da86d</td></tr>
-<tr style="--c: #425cc7;"><td>gen_ai.response.finish_reasons</td><td>["tool_calls"]</td></tr>
-<tr style="--c: #f5a800;"><td>gen_ai.usage.input_tokens</td><td>120</td></tr>
-<tr style="--c: #f5a800;"><td>gen_ai.usage.output_tokens</td><td>30</td></tr>
-<tr style="--c: #0f8188;"><td>gen_ai.input.messages</td><td>[{"role":"user","parts":[{"content":"Why is checkout restarting, and what should I do?","type":"text"}]}]</td></tr>
-<tr style="--c: #0f8188;"><td>gen_ai.output.messages</td><td>[{"role":"assistant","parts":[{"arguments":{"workload":"checkout"},"name":"inspect_workload","type":"tool_call"}]}]</td></tr>
-<tr style="--c: #a3367a;"><td>gen_ai.tool.definitions</td><td>[{"name":"inspect_workload","description":"Inspect Kubernetes evidence for a workload."}]</td></tr>
+<tr style="--c: #d64545;"><th scope="row">gen_ai.agent.name</th><td>diagnostic</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.operation.name</th><td>chat</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.provider.name</th><td>openai</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.request.model</th><td>gpt-4.1</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.response.model</th><td>gpt-4.1</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.response.id</th><td>chatcmpl-4021efaa4f924ee6a425ecde938da86d</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.response.finish_reasons</th><td>["tool_calls"]</td></tr>
+<tr style="--c: #f5a800;"><th scope="row">gen_ai.usage.input_tokens</th><td>120</td></tr>
+<tr style="--c: #f5a800;"><th scope="row">gen_ai.usage.output_tokens</th><td>30</td></tr>
+<tr style="--c: #0f8188;"><th scope="row">gen_ai.input.messages</th><td class="wrap">[{"role":"user","parts":[{"content":"Why is checkout restarting, and what should I do?","type":"text"}]}]</td></tr>
+<tr style="--c: #0f8188;"><th scope="row">gen_ai.output.messages</th><td class="wrap">[{"role":"assistant","parts":[{"arguments":{"workload":"checkout"},"name":"inspect_workload","type":"tool_call"}]}]</td></tr>
+<tr style="--c: #a3367a;"><th scope="row">gen_ai.tool.definitions</th><td class="wrap">[{"name":"inspect_workload","description":"Inspect Kubernetes evidence for a workload."}]</td></tr>
 </table>
 </div>
 </div>
