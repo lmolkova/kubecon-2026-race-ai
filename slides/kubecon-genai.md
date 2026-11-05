@@ -175,7 +175,7 @@ New home: [semantic-conventions-genai](https://github.com/open-telemetry/semanti
 
 # Conversation and tool results
 
-<div class="aspire" role="img" aria-label="Aspire-style view of the final inference span: user question, assistant tool calls, two tool responses, and final assistant output">
+<div class="aspire" role="group" aria-label="Aspire-style view of the final inference span">
 <div class="aspire-header"><span class="aspire-title">diagnostic-agent: chat gpt-4.1</span><span class="aspire-span-id">6483b37</span><span class="aspire-llm">LLM</span><span class="aspire-tabs"><span class="active">Input &amp; output</span><span>Tools 2</span><span>Details</span></span><span class="aspire-stats">Duration <b>1.88ms</b> · Tokens <b>360</b></span></div>
 <div class="aspire-body">
 <p class="aspire-section">Input</p>
