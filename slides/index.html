@@ -6,10 +6,7 @@
   <title>The Race to Standardize AI Observability</title>
   <script>
     (() => {
-      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.setAttribute("data-theme", "light");
     })();
   </script>
   <style>
@@ -81,6 +78,22 @@
     }
     .slide.active { visibility: visible; }
     .content { transform-origin: top left; }
+    .slide.branded-cover, .slide.branded-transition {
+      background: url("assets/kubecon-2026-logo.png") 44px 26px / 289px auto no-repeat,
+        url("assets/kubecon-2026-landscape.png") center bottom / 100% auto no-repeat,
+        #e3f6ff;
+      color: #052243;
+      border-radius: 0;
+      font-family: Arial, sans-serif;
+    }
+    .branded-cover .content { padding-top: 140px; }
+    .branded-transition .content { padding-top: 166px; }
+    .branded-cover h1, .branded-transition h1 {
+      max-width: 1080px; font-size: 58px; line-height: 1.12;
+      margin-bottom: 24px; font-weight: 700;
+    }
+    .branded-cover p { font-size: 24px; margin-bottom: 14px; }
+    .branded-cover p:last-child { font-size: 20px; }
     h1 { font-size: 44px; line-height: 1.15; margin: 0 0 28px; }
     p, ul, ol, pre, table { margin: 0 0 20px; }
     li { margin-bottom: 12px; }
@@ -90,7 +103,7 @@
       padding: 20px; border-radius: 0.625rem; background: var(--cp-surface-soft);
       font-size: 19px; white-space: pre-wrap; overflow-wrap: anywhere;
     }
-    code { font-family: Consolas, "Courier New", Courier, monospace; }
+    code { font-family: Consolas, "Courier New", Courier, monospace; font-weight: 600; }
     .hljs-keyword, .hljs-attr { color: #425cc7; font-weight: 600; }
     .hljs-string { color: #0f766e; }
     .hljs-number, .hljs-literal { color: #a3367a; }
@@ -112,11 +125,11 @@
       content: ""; position: absolute; left: 0; top: 0.3em;
       width: 16px; height: 16px; border-radius: 3px; background: var(--c);
     }
-    .attr-table { table-layout: fixed; margin: 0; font-family: Consolas, "Courier New", Courier, monospace; font-size: 20px; }
+    .attr-table { table-layout: fixed; margin: 0; font-family: Consolas, "Courier New", Courier, monospace; font-size: 20px; font-weight: 600; }
     .attr-table th, .attr-table td { padding: 4px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .attr-table td.wrap { white-space: normal; overflow-wrap: anywhere; font-size: 18px; line-height: 1.2; }
     .attr-table th {
-      width: 360px; padding-left: 18px; font-weight: normal;
+      width: 360px; padding-left: 18px; font-weight: 600;
       background: linear-gradient(var(--c), var(--c)) left 3px / 6px calc(100% - 6px) no-repeat;
     }
     .aspire {
@@ -278,6 +291,8 @@
       for (const chunk of splitSlides(await response.text())) {
         const slide = document.createElement("section");
         slide.className = "slide";
+        const layout = chunk.match(/<!-- layout: (branded-cover|branded-transition) -->/);
+        if (layout) slide.classList.add(layout[1]);
         const content = document.createElement("div");
         content.className = "content";
         content.innerHTML = marked.parse(chunk);
@@ -292,14 +307,18 @@
         code.parentElement.replaceWith(diagram);
       }
       try {
-        const [{ default: hljs }, { default: sql }, { default: json }] = await Promise.all([
+        const [{ default: hljs }, { default: sql }, { default: json }, { default: python }, { default: bash }] = await Promise.all([
           import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/core.min.js"),
           import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/sql.min.js"),
-          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/json.min.js")
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/json.min.js"),
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/python.min.js"),
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/bash.min.js")
         ]);
         hljs.registerLanguage("sql", sql);
         hljs.registerLanguage("json", json);
-        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json")) {
+        hljs.registerLanguage("python", python);
+        hljs.registerLanguage("bash", bash);
+        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json, pre > code.language-python, pre > code.language-sh, pre > code.language-bash")) {
           hljs.highlightElement(code);
         }
       } catch (error) {

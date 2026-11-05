@@ -19,14 +19,20 @@ going back into a slide shows all of them. Fragments with the same
 `data-fragment` value appear together.
 The viewer loads the Markdown source and local assets directly.
 Internet access to `cdn.jsdelivr.net` is required for the Markdown and
-Mermaid renderers and SQL/JSON syntax highlighting. SQL and JSON fenced blocks use highlight.js
-with light and dark colors. Reload the page after editing the source.
+Mermaid renderers and syntax highlighting. SQL, JSON, Python, and shell fenced blocks use highlight.js
+with light colors. All slides use light backgrounds regardless of system theme.
+Reload the page after editing the source.
 Stop the server with **Ctrl+C**.
 
 Speaker notes are omitted. TODOs remain in the slide source.
 Sources and qualifications are collected in [sources.md](sources.md).
 
 ## Colors
+
+The cover and two transition slides use artwork extracted from the supplied
+KubeCon + CloudNativeCon North America 2026 PowerPoint template. The navy logo
+and pale blue background keep these slides light. The original PowerPoint is
+preserved in `assets`; `<!-- layout: branded-transition -->` selects this layout.
 
 Diagram and chart colors follow the OpenTelemetry logo. OTel blue `#425cc7`
 is the main series color and marks diagnostic-agent spans. OTel amber
