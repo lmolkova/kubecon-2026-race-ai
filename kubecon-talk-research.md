@@ -1,7 +1,123 @@
-# Native instrumentation and GenAI semconv adoption
+# GenAI instrumentation, adoption, and the 2026 timeline
 
 Research snapshot: November 1, 2026. Read-only review of documentation, source,
 merged changes, and committed conformance results. No scenarios or tests run.
+
+Timeline expansion checked November 5, 2026. The earlier Python/JS counts below
+retain their November 1 cutoff. Dates in the new tables are UTC merge dates
+unless marked as a release announcement. Merged support does not establish
+which published package first shipped it.
+
+## 2026 timeline beyond Python and JavaScript
+
+Use these milestones for slide 18 and its future continuation. The scope is
+AI observability across OTel.
+This is a selected milestone inventory, not every OTel change in 2026.
+
+### Java: existing clients gain depth, new frameworks gain coverage
+
+| Date | Milestone and evidence | Scope for the talk |
+| --- | --- | --- |
+| January 5 | [Bedrock inference-profile model IDs, #15751](https://github.com/open-telemetry/opentelemetry-java-instrumentation/pull/15751) | Support regional/global model-ID prefixes. Included in [v2.24.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.24.0), published January 17. This improves existing Bedrock instrumentation. |
+| June 9 | [GenAI exception logs, #18893](https://github.com/open-telemetry/opentelemetry-java-instrumentation/pull/18893) | OpenAI failures can emit exception logs under the preview opt-in. Included in [v2.29.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.29.0), published June 19. |
+| October 3, release | [Java instrumentation v2.32.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.32.0) | Streaming-request attributes, OpenAI cached/reasoning token counts, and Bedrock guardrail IDs. These add detail to existing instrumentation. |
+| October 16 | [Spring AI ChatModel, #19473](https://github.com/open-telemetry/opentelemetry-java-instrumentation/pull/19473), `lrwh` | New Java agent instrumentation for Spring AI 1.x, including synchronous and streaming calls, client spans, and metrics. Captures the provider-neutral ChatModel interface. Message content is opt-in. |
+| November 4 | [MCP Java SDK, #20062](https://github.com/open-telemetry/opentelemetry-java-instrumentation/pull/20062), `walleseve` | New client instrumentation for SDK 0.14.1+, synchronous/asynchronous tool calls, duration metrics, and context propagation. Tool arguments/results are outside this PR's capture scope. |
+| November 4 | [OpenAI Responses API, #20537](https://github.com/open-telemetry/opentelemetry-java-instrumentation/pull/20537), `sangkyoonnam` | Adds spans and metrics for sync/async and streaming Responses calls. Content capture is deferred. This extends the existing OpenAI integration. |
+
+Do not call all six rows new instrumentations. Spring AI and MCP are new
+integration coverage; the other rows improve existing clients. November merges
+are newer than the original research snapshot and should be labeled merged
+until a containing release is verified.
+
+### Go compile-time instrumentation: GenAI coverage arrives in 2026
+
+| Date | Milestone and evidence | Scope for the talk |
+| --- | --- | --- |
+| July 2 | [OpenAI Go SDK, #604](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/604), `NameHaibinZhang` | New support for SDK v1/v2/v3: chat, text completions, embeddings, and streaming. Three SDK majors are one library integration, not three independent instrumentations. |
+| July 19 | [Anthropic Go SDK, #689](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/689), `pradhyum6144` | New non-streaming Messages API instrumentation. Streaming and content capture were deferred in this initial change. |
+| July 31 | [Anthropic duration metric, #775](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/775), `malladinagarjuna2` | Adds the operation-duration histogram, including failed calls. |
+| September 2 | [OpenAI duration metric and Anthropic error dimensions, #1074](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/1074), `Labreo` | Adds OpenAI operation-duration metrics and error classification on Anthropic duration metrics. |
+| September 7 | [OpenAI opt-in content capture, #740](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/740), `Aryanbhargava18` | Adds bounded prompt/completion capture. Embedding content is excluded. |
+| October 28 | [Avoid duplicate Anthropic spans, #1572](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/1572), `amazingakai` | Handles coexistence with native SDK OpenTelemetry. Useful evidence that native and external instrumentation must compose. |
+
+The timeline shows depth arriving after initial span coverage: metrics, content
+controls, and coexistence fixes.
+
+### OBI/eBPF: model calls, tools, and retrieval
+
+| Date | Milestone and evidence | Author |
+| --- | --- | --- |
+| February 25 | [OpenAI protocol support, #1353](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/1353) | `grcevski` |
+| March 31 | [GenAI metrics, #1672](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/1672) | `grcevski` |
+| April 23 and 27 | [Qwen, #1892](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/1892) and [MCP, #1867](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/1867) | `NameHaibinZhang` |
+| May 8 and 13 | [Reranking, #2056](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/2056) and [vector retrieval, #2087](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/2087) | `NameHaibinZhang` |
+| July 22 | [Native Ollama chat/generate endpoints, #2710](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/2710) | `NameHaibinZhang` |
+| October 14 | [GenAI upstream conformance, #3707](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/3707) | `NimrodAvni78` |
+| October 26 | [Cohere v2 chat, #3903](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/3903) | `nirajan1111` |
+| November 4 | [Ollama embedding spans, #4014](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/4014) | `DCchoudhury15` |
+
+OBI observes supported protocols and payloads across applications. Its coverage
+units differ from Python package or Go SDK counts. Do not add them into a single
+"number of instrumentations" total.
+
+The [v1 announcement](https://opentelemetry.io/blog/2026/obi-v1-release/) ties the
+release to configuration/deployment compatibility and telemetry migration
+guidance, including a Weaver-compatible registry. GenAI extraction needs explicit
+payload-capture and feature configuration. The release does not make all emitted
+telemetry stable or give visibility into arbitrary internal agent steps.
+
+### Work across OTel and coordination with AAIF
+
+| Date | Milestone and evidence | Why it belongs on the timeline |
+| --- | --- | --- |
+| May 5 | [GenAI conventions move to their own repo, #3696](https://github.com/open-telemetry/semantic-conventions/pull/3696) | A dedicated place for the domain's conventions and reference scenarios. |
+| May 12 and 22 | Collector [OpenInference normalization, #48245](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/48245) and [OpenLLMetry mapping, #48385](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/48385) | Migration help for existing span attributes. These changes do not establish normalization of logs, metrics, or missing context. |
+| May 13, charter approval field | [AAIF Observability & Traceability charter](https://github.com/aaif/wg-observability-and-traceability/blob/main/charter/CHARTER.md) | A coordination forum connecting existing efforts, including OTel GenAI. The charter records WG ratification on April 15 and approval on May 13, but its final ratification block still has placeholders. Label this as the charter's recorded date, not a verified launch announcement. |
+| May 19 | [Memory operation conventions, #140](https://github.com/open-telemetry/semantic-conventions-genai/pull/140) | Coverage expands to memory-store and memory-record operations, grounded in framework reference scenarios. Merged conventions are not a stability declaration. |
+| June 1 | [Collector GenAI normalizer promoted to alpha, #48773](https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/48773) | Added to the contrib distribution configuration. Implementation followed the May scaffold; cite this milestone rather than treating the scaffold as working support. |
+| August 8 | [Conformance runner and GenAI domain, #12](https://github.com/open-telemetry/semantic-conventions-conformance/pull/12) | Shared runner, Weaver validation, and a deterministic provider mock server. This PR adds tooling; scenarios follow separately. |
+| October 26 | [Content capture/upload configuration, #543](https://github.com/open-telemetry/semantic-conventions-genai/pull/543) | Formalizes shared configuration. Existing implementations still need adoption checks. |
+| November 4 | [Realtime session conventions, #394](https://github.com/open-telemetry/semantic-conventions-genai/pull/394) | Adds realtime inference, speech, session correlation, and audio/transcription modeling with OpenAI Realtime and Gemini Live reference scenarios. |
+
+AAIF is an external collaboration milestone, not an OTel subproject. Its
+[README](https://github.com/aaif/wg-observability-and-traceability) dates the chairs'
+term from March 1, 2026; that is not evidence of the group's exact launch date.
+
+### Contributor evidence beyond Python/JS
+
+Two verified examples of first public merged OTel PRs:
+
+| Account | First merged PR | Merge timestamp, UTC |
+| --- | --- | --- |
+| `malladinagarjuna2` | [Go Anthropic duration metrics, #775](https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation/pull/775) | 2026-07-31T04:15:11Z |
+| `nirajan1111` | [OBI Cohere chat, #3903](https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/pull/3903) | 2026-10-26T21:29:58Z |
+
+Checked November 5 using the same public merged-PR definition as the Python/JS
+research. Each query returned zero earlier matches:
+
+```text
+org:open-telemetry is:pr is:merged author:malladinagarjuna2 merged:<2026-07-31T04:15:11Z
+org:open-telemetry is:pr is:merged author:nirajan1111 merged:<2026-10-26T21:29:58Z
+```
+
+These are examples, not an exhaustive newcomer count. Checks for `lrwh`,
+`walleseve`, `sangkyoonnam`, `pradhyum6144`, and `DCchoudhury15` found earlier
+OTel merges. In particular, `walleseve` and `sangkyoonnam` also contributed in
+Python GenAI, so adding per-repo author counts would double-count them.
+
+### Suggested timeline selection
+
+For one slide, select milestones rather than reproducing the inventory:
+February OBI OpenAI support; May dedicated GenAI conventions and AAIF coordination;
+July Python beta delivery and Go GenAI coverage; August conformance tooling;
+October Spring AI, OBI GenAI conformance, and shared content configuration; November Java MCP
+and Responses support. Use the Python/JS sections below for their exact dates.
+
+Keep future RC targets and 2027 breadth on a separate continuation. Completed
+coverage already includes memory, MCP, retrieval, and realtime conventions;
+frame future work as stabilization, deeper implementation, and remaining gaps
+rather than implying those areas have no work today.
 
 ## Claims we can use in the talk
 
