@@ -10,7 +10,7 @@ which published package first shipped it.
 
 ## 2026 timeline beyond Python and JavaScript
 
-Use these milestones for slide 18 and its future continuation. The scope is
+Use these milestones for slide 17 and its future continuation. The scope is
 AI observability across OTel.
 This is a selected milestone inventory, not every OTel change in 2026.
 
@@ -107,6 +107,8 @@ OTel merges. In particular, `walleseve` and `sangkyoonnam` also contributed in
 Python GenAI, so adding per-repo author counts would double-count them.
 
 ### Suggested timeline selection
+
+Stabilization milestone checked November 5: [inference and core agentic execution stabilization, #511](https://github.com/open-telemetry/semantic-conventions-genai/issues/511) was opened September 11, 2026. Use September for the start of the tracked stabilization effort, not a declaration of stability. The issue defines scope across spans, metrics, and events; some operations remain undecided.
 
 For one slide, select milestones rather than reproducing the inventory:
 February OBI OpenAI support; May dedicated GenAI conventions and AAIF coordination;
