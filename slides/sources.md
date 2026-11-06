@@ -1,6 +1,6 @@
 # Sources and notes
 
-## Demo evidence: slides 3–9, 13
+## Demo evidence: slides 3–9, 12
 
 - Code: [demo](../demos/kubecon-genai/demo.py), [locked versions](../demos/kubecon-genai/uv.lock).
 - Main trace: `b2fb5dc7fc85244d41a7f3667beaec03`.
@@ -9,9 +9,9 @@
 - Model IDs: `gpt-4.1`, `claude-sonnet-4-6`, and `gpt-4.1-mini`.
 - Original Aspire screenshots recaptured in light mode on November 3, 2026; the full waterfall and separate orphan HTTP capture are retained in `assets/aspire-waterfall.png` and `assets/aspire-orphan-http.png`.
 - Slides 4 and 9 are vector redraws of those saved captures, retaining all 22 main-trace spans and the separate orphan span, displayed names, resources, nesting, and markers. Original displayed durations are retained in SVG metadata, not a visible column. Bar shapes are traced from screenshot pixels; no exact start/end timestamps were recovered. Slide 9's boxes and arrows mark intended parents without changing the captured hierarchy or combining the two time scales.
-- The four trace images on slides 3, 4, 9, and 12 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
+- The four trace images on slides 3, 4, 9, and 11 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
 - Slide 3 keeps conceptual span names and intended nesting, but its 12 bars follow the corresponding visible bar bounds on slide 4's 0–0.7 s axis. Model calls use the model-span rows, not their duplicate HTTP observations. These are approximate screenshot positions, not recovered OTLP timestamps; the SVG metadata records the source-row mapping and bounds.
-- Slide 12's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
+- Slide 11's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
 - Slide 3 uses the captured trace's span markers, with larger labels and row spacing to use the available slide height. Blue identifies diagnostic-agent and amber identifies runbook, matching the redrawn captures. Its 12 labels and hierarchy are unchanged.
 - The query tool fetches OTLP JSON from Aspire into local SQLite without renaming or reparenting spans.
 - Two GPT-4.1 calls: 420 input / 90 output tokens, OpenInference schema.
@@ -29,7 +29,18 @@
 - Slide 6 is an illustrative cost chart, not captured telemetry or billing. Both series use USD by usage date; provider data has an invented one-day delay. The demo's 60% missing input tokens does not imply 60% missing cost.
 - Slide 7's [instrumentation diagram](assets/instrumentation-architecture.svg) shows application calls and instrumentation sources, not measured span parentage.
 
-## Conventions and development: slides 11–18, 22–24
+## Project timeline: slide 17
+
+The six milestones use the [2026 research inventory](../kubecon-talk-research.md#2026-timeline-beyond-python-and-javascript) and its Python/JavaScript sections. Stops are evenly spaced, not a calendar scale.
+
+- February: OBI OpenAI protocol support, merged February 25.
+- May: dedicated GenAI conventions repository, Python GenAI repository, and AAIF Observability & Traceability charter. May 13 is the charter's recorded approval date, not a verified working-group launch date.
+- July: first Python beta on July 9; Go OpenAI and Anthropic support merged July 2 and 19.
+- August: conformance runner and GenAI domain merged August 8.
+- September: [inference and core agentic execution stabilization tracking issue](https://github.com/open-telemetry/semantic-conventions-genai/issues/511) opened September 11. This marks the tracked stabilization effort, not stable conventions. JavaScript utilities gained metrics and invocation lifecycle support.
+- October-November: native Anthropic Python tracing, Java Spring AI and MCP, and JavaScript OpenAI Agents. Java November entries are merged changes, not verified package releases.
+
+## Conventions and development: slides 10–17, 21–23
 
 - [GenAI conventions](https://github.com/open-telemetry/semantic-conventions-genai).
 - [Reference scenario policy](https://github.com/open-telemetry/semantic-conventions-genai/blob/main/AGENTS.md), and [reference contribution guide](https://github.com/open-telemetry/semantic-conventions-genai/blob/main/reference/CONTRIBUTING.md).
@@ -58,7 +69,7 @@ The roadmap is direction, not a delivery commitment. Separate established
 signal definitions, active stabilization, and proposed extensions verbally.
 Do not imply that planning, arbitrary steps, or every signal has stable coverage.
 
-## Conformance: slides 22–24
+## Conformance: slides 21–23
 
 - [Comparison report](https://open-telemetry.github.io/semantic-conventions-conformance/#/signals/span%3Agen_ai.client.inference?q=anthropic&level=scored): `gen_ai.client.inference`, filtered to Anthropic, Required + recommended.
 - [Native Anthropic report](https://open-telemetry.github.io/semantic-conventions-conformance/#/target/gen-ai/python/anthropic/native).
@@ -66,7 +77,7 @@ Do not imply that planning, arbitrary steps, or every signal has stable coverage
 - [Weaver](https://github.com/open-telemetry/weaver).
 
 Screenshots were captured for this deck on November 1, 2026, client local date.
-Slide 24's table copies five rows from the comparison report as read on
+Slide 23's table copies five rows from the comparison report as read on
 November 5, 2026. Re-check it before presenting.
 The live dashboard identifies GenAI registry revision `9ffc7e00c639`.
 This differs from the earlier pinned report in the research document.
@@ -76,10 +87,10 @@ are different findings. The successful inference scenario need not emit `error.t
 The report's signal classifications do not exhaust all telemetry emitted.
 Do not claim Weaver alone proves context propagation or semantic correctness.
 
-## Community adoption: slide 25
+## Community adoption: slide 24
 
 - [OpenInference #3024](https://github.com/Arize-ai/openinference/pull/3024): opt-in GenAI attributes alongside existing fields.
-- [Donation PR #1](https://github.com/open-telemetry/donation-openinference/pull/1): merged June 16, 2026; this is the date shown on the donation slide.
+- [Donation PR #1](https://github.com/open-telemetry/donation-openinference/pull/1): merged June 16, 2026.
 - [Arize code grant](https://github.com/open-telemetry/community/issues/3467): instrumentation code, not the OpenInference specification.
 - [OpenLLMetry LangChain #3673](https://github.com/traceloop/openllmetry/pull/3673).
 - [OpenLLMetry Anthropic #3835](https://github.com/traceloop/openllmetry/pull/3835).
@@ -97,7 +108,7 @@ package, attribute, signal, configuration option, or propagation path conforms.
 - Source: `opentelemetry.instrumentation.genai.langchain` version `1.3b0`.
 - `assets/otel-inference-attributes.json` preserves the exported values. The content slide decodes the message JSON, omits null names, and shows the first of two tool calls.
 - `assets/aspire-inference-attributes.png` shows only the first inference span's attributes table.
-- The slide 13 attributes table copies that span's `gen_ai.*` values from `assets/otel-inference-attributes.json`. Message and tool-definition values are shortened to the first part, tool call, or tool and omit null names. The chat span has no agent identity attributes, so the top `gen_ai.agent.name` row comes from the `invoke_agent diagnostic` span instead. Its value is the `name="diagnostic"` passed to `create_agent` in `demos/kubecon-genai/demo.py`.
+- The slide 12 attributes table copies that span's `gen_ai.*` values from `assets/otel-inference-attributes.json`. Message and tool-definition values are shortened to the first part, tool call, or tool and omit null names. The chat span has no agent identity attributes, so the top `gen_ai.agent.name` row comes from the `invoke_agent diagnostic` span instead. Its value is the `name="diagnostic"` passed to `create_agent` in `demos/kubecon-genai/demo.py`.
 - `assets/aspire-genai-conversation-long.png` shows the final inference span `6483b37c228ebddd` in the same trace: the question, two tool calls, both tool results, and the final answer. It reports 300 input and 60 output tokens.
 - Agent IDs, versions, descriptions, separate instructions, and request-parameter fields are convention coverage, not claims that every demo span emitted them.
 - Attribute definitions: `model/gen-ai/registry.yaml`; structured messages and tool definitions: `model/gen-ai/gen-ai-*-messages.json` and `model/gen-ai/gen-ai-tool-definitions.json`.

@@ -132,6 +132,15 @@ JS AI-related work brought in two additional first-time OTel merged-PR
 contributors, bringing the combined newcomer count to 26. The research notes
 list 15 merged JS AI-related PRs from eight authors in 2026.
 
+Broaden the project timeline beyond Python/JS using the
+[November 5 research expansion](kubecon-talk-research.md#2026-timeline-beyond-python-and-javascript).
+Include Go's OpenAI/Anthropic compile-time instrumentation, Java's Spring AI
+and MCP support, and OBI's model, tool, and retrieval coverage. Connect these
+to the dedicated GenAI conventions repo, Collector normalization, conformance
+tooling, and AAIF coordination. Distinguish merge dates, releases, and stability.
+The research also verifies two newcomer examples in Go/OBI; it does not compute
+an exhaustive cross-project contributor total.
+
 **Question:** How do we know the instrumentations deliver what we agreed on?
 
 ## 4. How do we prove compatibility? (6 min)

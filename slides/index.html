@@ -87,6 +87,18 @@
       font-family: Arial, sans-serif;
     }
     .branded-cover .content { padding-top: 140px; }
+    .slide.branded-closing {
+      background: url("assets/kubecon-2026-landscape.png") center bottom / 100% auto no-repeat, #e3f6ff;
+      color: #052243;
+      border-radius: 0;
+    }
+    .branded-closing .content { position: relative; height: 100%; }
+    .branded-closing h1 { text-align: center; font-size: 40px; }
+    .branded-closing .feedback-qr {
+      position: absolute; top: 50%; left: 50%;
+      width: 440px; height: 440px; margin: 0;
+      transform: translate(-50%, -50%);
+    }
     .slide.branded-transition {
       background: url("assets/kubecon-2026-landscape.png") center bottom / 100% auto no-repeat, #e3f6ff;
     }
@@ -118,6 +130,16 @@
       transform: translateY(-2px) rotate(45deg);
     }
     a { color: var(--cp-link); }
+    a[href^="https://github.com/"]::before,
+    .conformance-report-url a::before,
+    a[href^="https://cloud-native.slack.com/"]::before {
+      content: ""; display: inline-block;
+      width: 1em; height: 1em; margin-right: 0.3em;
+      vertical-align: -0.12em; background-color: currentColor;
+      mask: var(--link-icon) center / contain no-repeat;
+    }
+    a[href^="https://github.com/"], .conformance-report-url a { --link-icon: url("assets/github.svg"); }
+    a[href^="https://cloud-native.slack.com/"] { --link-icon: url("assets/slack.svg"); }
     img { display: block; max-width: 100%; max-height: 500px !important; margin: auto; object-fit: contain; }
     .slide.diagram { padding: 24px 16px; }
     .diagram .content { height: 672px; display: flex; flex-direction: column; gap: 10px; }
@@ -159,6 +181,78 @@
     html[data-theme="dark"] .hljs-type { color: #fcd34d; }
     .code-grid pre { white-space: pre; overflow-wrap: normal; }
     table { width: 100%; border-collapse: collapse; font-size: 24px; }
+    .slide .project-timeline {
+      position: relative; display: grid; grid-template-columns: repeat(6, 1fr);
+      height: 470px; margin: 26px 0 0; padding: 0; list-style: none;
+    }
+    .project-timeline::before {
+      content: ""; position: absolute; top: 230px; left: 0; right: 0; height: 4px;
+      border-radius: 4px; background: linear-gradient(90deg, #425cc7, #0f8188 55%, #f5a800);
+    }
+    .slide .project-timeline li { position: relative; margin: 0; padding: 0; --milestone: #425cc7; }
+    .project-timeline li:nth-child(3), .project-timeline li:nth-child(4) { --milestone: #0f8188; }
+    .project-timeline li:nth-child(5), .project-timeline li:nth-child(6) { --milestone: #b47700; }
+    .project-timeline li::before {
+      content: ""; position: absolute; top: 190px; left: 50%; width: 2px; height: 42px;
+      background: var(--milestone); opacity: .4;
+    }
+    .project-timeline li:nth-child(even)::before { top: 232px; }
+    .project-timeline li::after {
+      content: ""; position: absolute; top: 221px; left: calc(50% - 11px);
+      width: 22px; height: 22px; border: 5px solid var(--milestone); border-radius: 50%;
+      background: white; box-shadow: 0 0 0 7px white;
+    }
+    .project-timeline li > div {
+      position: absolute; bottom: 290px; left: 50%; width: 300px;
+      transform: translateX(-50%); padding: 0 0 0 18px; border-left: 3px solid var(--milestone);
+    }
+    .project-timeline li:nth-child(even) > div { top: 294px; bottom: auto; }
+    .project-timeline li:first-child > div { left: 0; transform: none; }
+    .project-timeline li:last-child > div { left: auto; right: 0; transform: none; }
+    .project-timeline time { display: block; color: var(--milestone); font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .slide .project-timeline p { margin: 0; font-size: 28px; line-height: 1.28; color: #172440; }
+    .slide .project-timeline p + p { margin-top: 12px; }
+    .slide:has(.contribution-repos) a { font-size: 26px; }
+    .contribution-repos { table-layout: fixed; border-collapse: separate; border-spacing: 14px; margin: 0 -14px; width: calc(100% + 28px); font-size: 22px; }
+    .contribution-repos td {
+      --repo-accent: #425cc7;
+      height: 96px; padding: 0; vertical-align: middle;
+      background: linear-gradient(135deg, #f6f8ff, #edf2fc);
+      border: 1px solid #dce5f3; border-left: 4px solid var(--repo-accent); border-radius: 12px;
+      box-shadow: 0 3px 10px #17244008;
+    }
+    .contribution-repos tr:nth-child(2) td { --repo-accent: #0f8188; background: linear-gradient(135deg, #f4fbfb, #e9f5f5); }
+    .contribution-repos tr:nth-child(3) td { --repo-accent: #f5a800; background: linear-gradient(135deg, #fffcf4, #fff5dc); }
+    .contribution-repos a {
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; height: 96px; padding: 8px 16px 8px 54px;
+      color: #172440; text-decoration: none; line-height: 1.2;
+    }
+    .contribution-repos a::before {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      width: 26px; height: 26px; margin: 0; background-color: var(--repo-accent);
+    }
+    .contribution-repos a:hover { color: #425cc7; }
+    .contribution-repos td:hover { border-color: var(--repo-accent); box-shadow: 0 5px 16px #425cc714; }
+    .contribution-entry {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px; margin: 0 0 20px;
+    }
+    .slide .contribution-entry a {
+      display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 12px 16px;
+      font-size: 26px; line-height: 1.3; color: #172440; text-decoration: none;
+      overflow-wrap: anywhere; background: #f7f8fc;
+      border: 1px solid #dce5f3; border-radius: 12px; box-shadow: 0 3px 10px #17244008;
+    }
+    .contribution-entry a:first-child { grid-column: 1; }
+    .contribution-entry a:nth-child(2) { grid-column: 1; grid-row: 2; }
+    .contribution-entry a:nth-child(3) { grid-column: 2; grid-row: 2; }
+    .contribution-group-title { font-size: 28px; line-height: 1.2; margin: 0; color: #172440; }
+    .contribution-entry a::before { flex: 0 0 26px; width: 26px; height: 26px; margin: 0; }
+    .contribution-entry a:hover { color: #425cc7; }
+    .contribution-entry a[href^="https://cloud-native.slack.com/"]::before {
+      mask: none; background: url("assets/slack-color.svg") center / contain no-repeat;
+    }
     .promql-table { table-layout: fixed; font-size: 22px; }
     .promql-table th:first-child { width: 23%; }
     .promql-table td { padding: 10px 12px; vertical-align: middle; }
@@ -243,6 +337,7 @@
     .conformance-grid td.yes { background: #1d7a5a; color: #ffffff; }
     .conformance-grid td.no { background: #e6e6ea; color: #5c5c5c; }
     .conformance-caption { font-size: 20px; color: var(--cp-text-muted); }
+    .conformance-report-url { font-size: 24px; line-height: 1.4; overflow-wrap: anywhere; }
     .mermaid { display: flex; justify-content: center; }
     .mermaid svg { max-width: 100%; max-height: 500px; }
     nav {
@@ -356,7 +451,7 @@
       for (const chunk of splitSlides(await response.text())) {
         const slide = document.createElement("section");
         slide.className = "slide";
-        const layout = chunk.match(/<!-- layout: (branded-cover|branded-transition|diagram|text) -->/);
+        const layout = chunk.match(/<!-- layout: (branded-cover|branded-transition|branded-closing|diagram|text) -->/);
         if (layout) slide.classList.add(layout[1]);
         const content = document.createElement("div");
         content.className = "content";

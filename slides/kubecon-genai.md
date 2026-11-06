@@ -111,23 +111,13 @@ FROM calls;
 
 # If I had a magic wand
 
-- One schema across all instrumentations
-- End-to-end trace correlation
-- Traces, metrics, and logs
-- Consistent configuration for content capture
-- Large content separate from telemetry, but reacheable
-
----
-
-# What did we do in OTel
-
 <table>
 <thead><tr><th>Wish</th><th class="fragment" data-fragment="otel">OpenTelemetry</th></tr></thead>
 <tbody>
 <tr><td>One schema across all<br>instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
 <tr><td>End-to-end trace correlation</td><td class="fragment" data-fragment="otel">Context propagation, suppression, enrichment</td></tr>
 <tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">Instrumentation that emits all signals</td></tr>
-<tr><td>Consistent configuration</td><td class="fragment" data-fragment="otel">Shared content-capture settings</td></tr>
+<tr><td>Consistent configuration</td><td class="fragment" data-fragment="otel">Content-capture settings</td></tr>
 <tr><td>Large content separate from telemetry,<br>while still reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
 </tbody>
 </table>
@@ -138,7 +128,7 @@ FROM calls;
 
 # GenAI semantic conventions
 
-New home: [semantic-conventions-genai](https://github.com/open-telemetry/semantic-conventions-genai)
+[open-telemetry/semantic-conventions-genai](https://github.com/open-telemetry/semantic-conventions-genai)
 
 ![GenAI trace waterfall; bold operations target stability, HTTP and DB use core conventions](assets/semconv-waterfall.svg?v=aligned-notes)
 
@@ -255,22 +245,26 @@ sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</c
 
 ---
 
-<!-- layout: text -->
+# GenAI observability in 2026
 
-# OpenInference instrumentation donation
+<ol class="project-timeline" aria-label="2026 project milestones">
+<li><div><time>February</time><p>GenAI support in OTel eBPF instrumentation</p></div></li>
+<li><div><time>May</time><p>Dedicated GenAI repositories</p><p>AAIF observability working group</p></div></li>
+<li><div><time>July</time><p>Python GenAI beta</p><p>Go GenAI instrumentation</p></div></li>
+<li><div><time>August</time><p>GenAI conformance tooling</p></div></li>
+<li><div><time>September</time><p>GenAI semconv stabilization starts</p><p>GenAI utilities for JavaScript</p></div></li>
+<li><div><time>October-November</time><p>Native Anthropic tracing</p><p>More Java and JavaScript integrations</p></div></li>
+</ol>
 
-**June 16, 2026 · Arize's code donation merged into OTel**
-
-- The community is adopting and adapting the donated instrumentations
-- Making them fully vendor-neutral with OTel conventions, configuration, and APIs
+<!-- Sources and qualifications: sources.md, "Project timeline: slide 17". Milestones are selected events, spaced evenly rather than to a calendar scale. -->
 
 ---
 
 # How we build instrumentations
 
-New repo: [opentelemetry-python-genai](https://github.com/open-telemetry/opentelemetry-python-genai)
+[open-telemetry/opentelemetry-python-genai](https://github.com/open-telemetry/opentelemetry-python-genai)
 
-- Shared GenAI Util: spans, metrics, content, context
+- GenAI Util: spans, metrics, content, context
 - Thin adapters: provider data → GenAI Util
 - Conformance checks + unit tests
 - AI-assisted development and review
@@ -278,10 +272,9 @@ New repo: [opentelemetry-python-genai](https://github.com/open-telemetry/opentel
 ```python
 with handler.inference("openai", request_model=kwargs["model"]) as operation:
     response = wrapped(*args, **kwargs)
-    operation.response_model_name = response.model
     set_usage(operation, response.usage)
     if handler.should_capture_content():
-        operation.output_messages = _prepare_output_messages(response.choices)
+        operation.output_messages = _prepare_messages(response.choices)
     return response
 ```
 
@@ -291,7 +284,7 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 
 - **26 newcomers to OTel** across Python GenAI + JS AI work
 - **13 Python instrumentation packages · 4 beta release rounds**
-- JS is adopting the shared-utility and conformance approach
+- JS is adopting the GenAI utility and conformance approach
 
 <img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: 0 to 19 a month in python-contrib from November 2024, rising to 116 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
 
@@ -352,7 +345,7 @@ weaver registry live-check \
 </div>
 <div>
 
-**3. Compare `data.json`**
+**3. View report**
 
 ```json
 {
@@ -389,7 +382,7 @@ weaver registry live-check \
 </tbody>
 </table>
 
-<p class="conformance-caption"><code>gen_ai.client.inference</code> span, measured by Weaver live-check. Snapshot from November 5, 2026. <a href="https://open-telemetry.github.io/semantic-conventions-conformance/#/signals/span%3Agen_ai.client.inference?q=anthropic&amp;level=scored">Live report</a></p>
+<p class="conformance-report-url"><a href="https://open-telemetry.github.io/semantic-conventions-conformance">https://open-telemetry.github.io/semantic-conventions-conformance</a></p>
 
 ---
 
@@ -400,7 +393,7 @@ weaver registry live-check \
 | Arize / OpenInference | OTel GenAI opt-in flag |
 | Anthropic | Native SDK tracing with GenAI attributes |
 | OpenLLMetry | GenAI convention adoption |
-| OpenTelemetry | Instrumentations, shared utilities, conformance |
+| OpenTelemetry | Instrumentations, utilities, conformance |
 
 ---
 
@@ -425,17 +418,37 @@ weaver registry live-check \
 
 ---
 
-# How to contribute
+# Let's build it together
 
-TODO
+<div class="contribution-entry">
+<a href="https://cloud-native.slack.com/archives/C06KR7ARS3X">#otel-genai-instrumentation</a>
+<a href="https://github.com/open-telemetry/semantic-conventions-genai">semantic-conventions-genai</a>
+<a href="https://github.com/open-telemetry/semantic-conventions-conformance">semantic-conventions-conformance</a>
+</div>
+
+<h2 class="contribution-group-title">OpenTelemetry Instrumentations</h2>
+
+<table class="contribution-repos" aria-label="Instrumentation repositories">
+<tbody>
+<tr>
+<td><a href="https://github.com/open-telemetry/opentelemetry-python-genai">opentelemetry-python-genai</a></td>
+<td><a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/genai-util">opentelemetry-js-contrib</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/open-telemetry/opentelemetry-java-instrumentation">opentelemetry-java-instrumentation</a></td>
+<td><a href="https://github.com/open-telemetry/opentelemetry-go-compile-instrumentation">opentelemetry-go-compile-instrumentation</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/open-telemetry/opentelemetry-ruby-contrib">opentelemetry-ruby-contrib</a></td>
+<td><a href="https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation">opentelemetry-ebpf-instrumentation</a></td>
+</tr>
+</tbody>
+</table>
+
+---
+
+<!-- layout: branded-closing -->
 
 # Thank you!
 
-<div style="display: flex; align-items: center; gap: 56px;">
-<img src="assets/the-race-to-standardize-ai-observability_molkova-stalnaker_1246166_feedback-code.png" alt="Scan to leave feedback on The Race to Standardize AI Observability" style="width: 340px; height: 340px; margin: 0; flex-shrink: 0;" />
-<div>
-<p><a href="https://github.com/open-telemetry/semantic-conventions-genai">GenAI conventions</a></p>
-<p><a href="https://github.com/open-telemetry/semantic-conventions-conformance">Conformance repository</a></p>
-<p><a href="https://open-telemetry.github.io/semantic-conventions-conformance/">Conformance reports</a></p>
-</div>
-</div>
+<img class="feedback-qr" src="assets/the-race-to-standardize-ai-observability_molkova-stalnaker_1246166_feedback-code.png" alt="Scan to leave feedback on The Race to Standardize AI Observability" />
