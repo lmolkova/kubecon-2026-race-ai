@@ -8,17 +8,6 @@ KubeCon + CloudNativeCon North America 2026
 
 ---
 
-<!-- layout: text -->
-
-# “Trask, can you help with the dashboard?”
-
-- [x] Instrumentations installed
-- [x] OTel configured
-- [x] Traces arriving
-- [ ] Dashboard
-
----
-
 <!-- layout: diagram -->
 
 # Our expectations
@@ -256,7 +245,7 @@ sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</c
 <li><div><time>October-November</time><p>Native Anthropic tracing</p><p>More Java and JavaScript integrations</p></div></li>
 </ol>
 
-<!-- Sources and qualifications: sources.md, "Project timeline: slide 17". Milestones are selected events, spaced evenly rather than to a calendar scale. -->
+<!-- Sources and qualifications: sources.md, "Project timeline: slide 16". Milestones are selected events, spaced evenly rather than to a calendar scale. -->
 
 ---
 

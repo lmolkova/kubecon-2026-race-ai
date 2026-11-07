@@ -44,8 +44,8 @@ broken context.
 
 - `assets/python-genai-contributions-monthly.svg`: monthly non-bot merged PRs to Python GenAI instrumentation, stacked by repository (python-contrib in grey, python-genai in OTel blue), with a marker at the May 12, 2026 repository launch.
 
-- `assets/aspire-genai-conversation-long.png`: final inference with the question, tool calls, results, and answer. Slide 14 shows these messages in an Aspire-style HTML mockup.
-- `assets/aspire-inference-attributes.png`: Aspire's attributes table for the first inference span. Slide 12 shows these values as an HTML table.
+- `assets/aspire-genai-conversation-long.png`: final inference with the question, tool calls, results, and answer. Slide 13 shows these messages in an Aspire-style HTML mockup.
+- `assets/aspire-inference-attributes.png`: Aspire's attributes table for the first inference span. Slide 11 shows these values as an HTML table.
 - `assets/otel-inference-attributes.json`: complete captured attribute values for that span.
 - `assets/semconv-waterfall.svg`: operation coverage, stability targets, and core convention boundaries.
 - `assets/expected-waterfall.svg`: intended span names and nesting, with approximate timing aligned to the saved capture, matching service colours and span markers, and an enlarged layout.
@@ -55,7 +55,7 @@ broken context.
 - `assets/aspire-parent-gap.svg`: the same 22-span redraw with a boxed runbook subtree, two intended-parent arrows, and the separate orphan trace on its own time scale.
 - `assets/aspire-orphan-http.png`: original capture of the detached runbook HTTP span in a separate trace.
 - `assets/aspire-trace.png`: earlier single-service hierarchy crop, not used in the deck.
-- `assets/conformance-inference.png`: archived dark-mode capture of the Anthropic comparison, not used in the deck. Slide 23 shows the same comparison as an HTML table.
+- `assets/conformance-inference.png`: archived dark-mode capture of the Anthropic comparison, not used in the deck. Slide 22 shows the same comparison as an HTML table.
 - `assets/conformance-findings.png`: archived capture, not used in the deck.
 - `queries/01-semconv.sql`: exact first on-slide query.
 - `queries/02-mixed.sql`: exact on-slide mapping query.
@@ -66,13 +66,13 @@ Screenshot trace: `b2fb5dc7fc85244d41a7f3667beaec03`.
 Both slide queries were executed against this capture: 2 / 280 and 5 / 900; the latter double-counts the Anthropic inference.
 Queries use the SQLite `span_data` view, with attributes exposed as quoted columns.
 The screenshots are saved locally so the deck does not depend on live services.
-Slides 3, 4, 9, and 11 share an SVG waterfall layout.
+Slides 2, 3, 8, and 10 share an SVG waterfall layout.
 The images omit titles, capture summaries, footer captions, and per-span
 duration columns; time axes and parentage annotations remain.
 The captured views preserve every displayed trace row; bar shapes follow the
 saved screenshot pixels, not recovered start/end timestamps.
-Slide 3's names and nesting remain illustrative; its bar positions follow the
-saved capture on the same 0–0.7 s axis. Slide 11's operation-coverage example
+Slide 2's names and nesting remain illustrative; its bar positions follow the
+saved capture on the same 0–0.7 s axis. Slide 10's operation-coverage example
 remains illustrative.
 
 ## Live demo fallback
