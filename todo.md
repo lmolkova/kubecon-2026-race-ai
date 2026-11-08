@@ -1,5 +1,10 @@
 # Slide TODOs
 
+
+## Slide 6:
+
+- [x] Remove OTLP from langsmith, it's SDK-based
+
 ## Slide 9
 
 - Find a realistic problem caused by broken context and talk through it.
@@ -14,7 +19,7 @@
 ## Slide 17
 
 - [x] Replace the donation slide with a six-milestone 2026 project timeline.
-- Merge slide 24 into it.
+- [x] Merge slide 24 into it (adoption slide removed).
 - [x] Include the AAIF observability working group in the May milestone.
 - [x] Mark the start of GenAI semconv stabilization in September, using tracking issue #511.
 - [x] Put distinct updates on separate lines with consistent text size; list native Anthropic tracing first in October-November and omit "shared".
@@ -29,7 +34,7 @@
 
 ## Slide 19
 
-- Expand the numbers / text to include Java, Go, eBPF, Ruby, and other GenAI instrumentation projects.
+- [x] Expand the numbers / text to include Java, Go, eBPF, Ruby, and other GenAI instrumentation projects.
 
 ## Slide 22
 
@@ -45,10 +50,10 @@
 
 ## Slides 24/25/26
 
-- Resolve overlap: slide 24 is community adoption, also slated to merge into the timeline on slide 17; slides 25/26 cover the future.
-- Consider two future timeline slides: near future and long term.
-- Near future: depth and detail, RC by EOY, and the next features to stabilize.
-- Long term: breadth and 2027 areas, including security / CoSAI, AAIF collaboration, evaluations, guardrails / safety, harnesses, and trajectories.
+- [x] Resolve overlap: removed slide 24 (community adoption); the timeline on slide 17 covers it. Slides 25/26 cover the future.
+- [x] Consider two future timeline slides: near future and long term. Merged into one roadmap slide instead.
+- [x] Near future: depth and detail, RC by EOY, and the next features to stabilize.
+- [x] Long term: breadth and 2027 areas, including security / CoSAI, AAIF collaboration, evaluations, guardrails / safety, harnesses, and trajectories. CoSAI not named on the slide.
 - Invite the audience to come shape this work with us.
 
 ## Slide 27

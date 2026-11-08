@@ -56,7 +56,7 @@ WHERE trace_id = :trace_id
 
 # How did we instrument the application?
 
-![Workflow, diagnostic agent, and runbook service with OpenInference, native OTel, and LangSmith OTLP instrumentation](assets/instrumentation-architecture.svg)
+![Workflow, diagnostic agent, and runbook service with OpenInference, native OTel, and LangSmith instrumentation](assets/instrumentation-architecture.svg)
 
 ---
 
@@ -238,7 +238,9 @@ sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</c
 
 <ol class="project-timeline" aria-label="2026 project milestones">
 <li><div><time>February</time><p>GenAI support in OTel eBPF instrumentation</p></div></li>
-<li><div><time>May</time><p>Dedicated GenAI repositories</p><p>AAIF observability working group</p></div></li>
+<li><div><time>March</time><p>OpenLLMetry adopts GenAI conventions</p></div></li>
+<li><div><time>May</time><p>Dedicated GenAI repositories</p><p>AAIF observability working group</p><p>OpenInference GenAI conventions export</p></div></li>
+<li><div><time>June</time><p>OpenInference instrumentation donated to OTel</p></div></li>
 <li><div><time>July</time><p>Python GenAI beta</p><p>Go GenAI instrumentation</p></div></li>
 <li><div><time>August</time><p>GenAI conformance tooling</p></div></li>
 <li><div><time>September</time><p>GenAI semconv stabilization starts</p><p>GenAI utilities for JavaScript</p></div></li>
@@ -271,22 +273,26 @@ with handler.inference("openai", request_model=kwargs["model"]) as operation:
 
 # More contributors, faster delivery
 
-- **26 newcomers to OTel** across Python GenAI + JS AI work
-- **13 Python instrumentation packages · 4 beta release rounds**
+- **At least 143 contributors to OTel AI work in 2026, 65 new to OTel**
+- **13 Python instrumentation packages**
 - JS is adopting the GenAI utility and conformance approach
 
 <img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: 0 to 19 a month in python-contrib from November 2024, rising to 116 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
 
 ---
 
-<!-- layout: text -->
+# Native instrumentation
 
-# Native SDK instrumentation
+<p class="native-lead">Libraries that emit OTel themselves are better for users and the ecosystem</p>
 
-- Anthropic tracing, ADK, Azure AI libraries
-- MCP Python and .NET, Mistral, LangChain, and many others
-- Native instrumentation is good for users and the ecosystem
-- Need a way to lib developers to validate conformance
+<ul class="native-grid" aria-label="Libraries with native OpenTelemetry GenAI instrumentation">
+<li><img src="assets/logos/anthropic.svg" alt=""><b>Anthropic SDK</b><span>Model provider</span></li>
+<li><img src="assets/logos/modelcontextprotocol.svg" alt=""><b>MCP SDKs</b><span>Tool protocol</span></li>
+<li><img src="assets/logos/microsoft.svg" alt=""><b>Microsoft Agent Framework</b><span>Agent framework</span></li>
+<li><img src="assets/logos/amazonwebservices.svg" alt=""><b>AWS Strands</b><span>Agent framework</span></li>
+<li><img src="assets/logos/google.svg" alt=""><b>Google ADK</b><span>Agent framework</span></li>
+<li><img src="assets/logos/vercel.svg" alt=""><b>Vercel AI SDK</b><span>App SDK</span></li>
+</ul>
 
 ---
 
@@ -375,35 +381,38 @@ weaver registry live-check \
 
 ---
 
-# Adoption across the community
+# What's next
 
-| Project | Progress in 2026 |
-| --- | --- |
-| Arize / OpenInference | OTel GenAI opt-in flag |
-| Anthropic | Native SDK tracing with GenAI attributes |
-| OpenLLMetry | GenAI convention adoption |
-| OpenTelemetry | Instrumentations, utilities, conformance |
+<div class="roadmap" role="group" aria-label="Roadmap: dated milestones, likely next features, and long-term goals">
+<section class="rm-firm">
+<p class="rm-caption">Targets</p>
+<div class="rm-stops">
+<div class="rm-stop"><time>End of 2026</time><p>Release candidate</p></div>
+<div class="rm-stop"><time>KubeCon EU 2027</time><p>Stable inference, agents, and tools</p></div>
+</div>
+</section>
+<section class="rm-next">
+<p class="rm-caption">Next features to stabilize</p>
+<ul class="rm-chips">
+<li>Retrievals &amp; embeddings</li>
+<li>MCP</li>
+<li>Live / realtime</li>
+</ul>
+</section>
+<section class="rm-later">
+<p class="rm-caption">Still taking shape</p>
+<ul class="rm-goals">
+<li>AAIF alignment</li>
+<li>Agentic identity &amp; security</li>
+<li>Evaluations</li>
+<li>Guardrails</li>
+<li>Harnesses</li>
+<li>Trajectories</li>
+</ul>
+</section>
+</div>
 
----
-
-<!-- layout: text -->
-
-# Next: stability and adoption
-
-- Initial wave: inference, agents/workflows, and tools across signals
-- After: stabilize incrementally, feature by feature
-- Improve instrumentation coverage and ergonomics
-
----
-
-<!-- layout: text -->
-
-# Next: richer agent telemetry
-
-- Trace steps, skills, and realtime interactions
-- Propagate conversation IDs and agent details in context - enable better cost / usage analysis on operation level
-- Capture evaluations and guardrail outcomes
-- Cover hosted agents and harnesses
+<!-- Sources and qualifications: sources.md, "Roadmap: slide 23". Dates are targets; the middle and right columns are direction, not commitments. -->
 
 ---
 

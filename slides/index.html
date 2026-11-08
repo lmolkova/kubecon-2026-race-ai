@@ -181,37 +181,88 @@
     html[data-theme="dark"] .hljs-type { color: #fcd34d; }
     .code-grid pre { white-space: pre; overflow-wrap: normal; }
     table { width: 100%; border-collapse: collapse; font-size: 24px; }
+    /* Flag layout: 9 columns for 8 stops; each card starts at its dot and spans two columns, so alternating cards never overlap. */
     .slide .project-timeline {
-      position: relative; display: grid; grid-template-columns: repeat(6, 1fr);
+      --dot: 14px;
+      position: relative; display: grid; grid-template-columns: repeat(9, 1fr);
       height: 470px; margin: 26px 0 0; padding: 0; list-style: none;
     }
     .project-timeline::before {
       content: ""; position: absolute; top: 230px; left: 0; right: 0; height: 4px;
-      border-radius: 4px; background: linear-gradient(90deg, #425cc7, #0f8188 55%, #f5a800);
+      border-radius: 4px; background: linear-gradient(90deg, #425cc7, #0f8188 50%, #f5a800);
     }
     .slide .project-timeline li { position: relative; margin: 0; padding: 0; --milestone: #425cc7; }
-    .project-timeline li:nth-child(3), .project-timeline li:nth-child(4) { --milestone: #0f8188; }
-    .project-timeline li:nth-child(5), .project-timeline li:nth-child(6) { --milestone: #b47700; }
+    .project-timeline li:nth-child(n+3) { --milestone: #0f8188; }
+    .project-timeline li:nth-child(n+6) { --milestone: #b47700; }
     .project-timeline li::before {
-      content: ""; position: absolute; top: 190px; left: 50%; width: 2px; height: 42px;
-      background: var(--milestone); opacity: .4;
+      content: ""; position: absolute; top: 180px; left: calc(var(--dot) - 1.5px); width: 3px; height: 52px;
+      background: var(--milestone);
     }
-    .project-timeline li:nth-child(even)::before { top: 232px; }
+    .project-timeline li:nth-child(odd)::before { top: 232px; height: 62px; }
     .project-timeline li::after {
-      content: ""; position: absolute; top: 221px; left: calc(50% - 11px);
+      content: ""; position: absolute; top: 221px; left: calc(var(--dot) - 11px);
       width: 22px; height: 22px; border: 5px solid var(--milestone); border-radius: 50%;
-      background: white; box-shadow: 0 0 0 7px white;
+      background: white; box-shadow: 0 0 0 5px white;
     }
     .project-timeline li > div {
-      position: absolute; bottom: 290px; left: 50%; width: 300px;
-      transform: translateX(-50%); padding: 0 0 0 18px; border-left: 3px solid var(--milestone);
+      position: absolute; bottom: 290px; left: calc(var(--dot) - 1.5px); width: calc(200% - 30px);
+      padding: 0 0 0 14px; border-left: 3px solid var(--milestone);
     }
-    .project-timeline li:nth-child(even) > div { top: 294px; bottom: auto; }
-    .project-timeline li:first-child > div { left: 0; transform: none; }
-    .project-timeline li:last-child > div { left: auto; right: 0; transform: none; }
-    .project-timeline time { display: block; color: var(--milestone); font-size: 24px; font-weight: 700; margin-bottom: 10px; }
-    .slide .project-timeline p { margin: 0; font-size: 28px; line-height: 1.28; color: #172440; }
-    .slide .project-timeline p + p { margin-top: 12px; }
+    .project-timeline li:nth-child(odd) > div { top: 294px; bottom: auto; }
+    .project-timeline time { display: block; color: var(--milestone); font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .slide .project-timeline p { margin: 0; font-size: 23px; line-height: 1.25; color: #172440; }
+    .slide .project-timeline p + p { margin-top: 8px; }
+    .slide .native-lead { margin: 8px 0 28px; font-size: 30px; font-weight: 600; color: #172440; }
+    .slide .native-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .slide .native-grid li {
+      margin: 0; padding: 22px 24px; border-radius: 14px; background: #f3f5fc; border-left: 6px solid #425cc7;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .native-grid li:nth-child(2) { border-left-color: #a3367a; background: #faf1f6; }
+    .native-grid li:nth-child(3), .native-grid li:nth-child(4), .native-grid li:nth-child(5) { border-left-color: #0f8188; background: #eef7f7; }
+    .native-grid li:nth-child(6) { border-left-color: #b47700; background: #fdf6e8; }
+    .native-grid b { font-size: 28px; line-height: 1.2; color: #172440; }
+    .native-grid span { font-size: 20px; color: #5b6478; }
+    .native-grid img { width: 44px; height: 44px; margin: 0 0 8px; object-fit: contain; }
+    /* Roadmap: line style and item weight fade from firm targets to vague long-term goals. */
+    .slide .roadmap { position: relative; display: grid; grid-template-columns: 1.45fr 1fr 1fr; height: 480px; margin-top: 24px; }
+    .roadmap section { position: relative; padding-right: 28px; }
+    .roadmap section::before { content: ""; position: absolute; top: 56px; left: 0; right: 0; height: 4px; }
+    .roadmap .rm-firm::before { background: #425cc7; border-radius: 4px 0 0 4px; }
+    .roadmap .rm-next::before { background: repeating-linear-gradient(90deg, #0f8188 0 16px, transparent 16px 26px); }
+    .roadmap .rm-later::before {
+      background: repeating-linear-gradient(90deg, #b47700 0 5px, transparent 5px 15px);
+      -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent); mask-image: linear-gradient(90deg, #000 30%, transparent);
+    }
+    .slide .roadmap .rm-caption { margin: 0; height: 40px; font-size: 17px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #5b6478; }
+    .roadmap .rm-stops { position: absolute; top: 58px; left: 14px; right: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .roadmap .rm-stop { position: relative; padding: 44px 0 0 16px; border-left: 3px solid #425cc7; }
+    .roadmap .rm-stop::before {
+      content: ""; position: absolute; top: -13px; left: -14.5px; width: 16px; height: 16px;
+      border: 5px solid #425cc7; border-radius: 50%; background: white; box-shadow: 0 0 0 5px white;
+    }
+    .roadmap .rm-stop time { display: block; color: #425cc7; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .slide .roadmap .rm-stop p { margin: 0; font-size: 30px; font-weight: 700; line-height: 1.2; color: #172440; }
+    .slide .roadmap ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; }
+    .slide .roadmap .rm-chips { gap: 14px; margin-top: 64px; }
+    .slide .rm-chips li {
+      margin: 0; padding: 8px 20px; border: 2px dashed #0f8188; border-radius: 999px;
+      background: #e8f5f5; font-size: 24px; line-height: 1.25; color: #172440;
+    }
+    .slide .roadmap .rm-goals { position: absolute; inset: 90px 0 0 0; display: block; }
+    .slide .rm-goals li {
+      position: absolute; margin: 0; padding: 8px 18px; border-radius: 999px; white-space: nowrap;
+      background: rgba(245, 168, 0, .13); box-shadow: 0 0 16px 8px rgba(245, 168, 0, .13);
+      font-size: 20px; line-height: 1.2; color: #6b5a33; animation: rm-float 6s ease-in-out infinite alternate;
+    }
+    .rm-goals li:nth-child(1) { top: 10px; left: 8px; }
+    .rm-goals li:nth-child(2) { top: 82px; left: 40px; animation-delay: -2s; }
+    .rm-goals li:nth-child(3) { top: 160px; left: 0; animation-delay: -4s; opacity: .85; }
+    .rm-goals li:nth-child(4) { top: 182px; left: 168px; animation-delay: -1s; }
+    .rm-goals li:nth-child(5) { top: 262px; left: 28px; animation-delay: -3s; opacity: .8; }
+    .rm-goals li:nth-child(6) { top: 282px; left: 178px; animation-delay: -5s; opacity: .7; }
+    @keyframes rm-float { to { transform: translateY(-8px); } }
+    @media (prefers-reduced-motion: reduce) { .rm-goals li { animation: none; } }
     .slide:has(.contribution-repos) a { font-size: 26px; }
     .contribution-repos { table-layout: fixed; border-collapse: separate; border-spacing: 14px; margin: 0 -14px; width: calc(100% + 28px); font-size: 22px; }
     .contribution-repos td {
