@@ -90,24 +90,23 @@ FROM calls;
 
 <!-- layout: diagram -->
 
-# Where context gets lost
+# Why did the agent give bad advice?
 
-![Full trace with the runbook subtree boxed and an arrow to consult_runbook; separate orphan HTTP trace with an arrow to the runbook ChatOpenAI span](assets/aspire-parent-gap.svg)
+![Collapsed trace showing consult_runbook with no children and the detached runbook subtree at the bottom of the trace](assets/aspire-parent-gap.svg?v=collapsed)
 
 ---
 
 <!-- layout: text -->
 
-# If I had a magic wand
+# How OpenTelemetry solves this
 
 <table>
-<thead><tr><th>Wish</th><th class="fragment" data-fragment="otel">OpenTelemetry</th></tr></thead>
 <tbody>
-<tr><td>One schema across all<br>instrumentations</td><td class="fragment" data-fragment="otel">GenAI semantic conventions, checked by conformance tests</td></tr>
-<tr><td>End-to-end trace correlation</td><td class="fragment" data-fragment="otel">Context propagation, suppression, enrichment</td></tr>
-<tr><td>Traces, metrics, and logs</td><td class="fragment" data-fragment="otel">Instrumentation that emits all signals</td></tr>
-<tr><td>Consistent configuration</td><td class="fragment" data-fragment="otel">Content-capture settings</td></tr>
-<tr><td>Large content separate from telemetry,<br>while still reachable</td><td class="fragment" data-fragment="otel">An upload hook that stores content and links to it</td></tr>
+<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="otel"><b>GenAI semantic conventions</b> + conformance tests</td></tr>
+<tr><td>Duplicate spans, missing parents, and broken traces</td><td class="fragment" data-fragment="otel"><b>Context propagation</b>, suppression, and enrichment</td></tr>
+<tr><td>Traces only - expensive to aggregate at scale</td><td class="fragment" data-fragment="otel"><b>Consistent signals</b>: spans and metrics</td></tr>
+<tr><td>Each library configures content capture differently</td><td class="fragment" data-fragment="otel"><b>Standard content-capture settings</b></td></tr>
+<tr><td>Prompts and tool outputs bloat traces</td><td class="fragment" data-fragment="otel"><b>Hooks</b> allowing to store content externally and link to it</td></tr>
 </tbody>
 </table>
 
@@ -255,27 +254,56 @@ sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</c
 
 [open-telemetry/opentelemetry-python-genai](https://github.com/open-telemetry/opentelemetry-python-genai)
 
-- GenAI Util: spans, metrics, content, context
-- Thin adapters: provider data → GenAI Util
-- Conformance checks + unit tests
-- AI-assisted development and review
+- **One shared GenAI Util** owns spans, metrics, content capture, and context
+- **Thin adapters** only map each library's data to GenAI Util types
+- **Conformance checks + unit tests** verify each package against the conventions
+- **AI-assisted development:** AGENTS.md, skills, and automated pre-review
+
+---
+
+# Inside an instrumentation
+
+<div class="adapter-grid">
+<div>
 
 ```python
-with handler.inference("openai", request_model=kwargs["model"]) as operation:
-    response = wrapped(*args, **kwargs)
-    set_usage(operation, response.usage)
-    if handler.should_capture_content():
-        operation.output_messages = _prepare_messages(response.choices)
-    return response
+def traced_create(wrapped, instance, args, kwargs):
+    invocation = handler.inference(
+        provider="anthropic", request_model=kwargs["model"]
+    )
+    invocation.input_messages = get_input_messages(kwargs)
+    try:
+        result = wrapped(*args, **kwargs)
+    except BaseException as exc:
+        invocation.fail(exc)
+        raise
+    set_response_attributes(invocation, result)
+    invocation.stop()
+    return result
 ```
+
+</div>
+<div class="adapter-util">
+<p class="adapter-util-title">GenAI Util handles</p>
+<ul>
+<li>Spans and attributes</li>
+<li>Metrics</li>
+<li>Content capture</li>
+<li>Errors</li>
+<li>Context</li>
+</ul>
+</div>
+</div>
+
+<!-- Simplified from opentelemetry-instrumentation-genai-anthropic patch.py (messages_create + _create_invocation): streaming, system instructions, tools, server address, beta resources, and raw responses omitted. -->
+
 
 ---
 
 # More contributors, faster delivery
 
 - **At least 143 contributors to OTel AI work in 2026, 65 new to OTel**
-- **13 Python instrumentation packages**
-- JS is adopting the GenAI utility and conformance approach
+- **13 Python instrumentations released in 2026**
 
 <img src="assets/python-genai-contributions-monthly.svg" alt="Python GenAI instrumentation PRs merged per month: 0 to 19 a month in python-contrib from November 2024, rising to 116 in September 2026 after the python-genai repository launched in May 2026" style="display: block; width: 100%; object-fit: contain; margin: 12px auto 0;" />
 
@@ -361,6 +389,40 @@ weaver registry live-check \
 
 ---
 
+# OpenTelemetry Weaver
+
+[open-telemetry/weaver](https://github.com/open-telemetry/weaver)
+
+<div class="adapter-grid" style="grid-template-columns: 1fr auto;">
+<div>
+
+- **Conventions** defined in machine-readable YAML
+- **Weaver** validates schemas and generates docs &amp; code
+- **Live check** verifies OTLP telemetry against the schema:
+  - required attributes, allowed attributes, types &amp; enums
+
+</div>
+<div>
+
+```yaml
+groups:
+  - id: span.gen_ai.client.inference
+    type: span
+    span_kind: client
+    attributes:
+      - ref: gen_ai.operation.name
+        requirement_level: required
+      - ref: gen_ai.provider.name
+        requirement_level: required
+      - ref: gen_ai.request.model
+      - ref: gen_ai.usage.input_tokens
+```
+
+</div>
+</div>
+
+---
+
 # One library, five instrumentations, different spans
 
 <table class="conformance-grid" aria-label="Attributes on the gen_ai.client.inference span emitted by five Python instrumentations of the Anthropic SDK">
@@ -378,6 +440,10 @@ weaver registry live-check \
 </table>
 
 <p class="conformance-report-url"><a href="https://open-telemetry.github.io/semantic-conventions-conformance">https://open-telemetry.github.io/semantic-conventions-conformance</a></p>
+
+---
+
+<iframe class="conformance-iframe" src="https://open-telemetry.github.io/semantic-conventions-conformance/#/signals/span%3Agen_ai.client.inference?q=anthropic&amp;level=scored" title="OpenTelemetry semantic conventions conformance report for gen_ai.client.inference"></iframe>
 
 ---
 
@@ -412,7 +478,7 @@ weaver registry live-check \
 </section>
 </div>
 
-<!-- Sources and qualifications: sources.md, "Roadmap: slide 23". Dates are targets; the middle and right columns are direction, not commitments. -->
+<!-- Sources and qualifications: sources.md, "Roadmap: slide 26". Dates are targets; the middle and right columns are direction, not commitments. -->
 
 ---
 

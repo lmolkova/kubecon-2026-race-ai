@@ -1,53 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1694" height="790" viewBox="0 0 1694 790" role="img" aria-labelledby="title desc">
-<title id="title">Captured parentage gaps and separate orphan trace</title>
-<desc id="desc">The same complete 22-span main trace as slide 3, plus the separate one-span runbook HTTP trace with its own 1.55 millisecond axis. A red box encloses main rows 15 through 19 and a red arrow points to consult_runbook. A second red arrow points from the orphan HTTP span to the runbook ChatOpenAI span. These are intended-parent annotations, not actual captured edges.</desc>
+<svg id="parent-gap-svg" xmlns="http://www.w3.org/2000/svg" width="1260" height="520" viewBox="0 0 1260 520" role="img" aria-labelledby="title desc">
+<title id="title">Why did the agent give bad advice? Broken parent context on consult_runbook</title>
+<desc id="desc">Collapsed view of the captured trace from slide 3. Subtrees under model, inspect_workload, and the runbook model are collapsed. Step 1 highlights consult_runbook with no children; Step 2 boxes the detached runbook subtree at the bottom of the trace and draws an arrow back up to consult_runbook.</desc>
 <metadata>{"kind":"screenshot-redraw-with-annotations","main":{"summary":{"trace_id":"b2fb5dc7fc85244d41a7f3667beaec03","displayed_start":"11:45:36.294 PM","displayed_duration":"0.7s","resources":2,"depth":7,"total_spans":22,"ticks":["0s","0.17s","0.35s","0.52s","0.7s"]},"rows":[{"name":"POST /run","depth":0,"duration":"0.7s","service":"diagnostic-agent","server":true,"detail_marker":false,"destination":"","bar_marker_approx_x":[884,1340],"color":"#425cc7","parent_row":null,"row":0,"source_bar_bounds":[875,1829],"source_bar_pixel_count":14308},{"name":"diagnose_workload","depth":1,"duration":"0.38s","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":0,"row":1,"source_bar_bounds":[1315,1828],"source_bar_pixel_count":7687},{"name":"model","depth":2,"duration":"15.35ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":1,"row":2,"source_bar_bounds":[1317,1338],"source_bar_pixel_count":303},{"name":"ChatOpenAI","depth":3,"duration":"14.15ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":2,"row":3,"source_bar_bounds":[1318,1337],"source_bar_pixel_count":273},{"name":"tools_condition","depth":3,"duration":"0.15ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":2,"row":4,"source_bar_bounds":[1337,1338],"source_bar_pixel_count":15},{"name":"tools","depth":2,"duration":"0.35s","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":1,"row":5,"source_bar_bounds":[1338,1823],"source_bar_pixel_count":7267},{"name":"inspect_workload","depth":3,"duration":"38.59ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":5,"row":6,"source_bar_bounds":[1339,1392],"source_bar_pixel_count":785},{"name":"diagnostic","depth":4,"duration":"36.63ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":6,"row":7,"source_bar_bounds":[1342,1392],"source_bar_pixel_count":740},{"name":"model","depth":5,"duration":"35.47ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":7,"row":8,"source_bar_bounds":[1343,1391],"source_bar_pixel_count":710},{"name":"ChatAnthropic","depth":6,"duration":"34.7ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":8,"row":9,"source_bar_bounds":[1344,1391],"source_bar_pixel_count":695},{"name":"consult_runbook","depth":3,"duration":"0.35s","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":5,"row":10,"source_bar_bounds":[1345,1822],"source_bar_pixel_count":7147},{"name":"model","depth":2,"duration":"3.2ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":1,"row":11,"source_bar_bounds":[1823,1828],"source_bar_pixel_count":75},{"name":"ChatOpenAI","depth":3,"duration":"2.29ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":11,"row":12,"source_bar_bounds":[1824,1827],"source_bar_pixel_count":45},{"name":"tools_condition","depth":3,"duration":"0.1ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":11,"row":13,"source_bar_bounds":[1827,1828],"source_bar_pixel_count":15},{"name":"HTTP POST 200","depth":1,"duration":"2.36ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":0,"row":14,"source_bar_bounds":[1329,1332],"source_bar_pixel_count":45},{"name":"HTTP POST 200","depth":1,"duration":"0.34s","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":0,"row":15,"source_bar_bounds":[1351,1822],"source_bar_pixel_count":7059},{"name":"POST /runbook","depth":2,"duration":"0.34s","service":"runbook","server":true,"detail_marker":false,"destination":"","bar_marker_approx_x":[1819],"color":"#f5a800","parent_row":15,"row":16,"source_bar_bounds":[1354,1828],"source_bar_pixel_count":7084},{"name":"runbook","depth":3,"duration":"0.34s","service":"runbook","server":false,"detail_marker":true,"destination":"","bar_marker_approx_x":[],"color":"#f5a800","parent_row":16,"row":17,"source_bar_bounds":[1362,1821],"source_bar_pixel_count":6875},{"name":"model","depth":4,"duration":"0.33s","service":"runbook","server":false,"detail_marker":true,"destination":"","bar_marker_approx_x":[],"color":"#f5a800","parent_row":17,"row":18,"source_bar_bounds":[1365,1820],"source_bar_pixel_count":6815},{"name":"ChatOpenAI","depth":5,"duration":"5.7ms","service":"runbook","server":false,"detail_marker":true,"destination":"","bar_marker_approx_x":[],"color":"#f5a800","parent_row":18,"row":19,"source_bar_bounds":[1812,1820],"source_bar_pixel_count":116},{"name":"HTTP POST 200","depth":1,"duration":"6.78ms","service":"diagnostic-agent","server":false,"detail_marker":true,"destination":"model-router:8000","bar_marker_approx_x":[],"color":"#425cc7","parent_row":0,"row":20,"source_bar_bounds":[1378,1388],"source_bar_pixel_count":138},{"name":"HTTP POST 200","depth":1,"duration":"0.61ms","service":"diagnostic-agent","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#425cc7","parent_row":0,"row":21,"source_bar_bounds":[1825,1826],"source_bar_pixel_count":15}]},"orphan":{"summary":{"trace_id":"01a1a3cdcf8a74568f6fdd9c7c86e09f","span_id":"f88b071f40ee83f4","displayed_start":"11:45:36.982 PM","displayed_duration":"1.55ms","resources":1,"depth":1,"total_spans":1,"ticks":["0ms","0.39ms","0.78ms","1.16ms","1.55ms"]},"rows":[{"name":"HTTP POST 200","depth":0,"duration":"1.55ms","service":"runbook","server":false,"detail_marker":false,"destination":"","bar_marker_approx_x":[],"color":"#f5a800","parent_row":null,"row":0,"source_bar_bounds":[875,1829],"source_bar_pixel_count":14308}]},"source_png_sha256":{"aspire-waterfall.png":"cebb81c3aaaf1b9b823c6259391757cb8f412d34394ea72103db219e544458ea","aspire-orphan-http.png":"5fa76b41e3fd15713235ac1797e51bec73ab7c9587c5e450e09d82bf40b17c02"},"parent_annotations":[{"color":"red","source_rows":[15,16,17,18,19],"intended_parent_row":10},{"color":"blue","source":"orphan row 0","intended_parent_row":19}]}</metadata>
 <style>
-  text { font-family: Arial, sans-serif; fill: #172b4d; }
-  .span-name { font-size: 24px; }
-  .service { font-size: 22px; }
-  .column-heading { font-size: 20px; fill: #596579; }
-  .span-note { font-size: 20px; fill: #596579; }
-  .core .span-name, .core .span-note { fill: #596579; }
-  .tree { fill: none; stroke: #ccd3df; stroke-width: 2; }
-  .grid { fill: none; stroke: #e5e9f0; }
+  #parent-gap-svg text { font-family: Arial, sans-serif; fill: #172b4d; }
+  #parent-gap-svg .span-name { font-size: 26px; }
+  #parent-gap-svg .service { font-size: 23px; }
+  #parent-gap-svg .column-heading { font-size: 21px; fill: #596579; }
+  #parent-gap-svg .tree { fill: none; stroke: #ccd3df; stroke-width: 2; }
+  #parent-gap-svg .grid { fill: none; stroke: #e5e9f0; }
+  #parent-gap-svg .callout-badge { font-size: 21px; font-weight: 700; fill: #b42318; }
 </style>
 <defs>
   <marker id="red-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c62828"/></marker>
-  <marker id="blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7048ff"/></marker>
 </defs>
-<rect width="1694" height="790" fill="white"/>
+<rect width="1260" height="520" fill="white"/>
 <g id="captured-panel">
-<text x="40" y="26" class="column-heading">Name</text>
-<text x="580" y="26" class="column-heading">Service</text>
-<rect class="service-area" x="80" y="492" width="1590" height="112" rx="4" fill="#fdf1d0"/>
-<path class="grid" d="M870 38V663"/>
-<text x="870" y="26" text-anchor="start" class="column-heading">0s</text>
-<path class="grid" d="M1070 38V663"/>
-<text x="1070" y="26" text-anchor="middle" class="column-heading">0.17s</text>
-<path class="grid" d="M1270 38V663"/>
-<text x="1270" y="26" text-anchor="middle" class="column-heading">0.35s</text>
-<path class="grid" d="M1470 38V663"/>
-<text x="1470" y="26" text-anchor="middle" class="column-heading">0.52s</text>
-<path class="grid" d="M1670 38V663"/>
-<text x="1670" y="26" text-anchor="end" class="column-heading">0.7s</text>
-<path class="tree" data-parent-row="0" d="M50 71V646 M50 86H58 M50 450H58 M50 478H58 M50 618H58 M50 646H58"/>
-<path class="tree" data-parent-row="1" d="M78 99V366 M78 114H86 M78 198H86 M78 366H86"/>
-<path class="tree" data-parent-row="2" d="M106 127V170 M106 142H114 M106 170H114"/>
-<path class="tree" data-parent-row="5" d="M106 211V338 M106 226H114 M106 338H114"/>
-<path class="tree" data-parent-row="6" d="M134 239V254 M134 254H142"/>
-<path class="tree" data-parent-row="7" d="M162 267V282 M162 282H170"/>
-<path class="tree" data-parent-row="8" d="M190 295V310 M190 310H198"/>
-<path class="tree" data-parent-row="11" d="M106 379V422 M106 394H114 M106 422H114"/>
-<path class="tree" data-parent-row="15" d="M78 491V506 M78 506H86"/>
-<path class="tree" data-parent-row="16" d="M106 519V534 M106 534H114"/>
-<path class="tree" data-parent-row="17" d="M134 547V562 M134 562H142"/>
-<path class="tree" data-parent-row="18" d="M162 575V590 M162 590H170"/>
+<text x="40" y="28" class="column-heading">Name</text>
+<text x="430" y="28" class="column-heading">Service</text>
+<rect class="service-area" x="80" y="382" width="1164" height="122" rx="4" fill="#fdf1d0"/>
+<path class="grid" d="M640 38V508"/>
+<text x="640" y="28" text-anchor="start" class="column-heading">0s</text>
+<path class="grid" d="M790 38V508"/>
+<text x="790" y="28" text-anchor="middle" class="column-heading">0.17s</text>
+<path class="grid" d="M940 38V508"/>
+<text x="940" y="28" text-anchor="middle" class="column-heading">0.35s</text>
+<path class="grid" d="M1090 38V508"/>
+<text x="1090" y="28" text-anchor="middle" class="column-heading">0.52s</text>
+<path class="grid" d="M1240 38V508"/>
+<text x="1240" y="28" text-anchor="end" class="column-heading">0.7s</text>
+<path class="tree" data-parent-row="0" d="M50 77V358 M50 106H58 M50 358H58"/>
+<path class="tree" data-parent-row="1" d="M78 119V316 M78 148H86 M78 190H86 M78 316H86"/>
+<path class="tree" data-parent-row="5" d="M106 203V274 M106 232H114 M106 274H114"/>
+<path class="tree" data-parent-row="15" d="M78 371V400 M78 400H86"/>
+<path class="tree" data-parent-row="16" d="M106 413V442 M106 442H114"/>
+<path class="tree" data-parent-row="17" d="M134 455V484 M134 484H142"/>
 <g id="captured-row-0" class="trace-row" data-row="0" data-depth="0" data-parent-row="">
-<g class="server-icon" transform="translate(24 50)" stroke="#425cc7" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
-<text x="40" y="66" class="span-name">POST /run</text>
-<text x="580" y="66" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="875" data-source-right="1829" data-bar-marker-count="2" transform="translate(870 50) scale(0.83857 1)">
+<g class="server-icon" transform="translate(24 56)" stroke="#425cc7" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
+<text x="40" y="72" class="span-name">POST /run</text>
+<text x="430" y="72" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="875" data-source-right="1829" data-bar-marker-count="2" transform="translate(640 56) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M238 0h1v1h-1Z M477 0h1v1h-1Z M715 0h1v1h-1Z M0 1h1v2h-1Z M0 14h1v2h-1Z M238 16h1v1h-1Z M477 16h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#bbc4e7" d="M2 1h1v1h-1Z M951 1h1v1h-1Z M953 3h1v1h-1Z M953 13h1v1h-1Z M2 15h1v1h-1Z M951 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M3 1h1v1h-1Z M950 1h1v1h-1Z M953 4h1v1h-1Z M953 12h1v1h-1Z M3 15h1v1h-1Z M950 15h1v1h-1Z"/>
@@ -78,10 +70,10 @@
 </g>
 </g>
 <g id="captured-row-1" class="trace-row" data-row="1" data-depth="1" data-parent-row="0">
-<rect class="service-marker" x="54" y="77" width="4" height="18" fill="#425cc7"/>
-<text x="68" y="94" class="span-name">diagnose_workload</text>
-<text x="580" y="94" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1315" data-source-right="1828" data-bar-marker-count="0" transform="translate(870 78) scale(0.83857 1)">
+<rect class="service-marker" x="54" y="97" width="4" height="18" fill="#425cc7"/>
+<text x="68" y="114" class="span-name">diagnose_workload</text>
+<text x="430" y="114" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1315" data-source-right="1828" data-bar-marker-count="0" transform="translate(640 98) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M477 0h1v1h-1Z M715 0h1v1h-1Z M477 16h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#bbc4e7" d="M442 1h1v1h-1Z M950 1h1v1h-1Z M440 3h1v1h-1Z M952 3h1v1h-1Z M440 13h1v1h-1Z M952 13h1v1h-1Z M442 15h1v1h-1Z M950 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M443 1h1v1h-1Z M949 1h1v1h-1Z M440 4h1v1h-1Z M952 4h1v1h-1Z M440 12h1v1h-1Z M952 12h1v1h-1Z M443 15h1v1h-1Z M949 15h1v1h-1Z"/>
@@ -91,10 +83,10 @@
 </g>
 </g>
 <g id="captured-row-2" class="trace-row" data-row="2" data-depth="2" data-parent-row="1">
-<rect class="service-marker" x="82" y="105" width="4" height="18" fill="#425cc7"/>
-<text x="96" y="122" class="span-name">model</text>
-<text x="580" y="122" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1317" data-source-right="1338" data-bar-marker-count="0" transform="translate(870 106) scale(0.83857 1)">
+<rect class="service-marker" x="82" y="139" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="156" class="span-name">▸ model</text>
+<text x="430" y="156" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1317" data-source-right="1338" data-bar-marker-count="0" transform="translate(640 140) scale(0.62893 1)">
 <path fill="#bbc4e7" d="M444 1h1v1h-1Z M460 1h1v1h-1Z M442 3h1v1h-1Z M462 3h1v1h-1Z M442 13h1v1h-1Z M462 13h1v1h-1Z M444 15h1v1h-1Z M460 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M445 1h1v1h-1Z M459 1h1v1h-1Z M442 4h1v1h-1Z M462 4h1v1h-1Z M442 12h1v1h-1Z M462 12h1v1h-1Z M445 15h1v1h-1Z M459 15h1v1h-1Z"/>
 <path fill="#435cc6" d="M446 1h1v1h-1Z M458 1h1v1h-1Z M442 5h1v1h-1Z M462 5h1v1h-1Z M442 11h1v1h-1Z M462 11h1v1h-1Z M446 15h1v1h-1Z M458 15h1v1h-1Z"/>
@@ -102,31 +94,11 @@
 <path fill="#98a6df" d="M443 2h1v1h-1Z M461 2h1v1h-1Z M443 14h1v1h-1Z M461 14h1v1h-1Z"/>
 </g>
 </g>
-<g id="captured-row-3" class="trace-row" data-row="3" data-depth="3" data-parent-row="2">
-<rect class="service-marker" x="110" y="133" width="4" height="18" fill="#425cc7"/>
-<text x="124" y="150" class="span-name">ChatOpenAI</text>
-<text x="580" y="150" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1318" data-source-right="1337" data-bar-marker-count="0" transform="translate(870 134) scale(0.83857 1)">
-<path fill="#bbc4e7" d="M445 1h1v1h-1Z M459 1h1v1h-1Z M443 3h1v1h-1Z M461 3h1v1h-1Z M443 13h1v1h-1Z M461 13h1v1h-1Z M445 15h1v1h-1Z M459 15h1v1h-1Z"/>
-<path fill="#6d81d2" d="M446 1h1v1h-1Z M458 1h1v1h-1Z M443 4h1v1h-1Z M461 4h1v1h-1Z M443 12h1v1h-1Z M461 12h1v1h-1Z M446 15h1v1h-1Z M458 15h1v1h-1Z"/>
-<path fill="#435cc6" d="M447 1h1v1h-1Z M457 1h1v1h-1Z M443 5h1v1h-1Z M461 5h1v1h-1Z M443 11h1v1h-1Z M461 11h1v1h-1Z M447 15h1v1h-1Z M457 15h1v1h-1Z"/>
-<path fill="#425cc7" d="M448 1h9v1h-9Z M445 2h15v1h-15Z M444 3h17v3h-17Z M443 6h19v5h-19Z M444 11h17v3h-17Z M445 14h15v1h-15Z M448 15h9v1h-9Z"/>
-<path fill="#98a6df" d="M444 2h1v1h-1Z M460 2h1v1h-1Z M444 14h1v1h-1Z M460 14h1v1h-1Z"/>
-</g>
-</g>
-<g id="captured-row-4" class="trace-row" data-row="4" data-depth="3" data-parent-row="2">
-<rect class="service-marker" x="110" y="161" width="4" height="18" fill="#425cc7"/>
-<text x="124" y="178" class="span-name">tools_condition</text>
-<text x="580" y="178" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1337" data-source-right="1338" data-bar-marker-count="0" transform="translate(870 162) scale(0.83857 1)">
-<path fill="#425cc7" d="M462 1h1v15h-1Z"/>
-</g>
-</g>
 <g id="captured-row-5" class="trace-row" data-row="5" data-depth="2" data-parent-row="1">
-<rect class="service-marker" x="82" y="189" width="4" height="18" fill="#425cc7"/>
-<text x="96" y="206" class="span-name">tools</text>
-<text x="580" y="206" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1338" data-source-right="1823" data-bar-marker-count="0" transform="translate(870 190) scale(0.83857 1)">
+<rect class="service-marker" x="82" y="181" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="198" class="span-name">tools</text>
+<text x="430" y="198" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1338" data-source-right="1823" data-bar-marker-count="0" transform="translate(640 182) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M477 0h1v1h-1Z M715 0h1v1h-1Z M477 16h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#bbc4e7" d="M465 1h1v1h-1Z M945 1h1v1h-1Z M463 3h1v1h-1Z M947 3h1v1h-1Z M463 13h1v1h-1Z M947 13h1v1h-1Z M465 15h1v1h-1Z M945 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M466 1h1v1h-1Z M944 1h1v1h-1Z M463 4h1v1h-1Z M947 4h1v1h-1Z M463 12h1v1h-1Z M947 12h1v1h-1Z M466 15h1v1h-1Z M944 15h1v1h-1Z"/>
@@ -136,10 +108,10 @@
 </g>
 </g>
 <g id="captured-row-6" class="trace-row" data-row="6" data-depth="3" data-parent-row="5">
-<rect class="service-marker" x="110" y="217" width="4" height="18" fill="#425cc7"/>
-<text x="124" y="234" class="span-name">inspect_workload</text>
-<text x="580" y="234" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1339" data-source-right="1392" data-bar-marker-count="0" transform="translate(870 218) scale(0.83857 1)">
+<rect class="service-marker" x="110" y="223" width="4" height="18" fill="#425cc7"/>
+<text x="124" y="240" class="span-name">▸ inspect_workload</text>
+<text x="430" y="240" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1339" data-source-right="1392" data-bar-marker-count="0" transform="translate(640 224) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M477 0h1v1h-1Z M477 16h1v1h-1Z"/>
 <path fill="#bbc4e7" d="M466 1h1v1h-1Z M514 1h1v1h-1Z M464 3h1v1h-1Z M516 3h1v1h-1Z M464 13h1v1h-1Z M516 13h1v1h-1Z M466 15h1v1h-1Z M514 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M467 1h1v1h-1Z M513 1h1v1h-1Z M464 4h1v1h-1Z M516 4h1v1h-1Z M464 12h1v1h-1Z M516 12h1v1h-1Z M467 15h1v1h-1Z M513 15h1v1h-1Z"/>
@@ -148,50 +120,11 @@
 <path fill="#98a6df" d="M465 2h1v1h-1Z M515 2h1v1h-1Z M465 14h1v1h-1Z M515 14h1v1h-1Z"/>
 </g>
 </g>
-<g id="captured-row-7" class="trace-row" data-row="7" data-depth="4" data-parent-row="6">
-<rect class="service-marker" x="138" y="245" width="4" height="18" fill="#425cc7"/>
-<text x="152" y="262" class="span-name">diagnostic</text>
-<text x="580" y="262" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1342" data-source-right="1392" data-bar-marker-count="0" transform="translate(870 246) scale(0.83857 1)">
-<path fill="#d8d8d8" d="M477 0h1v1h-1Z M477 16h1v1h-1Z"/>
-<path fill="#bbc4e7" d="M469 1h1v1h-1Z M514 1h1v1h-1Z M467 3h1v1h-1Z M516 3h1v1h-1Z M467 13h1v1h-1Z M516 13h1v1h-1Z M469 15h1v1h-1Z M514 15h1v1h-1Z"/>
-<path fill="#6d81d2" d="M470 1h1v1h-1Z M513 1h1v1h-1Z M467 4h1v1h-1Z M516 4h1v1h-1Z M467 12h1v1h-1Z M516 12h1v1h-1Z M470 15h1v1h-1Z M513 15h1v1h-1Z"/>
-<path fill="#435cc6" d="M471 1h1v1h-1Z M512 1h1v1h-1Z M467 5h1v1h-1Z M516 5h1v1h-1Z M467 11h1v1h-1Z M516 11h1v1h-1Z M471 15h1v1h-1Z M512 15h1v1h-1Z"/>
-<path fill="#425cc7" d="M472 1h40v1h-40Z M469 2h46v1h-46Z M468 3h48v3h-48Z M467 6h50v5h-50Z M468 11h48v3h-48Z M469 14h46v1h-46Z M472 15h40v1h-40Z"/>
-<path fill="#98a6df" d="M468 2h1v1h-1Z M515 2h1v1h-1Z M468 14h1v1h-1Z M515 14h1v1h-1Z"/>
-</g>
-</g>
-<g id="captured-row-8" class="trace-row" data-row="8" data-depth="5" data-parent-row="7">
-<rect class="service-marker" x="166" y="273" width="4" height="18" fill="#425cc7"/>
-<text x="180" y="290" class="span-name">model</text>
-<text x="580" y="290" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1343" data-source-right="1391" data-bar-marker-count="0" transform="translate(870 274) scale(0.83857 1)">
-<path fill="#d8d8d8" d="M477 0h1v1h-1Z M477 16h1v1h-1Z"/>
-<path fill="#bbc4e7" d="M470 1h1v1h-1Z M513 1h1v1h-1Z M468 3h1v1h-1Z M515 3h1v1h-1Z M468 13h1v1h-1Z M515 13h1v1h-1Z M470 15h1v1h-1Z M513 15h1v1h-1Z"/>
-<path fill="#6d81d2" d="M471 1h1v1h-1Z M512 1h1v1h-1Z M468 4h1v1h-1Z M515 4h1v1h-1Z M468 12h1v1h-1Z M515 12h1v1h-1Z M471 15h1v1h-1Z M512 15h1v1h-1Z"/>
-<path fill="#435cc6" d="M472 1h1v1h-1Z M511 1h1v1h-1Z M468 5h1v1h-1Z M515 5h1v1h-1Z M468 11h1v1h-1Z M515 11h1v1h-1Z M472 15h1v1h-1Z M511 15h1v1h-1Z"/>
-<path fill="#425cc7" d="M473 1h38v1h-38Z M470 2h44v1h-44Z M469 3h46v3h-46Z M468 6h48v5h-48Z M469 11h46v3h-46Z M470 14h44v1h-44Z M473 15h38v1h-38Z"/>
-<path fill="#98a6df" d="M469 2h1v1h-1Z M514 2h1v1h-1Z M469 14h1v1h-1Z M514 14h1v1h-1Z"/>
-</g>
-</g>
-<g id="captured-row-9" class="trace-row" data-row="9" data-depth="6" data-parent-row="8">
-<rect class="service-marker" x="194" y="301" width="4" height="18" fill="#425cc7"/>
-<text x="208" y="318" class="span-name">ChatAnthropic</text>
-<text x="580" y="318" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1344" data-source-right="1391" data-bar-marker-count="0" transform="translate(870 302) scale(0.83857 1)">
-<path fill="#d8d8d8" d="M477 0h1v1h-1Z M477 16h1v1h-1Z"/>
-<path fill="#bbc4e7" d="M471 1h1v1h-1Z M513 1h1v1h-1Z M469 3h1v1h-1Z M515 3h1v1h-1Z M469 13h1v1h-1Z M515 13h1v1h-1Z M471 15h1v1h-1Z M513 15h1v1h-1Z"/>
-<path fill="#6d81d2" d="M472 1h1v1h-1Z M512 1h1v1h-1Z M469 4h1v1h-1Z M515 4h1v1h-1Z M469 12h1v1h-1Z M515 12h1v1h-1Z M472 15h1v1h-1Z M512 15h1v1h-1Z"/>
-<path fill="#435cc6" d="M473 1h1v1h-1Z M511 1h1v1h-1Z M469 5h1v1h-1Z M515 5h1v1h-1Z M469 11h1v1h-1Z M515 11h1v1h-1Z M473 15h1v1h-1Z M511 15h1v1h-1Z"/>
-<path fill="#425cc7" d="M474 1h37v1h-37Z M471 2h43v1h-43Z M470 3h45v3h-45Z M469 6h47v5h-47Z M470 11h45v3h-45Z M471 14h43v1h-43Z M474 15h37v1h-37Z"/>
-<path fill="#98a6df" d="M470 2h1v1h-1Z M514 2h1v1h-1Z M470 14h1v1h-1Z M514 14h1v1h-1Z"/>
-</g>
-</g>
 <g id="captured-row-10" class="trace-row" data-row="10" data-depth="3" data-parent-row="5">
-<rect class="service-marker" x="110" y="329" width="4" height="18" fill="#425cc7"/>
-<text x="124" y="346" class="span-name">consult_runbook</text>
-<text x="580" y="346" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1345" data-source-right="1822" data-bar-marker-count="0" transform="translate(870 330) scale(0.83857 1)">
+<rect class="service-marker" x="110" y="265" width="4" height="18" fill="#425cc7"/>
+<text x="124" y="282" class="span-name">consult_runbook</text>
+<text x="430" y="282" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1345" data-source-right="1822" data-bar-marker-count="0" transform="translate(640 266) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M477 0h1v1h-1Z M715 0h1v1h-1Z M477 16h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#bbc4e7" d="M472 1h1v1h-1Z M944 1h1v1h-1Z M470 3h1v1h-1Z M946 3h1v1h-1Z M470 13h1v1h-1Z M946 13h1v1h-1Z M472 15h1v1h-1Z M944 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M473 1h1v1h-1Z M943 1h1v1h-1Z M470 4h1v1h-1Z M946 4h1v1h-1Z M470 12h1v1h-1Z M946 12h1v1h-1Z M473 15h1v1h-1Z M943 15h1v1h-1Z"/>
@@ -201,46 +134,20 @@
 </g>
 </g>
 <g id="captured-row-11" class="trace-row" data-row="11" data-depth="2" data-parent-row="1">
-<rect class="service-marker" x="82" y="357" width="4" height="18" fill="#425cc7"/>
-<text x="96" y="374" class="span-name">model</text>
-<text x="580" y="374" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1823" data-source-right="1828" data-bar-marker-count="0" transform="translate(870 358) scale(0.83857 1)">
+<rect class="service-marker" x="82" y="307" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="324" class="span-name">▸ model</text>
+<text x="430" y="324" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1823" data-source-right="1828" data-bar-marker-count="0" transform="translate(640 308) scale(0.62893 1)">
 <path fill="#d7dcef" d="M948 1h1v1h-1Z M952 1h1v1h-1Z M948 15h1v1h-1Z M952 15h1v1h-1Z"/>
 <path fill="#6a7ed2" d="M949 1h1v1h-1Z M951 1h1v1h-1Z M948 2h1v1h-1Z M952 2h1v1h-1Z M948 14h1v1h-1Z M952 14h1v1h-1Z M949 15h1v1h-1Z M951 15h1v1h-1Z"/>
 <path fill="#425cc7" d="M950 1h1v1h-1Z M949 2h3v1h-3Z M948 3h5v11h-5Z M949 14h3v1h-3Z M950 15h1v1h-1Z"/>
 </g>
 </g>
-<g id="captured-row-12" class="trace-row" data-row="12" data-depth="3" data-parent-row="11">
-<rect class="service-marker" x="110" y="385" width="4" height="18" fill="#425cc7"/>
-<text x="124" y="402" class="span-name">ChatOpenAI</text>
-<text x="580" y="402" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1824" data-source-right="1827" data-bar-marker-count="0" transform="translate(870 386) scale(0.83857 1)">
-<path fill="#95a3dd" d="M949 1h1v1h-1Z M951 1h1v1h-1Z M949 15h1v1h-1Z M951 15h1v1h-1Z"/>
-<path fill="#425cc7" d="M950 1h1v1h-1Z M949 2h3v13h-3Z M950 15h1v1h-1Z"/>
-</g>
-</g>
-<g id="captured-row-13" class="trace-row" data-row="13" data-depth="3" data-parent-row="11">
-<rect class="service-marker" x="110" y="413" width="4" height="18" fill="#425cc7"/>
-<text x="124" y="430" class="span-name">tools_condition</text>
-<text x="580" y="430" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1827" data-source-right="1828" data-bar-marker-count="0" transform="translate(870 414) scale(0.83857 1)">
-<path fill="#425cc7" d="M952 1h1v15h-1Z"/>
-</g>
-</g>
-<g id="captured-row-14" class="trace-row" data-row="14" data-depth="1" data-parent-row="0">
-<rect class="service-marker" x="54" y="441" width="4" height="18" fill="#425cc7"/>
-<text x="68" y="458" class="span-name">HTTP POST 200</text>
-<text x="580" y="458" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1329" data-source-right="1332" data-bar-marker-count="0" transform="translate(870 442) scale(0.83857 1)">
-<path fill="#95a3dd" d="M454 1h1v1h-1Z M456 1h1v1h-1Z M454 15h1v1h-1Z M456 15h1v1h-1Z"/>
-<path fill="#425cc7" d="M455 1h1v1h-1Z M454 2h3v13h-3Z M455 15h1v1h-1Z"/>
-</g>
-</g>
 <g id="captured-row-15" class="trace-row" data-row="15" data-depth="1" data-parent-row="0">
-<rect class="service-marker" x="54" y="469" width="4" height="18" fill="#425cc7"/>
-<text x="68" y="486" class="span-name">HTTP POST 200</text>
-<text x="580" y="486" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1351" data-source-right="1822" data-bar-marker-count="0" transform="translate(870 470) scale(0.83857 1)">
+<rect class="service-marker" x="54" y="349" width="4" height="18" fill="#425cc7"/>
+<text x="68" y="366" class="span-name">HTTP POST 200</text>
+<text x="430" y="366" class="service">diagnostic-agent</text>
+<g class="bar screenshot-bar" data-source-left="1351" data-source-right="1822" data-bar-marker-count="0" transform="translate(640 350) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M715 0h1v1h-1Z M477 0h1v2h-1Z M477 15h1v2h-1Z M715 16h1v1h-1Z"/>
 <path fill="#bbc4e7" d="M478 1h1v1h-1Z M944 1h1v1h-1Z M476 3h1v1h-1Z M946 3h1v1h-1Z M476 13h1v1h-1Z M946 13h1v1h-1Z M478 15h1v1h-1Z M944 15h1v1h-1Z"/>
 <path fill="#6d81d2" d="M479 1h1v1h-1Z M943 1h1v1h-1Z M476 4h1v1h-1Z M946 4h1v1h-1Z M476 12h1v1h-1Z M946 12h1v1h-1Z M479 15h1v1h-1Z M943 15h1v1h-1Z"/>
@@ -251,10 +158,10 @@
 </g>
 </g>
 <g id="captured-row-16" class="trace-row" data-row="16" data-depth="2" data-parent-row="15">
-<g class="server-icon" transform="translate(80 498)" stroke="#f5a800" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
-<text x="96" y="514" class="span-name">POST /runbook</text>
-<text x="580" y="514" class="service">runbook</text>
-<g class="bar screenshot-bar" data-source-left="1354" data-source-right="1828" data-bar-marker-count="1" transform="translate(870 498) scale(0.83857 1)">
+<g class="server-icon" transform="translate(80 392)" stroke="#f5a800" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
+<text x="96" y="408" class="span-name">POST /runbook</text>
+<text x="430" y="408" class="service">runbook</text>
+<g class="bar screenshot-bar" data-source-left="1354" data-source-right="1828" data-bar-marker-count="1" transform="translate(640 392) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M715 0h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#f7dda6" d="M481 1h1v1h-1Z M479 3h1v1h-1Z M479 13h1v1h-1Z M481 15h1v1h-1Z"/>
 <path fill="#f5bb3b" d="M482 1h1v1h-1Z M479 4h1v1h-1Z M479 12h1v1h-1Z M482 15h1v1h-1Z"/>
@@ -301,10 +208,10 @@
 </g>
 </g>
 <g id="captured-row-17" class="trace-row" data-row="17" data-depth="3" data-parent-row="16">
-<rect class="service-marker" x="110" y="525" width="4" height="18" fill="#f5a800"/>
-<text x="124" y="542" class="span-name">runbook</text>
-<text x="580" y="542" class="service">runbook</text>
-<g class="bar screenshot-bar" data-source-left="1362" data-source-right="1821" data-bar-marker-count="0" transform="translate(870 526) scale(0.83857 1)">
+<rect class="service-marker" x="110" y="433" width="4" height="18" fill="#f5a800"/>
+<text x="124" y="450" class="span-name">runbook</text>
+<text x="430" y="450" class="service">runbook</text>
+<g class="bar screenshot-bar" data-source-left="1362" data-source-right="1821" data-bar-marker-count="0" transform="translate(640 434) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M715 0h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#f7dda6" d="M489 1h1v1h-1Z M943 1h1v1h-1Z M487 3h1v1h-1Z M945 3h1v1h-1Z M487 13h1v1h-1Z M945 13h1v1h-1Z M489 15h1v1h-1Z M943 15h1v1h-1Z"/>
 <path fill="#f5bb3b" d="M490 1h1v1h-1Z M942 1h1v1h-1Z M487 4h1v1h-1Z M945 4h1v1h-1Z M487 12h1v1h-1Z M945 12h1v1h-1Z M490 15h1v1h-1Z M942 15h1v1h-1Z"/>
@@ -314,10 +221,10 @@
 </g>
 </g>
 <g id="captured-row-18" class="trace-row" data-row="18" data-depth="4" data-parent-row="17">
-<rect class="service-marker" x="138" y="553" width="4" height="18" fill="#f5a800"/>
-<text x="152" y="570" class="span-name">model</text>
-<text x="580" y="570" class="service">runbook</text>
-<g class="bar screenshot-bar" data-source-left="1365" data-source-right="1820" data-bar-marker-count="0" transform="translate(870 554) scale(0.83857 1)">
+<rect class="service-marker" x="138" y="475" width="4" height="18" fill="#f5a800"/>
+<text x="152" y="492" class="span-name">▸ model</text>
+<text x="430" y="492" class="service">runbook</text>
+<g class="bar screenshot-bar" data-source-left="1365" data-source-right="1820" data-bar-marker-count="0" transform="translate(640 476) scale(0.62893 1)">
 <path fill="#d8d8d8" d="M715 0h1v1h-1Z M715 16h1v1h-1Z"/>
 <path fill="#f7dda6" d="M492 1h1v1h-1Z M942 1h1v1h-1Z M490 3h1v1h-1Z M944 3h1v1h-1Z M490 13h1v1h-1Z M944 13h1v1h-1Z M492 15h1v1h-1Z M942 15h1v1h-1Z"/>
 <path fill="#f5bb3b" d="M493 1h1v1h-1Z M941 1h1v1h-1Z M490 4h1v1h-1Z M944 4h1v1h-1Z M490 12h1v1h-1Z M944 12h1v1h-1Z M493 15h1v1h-1Z M941 15h1v1h-1Z"/>
@@ -325,74 +232,17 @@
 <path fill="#f6ce76" d="M491 2h1v1h-1Z M943 2h1v1h-1Z M491 14h1v1h-1Z M943 14h1v1h-1Z"/>
 </g>
 </g>
-<g id="captured-row-19" class="trace-row" data-row="19" data-depth="5" data-parent-row="18">
-<rect class="service-marker" x="166" y="581" width="4" height="18" fill="#f5a800"/>
-<text x="180" y="598" class="span-name">ChatOpenAI</text>
-<text x="580" y="598" class="service">runbook</text>
-<g class="bar screenshot-bar" data-source-left="1812" data-source-right="1820" data-bar-marker-count="0" transform="translate(870 582) scale(0.83857 1)">
-<path fill="#f6e8c8" d="M938 1h1v1h-1Z M943 1h1v1h-1Z M937 2h1v1h-1Z M944 2h1v1h-1Z M937 14h1v1h-1Z M944 14h1v1h-1Z M938 15h1v1h-1Z M943 15h1v1h-1Z"/>
-<path fill="#f5c04c" d="M939 1h1v1h-1Z M942 1h1v1h-1Z M937 3h1v1h-1Z M944 3h1v1h-1Z M937 13h1v1h-1Z M944 13h1v1h-1Z M939 15h1v1h-1Z M942 15h1v1h-1Z"/>
-<path fill="#f5a802" d="M940 1h2v1h-2Z M938 2h1v1h-1Z M943 2h1v1h-1Z M937 4h1v1h-1Z M944 4h1v1h-1Z M937 12h1v1h-1Z M944 12h1v1h-1Z M938 14h1v1h-1Z M943 14h1v1h-1Z M940 15h2v1h-2Z"/>
-<path fill="#f5a800" d="M939 2h4v1h-4Z M938 3h6v2h-6Z M937 5h8v7h-8Z M938 12h6v2h-6Z M939 14h4v1h-4Z"/>
 </g>
+<g id="step-1-empty-tool" class="fragment" data-fragment="1">
+  <rect x="102" y="253" width="1142" height="40" rx="6" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <rect x="646" y="257" width="282" height="32" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
+  <text x="658" y="280" class="callout-badge">No child spans under tool</text>
 </g>
-<g id="captured-row-20" class="trace-row" data-row="20" data-depth="1" data-parent-row="0">
-<rect class="service-marker" x="54" y="609" width="4" height="18" fill="#425cc7"/>
-<text x="68" y="626" class="span-name">HTTP POST 200</text>
-<g class="destination-icon" transform="translate(270 618)" stroke="#a67850" fill="none" stroke-width="1.5"><circle r="6"/><path d="M-3 0H3M0 -3L3 0L0 3"/></g>
-<text x="284" y="625" class="span-note">model-router:8000</text>
-<text x="580" y="626" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1378" data-source-right="1388" data-bar-marker-count="0" transform="translate(870 610) scale(0.83857 1)">
-<path fill="#bbc4e7" d="M505 1h1v1h-1Z M510 1h1v1h-1Z M503 3h1v1h-1Z M512 3h1v1h-1Z M503 13h1v1h-1Z M512 13h1v1h-1Z M505 15h1v1h-1Z M510 15h1v1h-1Z"/>
-<path fill="#6d81d2" d="M506 1h1v1h-1Z M509 1h1v1h-1Z M503 4h1v1h-1Z M512 4h1v1h-1Z M503 12h1v1h-1Z M512 12h1v1h-1Z M506 15h1v1h-1Z M509 15h1v1h-1Z"/>
-<path fill="#435cc6" d="M507 1h2v1h-2Z M503 5h1v1h-1Z M512 5h1v1h-1Z M503 11h1v1h-1Z M512 11h1v1h-1Z M507 15h2v1h-2Z"/>
-<path fill="#98a6df" d="M504 2h1v1h-1Z M511 2h1v1h-1Z M504 14h1v1h-1Z M511 14h1v1h-1Z"/>
-<path fill="#425cc7" d="M505 2h6v1h-6Z M504 3h8v3h-8Z M503 6h10v5h-10Z M504 11h8v3h-8Z M505 14h6v1h-6Z"/>
+<g id="step-2-detached-subtree" class="fragment" data-fragment="2">
+  <rect class="runbook-subtree-annotation" x="32" y="340" width="1212" height="168" rx="6" fill="none" stroke="#c62828" stroke-width="3.5"/>
+  <path d="M32 362H10V274H98" fill="none" stroke="white" stroke-width="7" stroke-linejoin="round"/>
+  <path class="intended-parent-arrow red" data-intended-parent-row="10" d="M32 362H10V274H98" fill="none" stroke="#c62828" stroke-width="3.5" stroke-linejoin="round" marker-end="url(#red-arrow)"/>
+  <rect x="646" y="346" width="282" height="32" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
+  <text x="658" y="369" class="callout-badge">Detached - landed at root</text>
 </g>
-</g>
-<g id="captured-row-21" class="trace-row" data-row="21" data-depth="1" data-parent-row="0">
-<rect class="service-marker" x="54" y="637" width="4" height="18" fill="#425cc7"/>
-<text x="68" y="654" class="span-name">HTTP POST 200</text>
-<text x="580" y="654" class="service">diagnostic-agent</text>
-<g class="bar screenshot-bar" data-source-left="1825" data-source-right="1826" data-bar-marker-count="0" transform="translate(870 638) scale(0.83857 1)">
-<path fill="#425cc7" d="M950 1h1v15h-1Z"/>
-</g>
-</g>
-</g>
-<g transform="translate(0 690)"><g id="orphan-panel">
-<text x="40" y="26" class="column-heading">Name</text>
-<text x="580" y="26" class="column-heading">Service</text>
-<path class="grid" d="M870 38V75"/>
-<text x="870" y="26" text-anchor="start" class="column-heading">0ms</text>
-<path class="grid" d="M1070 38V75"/>
-<text x="1070" y="26" text-anchor="middle" class="column-heading">0.39ms</text>
-<path class="grid" d="M1270 38V75"/>
-<text x="1270" y="26" text-anchor="middle" class="column-heading">0.78ms</text>
-<path class="grid" d="M1470 38V75"/>
-<text x="1470" y="26" text-anchor="middle" class="column-heading">1.16ms</text>
-<path class="grid" d="M1670 38V75"/>
-<text x="1670" y="26" text-anchor="end" class="column-heading">1.55ms</text>
-<g id="orphan-row-0" class="trace-row" data-row="0" data-depth="0" data-parent-row="">
-<rect class="service-marker" x="26" y="49" width="4" height="18" fill="#f5a800"/>
-<text x="40" y="66" class="span-name">HTTP POST 200</text>
-<text x="580" y="66" class="service">runbook</text>
-<g class="bar screenshot-bar" data-source-left="875" data-source-right="1829" data-bar-marker-count="0" transform="translate(870 50) scale(0.83857 1)">
-<path fill="#d8d8d8" d="M238 0h1v1h-1Z M477 0h1v1h-1Z M715 0h1v1h-1Z M0 1h1v2h-1Z M0 14h1v2h-1Z M238 16h1v1h-1Z M477 16h1v1h-1Z M715 16h1v1h-1Z"/>
-<path fill="#f7dda6" d="M2 1h1v1h-1Z M951 1h1v1h-1Z M953 3h1v1h-1Z M953 13h1v1h-1Z M2 15h1v1h-1Z M951 15h1v1h-1Z"/>
-<path fill="#f5bb3b" d="M3 1h1v1h-1Z M950 1h1v1h-1Z M953 4h1v1h-1Z M953 12h1v1h-1Z M3 15h1v1h-1Z M950 15h1v1h-1Z"/>
-<path fill="#f5a800" d="M4 1h946v1h-946Z M2 2h950v1h-950Z M1 3h952v2h-952Z M0 5h954v7h-954Z M1 12h952v2h-952Z M2 14h950v1h-950Z M4 15h946v1h-946Z"/>
-<path fill="#f6ce76" d="M1 2h1v1h-1Z M952 2h1v1h-1Z M1 14h1v1h-1Z M952 14h1v1h-1Z"/>
-<path fill="#e2c891" d="M0 3h1v1h-1Z M0 13h1v1h-1Z"/>
-<path fill="#eeb434" d="M0 4h1v1h-1Z M0 12h1v1h-1Z"/>
-</g>
-</g>
-</g></g>
-<g id="intended-parent-annotations">
-  <rect class="runbook-subtree-annotation" x="32" y="464" width="1638" height="140" rx="2" fill="none" stroke="#c62828" stroke-width="3"/>
-  <path d="M32 478H8V338H102" fill="none" stroke="white" stroke-width="7" stroke-linejoin="round"/>
-  <path class="intended-parent-arrow red" data-intended-parent-row="10" d="M32 478H8V338H102" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" marker-end="url(#red-arrow)"/>
-  <path d="M24 748H2V590H158" fill="none" stroke="white" stroke-width="7" stroke-linejoin="round"/>
-  <path class="intended-parent-arrow red" data-intended-parent-row="19" d="M24 748H2V590H158" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" marker-end="url(#red-arrow)"/>
-</g>
-
 </svg>
