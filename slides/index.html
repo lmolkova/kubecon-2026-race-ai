@@ -145,10 +145,10 @@
     .diagram .content { height: 672px; display: flex; flex-direction: column; gap: 10px; }
     .diagram h1 { margin: 0 24px; }
     .diagram .content > p { margin: 0 24px; }
-    .diagram .content > p:has(> img) {
+    .diagram .content > p:has(> img), .diagram .content > p:has(> svg) {
       flex: 1; min-height: 0; margin: 0; display: flex;
     }
-    .diagram img { width: 100%; height: 100%; max-height: none !important; object-fit: contain; }
+    .diagram img, .diagram svg { width: 100%; height: 100%; max-height: none !important; object-fit: contain; }
     .diagram .diagram-caption { font-size: 22px; color: var(--cp-text-muted); }
     pre {
       padding: 20px; border-radius: 0.625rem; background: var(--cp-surface-soft);
@@ -180,6 +180,16 @@
     html[data-theme="dark"] .hljs-built_in,
     html[data-theme="dark"] .hljs-type { color: #fcd34d; }
     .code-grid pre { white-space: pre; overflow-wrap: normal; }
+    .adapter-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+    .adapter-grid pre { margin: 0; white-space: pre; overflow-wrap: normal; font-size: 24px; line-height: 1.4; }
+    .adapter-grid mark { background: #dbe3ff; color: #304bb3; border-radius: 4px; padding: 0 3px; }
+    .adapter-util { padding: 24px 28px; border-left: 5px solid #425cc7; background: #eef2ff; border-radius: 0 0.625rem 0.625rem 0; }
+    .slide .adapter-util-title { margin: 0 0 16px; font-size: 26px; font-weight: 700; color: #304bb3; }
+    .slide .adapter-util ul { margin: 0; padding-left: 22px; }
+    .slide .adapter-util li { font-size: 26px; line-height: 1.3; margin-bottom: 12px; }
+    .slide:has(.conformance-iframe) { padding: 0; overflow: hidden; }
+    .slide:has(.conformance-iframe) .content { width: 100%; height: 100%; transform: none !important; }
+    .conformance-iframe { display: block; width: 100%; height: calc(100% + 89px); margin-top: -89px; border: 0; background: #0f1420; }
     table { width: 100%; border-collapse: collapse; font-size: 24px; }
     /* Flag layout: 9 columns for 8 stops; each card starts at its dot and spans two columns, so alternating cards never overlap. */
     .slide .project-timeline {
@@ -309,8 +319,9 @@
     .promql-table td { padding: 10px 12px; vertical-align: middle; }
     .promql-table pre { margin: 0; padding: 0; background: transparent; font-size: 19px; line-height: 1.35; }
     th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--cp-border); }
+    .slide:has(.attr-table) { padding: 36px 24px; }
     .attr-key { list-style: none; padding-left: 0; }
-    .attr-key li { position: relative; padding-left: 32px; }
+    .attr-key li { position: relative; padding-left: 32px; margin-bottom: 28px; }
     .attr-key li::before {
       content: ""; position: absolute; left: 0; top: 0.3em;
       width: 16px; height: 16px; border-radius: 3px; background: var(--c);
@@ -319,7 +330,7 @@
     .attr-table th, .attr-table td { padding: 4px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .attr-table td.wrap { white-space: normal; overflow-wrap: anywhere; font-size: 18px; line-height: 1.2; }
     .attr-table th {
-      width: 360px; padding-left: 18px; font-weight: 600;
+      width: 390px; padding-left: 16px; font-weight: 600;
       background: linear-gradient(var(--c), var(--c)) left 3px / 6px calc(100% - 6px) no-repeat;
     }
     .aspire {
@@ -518,17 +529,19 @@
         code.parentElement.replaceWith(diagram);
       }
       try {
-        const [{ default: hljs }, { default: sql }, { default: json }, { default: python }, { default: bash }] = await Promise.all([
+        const [{ default: hljs }, { default: sql }, { default: json }, { default: python }, { default: bash }, { default: yaml }] = await Promise.all([
           import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/core.min.js"),
           import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/sql.min.js"),
           import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/json.min.js"),
           import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/python.min.js"),
-          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/bash.min.js")
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/bash.min.js"),
+          import("https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.12.0/es/languages/yaml.min.js")
         ]);
         hljs.registerLanguage("sql", sql);
         hljs.registerLanguage("json", json);
         hljs.registerLanguage("python", python);
         hljs.registerLanguage("bash", bash);
+        hljs.registerLanguage("yaml", yaml);
         hljs.registerLanguage("promql", () => ({
           name: "PromQL",
           keywords: {
@@ -549,8 +562,11 @@
         for (const code of deck.querySelectorAll(".promql-table pre > code")) {
           code.classList.add("language-promql");
         }
-        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json, pre > code.language-python, pre > code.language-sh, pre > code.language-bash, pre > code.language-promql")) {
+        for (const code of deck.querySelectorAll("pre > code.language-sql, pre > code.language-json, pre > code.language-python, pre > code.language-sh, pre > code.language-bash, pre > code.language-promql, pre > code.language-yaml")) {
           hljs.highlightElement(code);
+        }
+        for (const code of deck.querySelectorAll(".adapter-grid pre > code")) {
+          code.innerHTML = code.innerHTML.replace(/handler\.inference|invocation\.fail|invocation\.stop/g, "<mark>$&</mark>");
         }
       } catch (error) {
         console.warn("Code highlighting unavailable; showing plain code.", error);
@@ -570,6 +586,15 @@
         }
       });
       await mermaid.run({ nodes: [...deck.querySelectorAll(".mermaid")] });
+      for (const img of deck.querySelectorAll('img[src*="aspire-parent-gap.svg"]')) {
+        const res = await fetch(img.src, { cache: "no-store" });
+        if (res.ok) {
+          const wrap = document.createElement("div");
+          wrap.innerHTML = await res.text();
+          const svgEl = wrap.querySelector("svg");
+          if (svgEl) img.replaceWith(svgEl);
+        }
+      }
       await Promise.all([...deck.querySelectorAll("img")].map(image => image.decode()));
       await document.fonts.ready;
       for (const slide of slides) {
@@ -595,8 +620,12 @@
         else return;
         event.preventDefault();
       });
-      window.addEventListener("hashchange", () => show((Number(location.hash.slice(1)) || 1) - 1));
-      show((Number(location.hash.slice(1)) || 1) - 1);
+      const showFromHash = () => {
+        const [s, st] = location.hash.slice(1).split(".");
+        show((Number(s) || 1) - 1, Number(st) || 0);
+      };
+      window.addEventListener("hashchange", showFromHash);
+      showFromHash();
       status.hidden = true;
       resize();
     } catch (error) {

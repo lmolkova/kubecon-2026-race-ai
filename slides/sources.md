@@ -57,7 +57,7 @@ Python: 358 merged PRs since repository creation on May 12; 47 PR authors;
 24 first merged-PR contributors to the OTel organization. JS AI work: 15 merged
 PRs, 8 authors, 2 additional newcomers. Combined distinct authors: 53; newcomers: 26.
 The weekly chart includes the partial first and last weeks; the mean excludes them.
-Four coordinated Python beta release rounds plus patches; 13 released packages.
+Four coordinated Python beta release rounds plus patches; 13 released packages, all released in 2026 (PyPI, checked November 7). 12 had their first PyPI release in 2026 under the `genai-` names (July 9 - October 23); Google GenAI first shipped from python-contrib in February 2025. OpenAI and OpenAI Agents previously shipped from contrib as `-v2` packages.
 The monthly PR chart counts non-bot merged PRs per UTC month, November 2024
 through October 2026, as of November 4, 2026. In `opentelemetry-python-contrib`,
 a PR counts when at least half of its changed package-directory files are under
@@ -67,7 +67,7 @@ and `opentelemetrybot`. Some GenAI packages still live in contrib, so both repos
 contribute after May 2026.
 Refresh counts before presenting. They are not live dashboard values.
 
-OTel AI contributors (slide 18), checked November 7, 2026: non-bot PRs merged
+OTel AI contributors (slide 19), checked November 7, 2026: non-bot PRs merged
 since January 1, 2026. "New" = no merged PR anywhere in the open-telemetry org
 before the author's first AI PR; each newcomer counted once, in the repo of that
 first PR. Contributors are deduplicated across repos in the total.
@@ -91,7 +91,7 @@ matching misses AI PRs without these words, so keyword-scoped repos are
 undercounts. Two authors could not be checked (search 422) and count as not new.
 .NET excluded.
 
-## Native instrumentation: slide 19
+## Native instrumentation: slide 20
 
 Each library emits OTel itself, using GenAI conventions. Checked November 7, 2026.
 - [Anthropic SDK tracing guide](https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk); [native tracing commit](https://github.com/anthropics/anthropic-sdk-python/commit/02c93c199b78c3f9bbe59cf424162f8a3868d5ed).
@@ -104,7 +104,7 @@ Each library emits OTel itself, using GenAI conventions. Checked November 7, 202
 Convention versions and coverage vary by library. Native does not mean conformant.
 Logos: [Simple Icons](https://simpleicons.org/) (CC0); trademarks belong to their owners.
 
-## Roadmap: slide 23
+## Roadmap: slide 26
 
 The roadmap is direction, not a delivery commitment.
 - Targets: release candidate by end of 2026; stable inference, agents/workflows, and tools by KubeCon EU, March 2027. Say "target", not "date".
