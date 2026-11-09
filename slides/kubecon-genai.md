@@ -120,12 +120,13 @@ FROM calls;
 
 <table class="mission-table">
 <tbody>
-<tr><th colspan="2">Portable</th></tr>
-<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="otel"><b>GenAI semantic conventions</b></td></tr>
-<tr><td>Each library records prompts and responses its own way</td><td class="fragment" data-fragment="otel"><b>Structured inputs and outputs</b></td></tr>
-<tr><td>Each library has its own content-capture switch</td><td class="fragment" data-fragment="otel"><b>One content-capture setting</b></td></tr>
-<tr><th colspan="2">High-quality</th></tr>
-<tr><td>No AI metrics, so counting tokens meant querying traces</td><td class="fragment" data-fragment="otel"><b>Common metrics</b></td></tr>
+<tr><th>Portable</th><th class="fragment" data-fragment="semconv">GenAI semantic conventions</th></tr>
+<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="semconv"><b>Standard span and attribute names</b></td></tr>
+<tr><td>Each library records prompts and responses its own way</td><td class="fragment" data-fragment="semconv"><b>Structured inputs and outputs</b></td></tr>
+<tr><td>Each library has its own content-capture switch</td><td class="fragment" data-fragment="semconv"><b>One content-capture setting</b></td></tr>
+<tr><td>No AI metrics, so counting tokens meant querying traces</td><td class="fragment" data-fragment="semconv"><b>Standard token and latency metrics</b></td></tr>
+<tr><th>High-quality</th><th class="fragment" data-fragment="instr">Instrumentation</th></tr>
+<tr class="later"><td>Duplicate spans and a broken trace</td><td class="fragment" data-fragment="instr">Coming up</td></tr>
 </tbody>
 </table>
 
