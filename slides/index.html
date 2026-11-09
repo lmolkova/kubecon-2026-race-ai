@@ -586,7 +586,7 @@
         }
       });
       await mermaid.run({ nodes: [...deck.querySelectorAll(".mermaid")] });
-      for (const img of deck.querySelectorAll('img[src*="aspire-parent-gap.svg"]')) {
+      for (const img of deck.querySelectorAll('img[src*="aspire-parent-gap.svg"], img[src*="aspire-span-noise.svg"]')) {
         const res = await fetch(img.src, { cache: "no-store" });
         if (res.ok) {
           const wrap = document.createElement("div");

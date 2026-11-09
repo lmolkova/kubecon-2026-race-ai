@@ -1,0 +1,107 @@
+<svg id="otel-waterfall-svg" xmlns="http://www.w3.org/2000/svg" width="1260" height="640" viewBox="0 0 1260 640" role="img" aria-labelledby="otel-waterfall-title otel-waterfall-desc">
+<title id="otel-waterfall-title">Trace from OpenTelemetry instrumentations</title>
+<desc id="otel-waterfall-desc">POST /run contains invoke_workflow diagnose_workload. Chat spans are collapsed, hiding the HTTP client span under each. The inspect_workload tool runs the diagnostic agent. The consult_runbook tool's HTTP client span stays expanded: the runbook service's server, workflow, and chat spans sit under it in the same trace. Names and nesting follow trace 36834b4c2a254ac26e29cecc1976d634 from the demo with OpenTelemetry instrumentations. Bar positions follow the matching spans of the slide 5 capture on the same 0 to 0.7 second axis. The HTTP client span is labeled POST 200. Blue identifies diagnostic-agent spans; amber identifies runbook spans.</desc>
+<metadata>{"kind":"trace-redraw","structure_source":{"trace_id":"36834b4c2a254ac26e29cecc1976d634","demo":"compose.otel.yaml","spans":16},"timing_source":{"kind":"screenshot-aligned","trace_id":"b2fb5dc7fc85244d41a7f3667beaec03","source":"aspire-waterfall.png","source_axis_pixels":[875,1829],"axis_pixels":[700,1240],"ticks":["0s","0.17s","0.35s","0.52s","0.7s"],"precision":"Approximate screenshot geometry, not recovered OTLP timestamps."},"rows":[{"name":"POST /run","scope":"opentelemetry.instrumentation.fastapi","depth":0,"service":"diagnostic-agent","timing_source_row":0,"timing_source_bar_bounds":[875,1829]},{"name":"invoke_workflow diagnose_workload","scope":"opentelemetry.instrumentation.genai.langchain","depth":1,"service":"diagnostic-agent","timing_source_row":1,"timing_source_bar_bounds":[1315,1828]},{"name":"chat gpt-4.1","scope":"opentelemetry.instrumentation.genai.langchain","depth":2,"service":"diagnostic-agent","collapsed":true,"hidden_children":[{"otel_name":"POST","scope":"opentelemetry.instrumentation.httpx"}],"timing_source_row":3,"timing_source_bar_bounds":[1318,1337]},{"name":"execute_tool inspect_workload","scope":"opentelemetry.instrumentation.genai.langchain","depth":2,"service":"diagnostic-agent","timing_source_row":6,"timing_source_bar_bounds":[1339,1392]},{"name":"invoke_agent diagnostic","scope":"opentelemetry.instrumentation.genai.langchain","depth":3,"service":"diagnostic-agent","timing_source_row":7,"timing_source_bar_bounds":[1342,1392]},{"name":"chat claude-sonnet-4-6","scope":"opentelemetry.instrumentation.genai.langchain","depth":4,"service":"diagnostic-agent","collapsed":true,"hidden_children":[{"otel_name":"anthropic.messages.create","scope":"com.anthropic.sdk.python"}],"timing_source_row":9,"timing_source_bar_bounds":[1344,1391]},{"name":"execute_tool consult_runbook","scope":"opentelemetry.instrumentation.genai.langchain","depth":2,"service":"diagnostic-agent","timing_source_row":10,"timing_source_bar_bounds":[1345,1822]},{"name":"POST 200","otel_name":"POST","scope":"opentelemetry.instrumentation.httpx","depth":3,"service":"diagnostic-agent","timing_source_row":15,"timing_source_bar_bounds":[1351,1822]},{"name":"POST /runbook","scope":"opentelemetry.instrumentation.fastapi","depth":4,"service":"runbook","timing_source_row":16,"timing_source_bar_bounds":[1354,1828]},{"name":"invoke_workflow runbook","scope":"opentelemetry.instrumentation.genai.langchain","depth":5,"service":"runbook","timing_source_row":17,"timing_source_bar_bounds":[1362,1821]},{"name":"chat gpt-4.1-mini","scope":"opentelemetry.instrumentation.genai.openai","depth":6,"service":"runbook","collapsed":true,"hidden_children":[{"otel_name":"POST","scope":"opentelemetry.instrumentation.httpx"}],"timing_source_row":19,"timing_source_bar_bounds":[1812,1820]},{"name":"chat gpt-4.1","scope":"opentelemetry.instrumentation.genai.langchain","depth":2,"service":"diagnostic-agent","collapsed":true,"hidden_children":[{"otel_name":"POST","scope":"opentelemetry.instrumentation.httpx"}],"timing_source_row":12,"timing_source_bar_bounds":[1824,1827]}]}</metadata>
+<style>
+  #otel-waterfall-svg text { font-family: Arial, sans-serif; fill: #172b4d; }
+  #otel-waterfall-svg .span-name { font-size: 26px; }
+  #otel-waterfall-svg .service { font-size: 23px; }
+  #otel-waterfall-svg .column-heading { font-size: 21px; fill: #596579; }
+  #otel-waterfall-svg .tree { fill: none; stroke: #ccd3df; stroke-width: 2; }
+  #otel-waterfall-svg .grid { fill: none; stroke: #e5e9f0; }
+</style>
+<rect width="1260" height="640" fill="white"/>
+<text x="40" y="28" class="column-heading">Name</text>
+<text x="506" y="28" class="column-heading">Service</text>
+<rect class="service-area" x="136" y="334" width="1108" height="108" rx="4" fill="#fdf1d0"/>
+<path class="grid" d="M700 38V484"/>
+<text x="700" y="28" text-anchor="start" class="column-heading">0s</text>
+<path class="grid" d="M835 38V484"/>
+<text x="835" y="28" text-anchor="middle" class="column-heading">0.17s</text>
+<path class="grid" d="M970 38V484"/>
+<text x="970" y="28" text-anchor="middle" class="column-heading">0.35s</text>
+<path class="grid" d="M1105 38V484"/>
+<text x="1105" y="28" text-anchor="middle" class="column-heading">0.52s</text>
+<path class="grid" d="M1240 38V484"/>
+<text x="1240" y="28" text-anchor="end" class="column-heading">0.7s</text>
+<path class="tree" d="M50 77V100 M50 100H58"/>
+<path class="tree" d="M78 113V460 M78 136H86 M78 172H86 M78 280H86 M78 460H86"/>
+<path class="tree" d="M106 185V208 M106 208H114"/>
+<path class="tree" d="M134 221V244 M134 244H142"/>
+<path class="tree" d="M106 293V316 M106 316H114"/>
+<path class="tree" d="M134 329V352 M134 352H142"/>
+<path class="tree" d="M162 365V388 M162 388H170"/>
+<path class="tree" d="M190 401V424 M190 424H198"/>
+<g class="trace-row" data-depth="0">
+<g class="server-icon" transform="translate(24 56)" stroke="#425cc7" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
+<text x="40" y="72" class="span-name">POST /run</text>
+<text x="506" y="72" class="service">diagnostic-agent</text>
+<rect class="bar" x="700" y="56" width="540" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="1">
+<rect class="service-marker" x="54" y="91" width="4" height="18" fill="#425cc7"/>
+<text x="68" y="108" class="span-name">invoke_workflow diagnose_workload</text>
+<text x="506" y="108" class="service">diagnostic-agent</text>
+<rect class="bar" x="949.06" y="92" width="290.38" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="2">
+<rect class="service-marker" x="82" y="127" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="144" class="span-name">▸ chat gpt-4.1</text>
+<text x="506" y="144" class="service">diagnostic-agent</text>
+<rect class="bar" x="950.75" y="128" width="10.75" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="2">
+<rect class="service-marker" x="82" y="163" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="180" class="span-name">execute_tool inspect_workload</text>
+<text x="506" y="180" class="service">diagnostic-agent</text>
+<rect class="bar" x="962.64" y="164" width="30" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="3">
+<rect class="service-marker" x="110" y="199" width="4" height="18" fill="#425cc7"/>
+<text x="124" y="216" class="span-name">invoke_agent diagnostic</text>
+<text x="506" y="216" class="service">diagnostic-agent</text>
+<rect class="bar" x="964.34" y="200" width="28.3" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="4">
+<rect class="service-marker" x="138" y="235" width="4" height="18" fill="#425cc7"/>
+<text x="152" y="252" class="span-name">▸ chat claude-sonnet-4-6</text>
+<text x="506" y="252" class="service">diagnostic-agent</text>
+<rect class="bar" x="965.47" y="236" width="26.6" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="2">
+<rect class="service-marker" x="82" y="271" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="288" class="span-name">execute_tool consult_runbook</text>
+<text x="506" y="288" class="service">diagnostic-agent</text>
+<rect class="bar" x="966.04" y="272" width="270" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="3">
+<rect class="service-marker" x="110" y="307" width="4" height="18" fill="#425cc7"/>
+<text x="124" y="324" class="span-name">POST 200</text>
+<text x="506" y="324" class="service">diagnostic-agent</text>
+<rect class="bar" x="969.43" y="308" width="266.6" height="17" rx="4" fill="#425cc7"/>
+</g>
+<g class="trace-row" data-depth="4">
+<g class="server-icon" transform="translate(136 344)" stroke="#f5a800" fill="none" stroke-width="1.5"><rect width="10" height="16" rx="1.5"/><path d="M2 5H8M2 9H8M2 13H5"/></g>
+<text x="152" y="360" class="span-name">POST /runbook</text>
+<text x="506" y="360" class="service">runbook</text>
+<rect class="bar" x="971.13" y="344" width="268.3" height="17" rx="4" fill="#f5a800"/>
+</g>
+<g class="trace-row" data-depth="5">
+<rect class="service-marker" x="166" y="379" width="4" height="18" fill="#f5a800"/>
+<text x="180" y="396" class="span-name">invoke_workflow runbook</text>
+<text x="506" y="396" class="service">runbook</text>
+<rect class="bar" x="975.66" y="380" width="259.81" height="17" rx="4" fill="#f5a800"/>
+</g>
+<g class="trace-row" data-depth="6">
+<rect class="service-marker" x="194" y="415" width="4" height="18" fill="#f5a800"/>
+<text x="208" y="432" class="span-name">▸ chat gpt-4.1-mini</text>
+<text x="506" y="432" class="service">runbook</text>
+<rect class="bar" x="1230.38" y="416" width="4.53" height="17" rx="2" fill="#f5a800"/>
+</g>
+<g class="trace-row" data-depth="2">
+<rect class="service-marker" x="82" y="451" width="4" height="18" fill="#425cc7"/>
+<text x="96" y="468" class="span-name">▸ chat gpt-4.1</text>
+<text x="506" y="468" class="service">diagnostic-agent</text>
+<rect class="bar" x="1237.17" y="452" width="2" height="17" rx="1" fill="#425cc7"/>
+</g>
+</svg>

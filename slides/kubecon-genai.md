@@ -8,19 +8,39 @@ KubeCon + CloudNativeCon North America 2026
 
 ---
 
-<!-- layout: diagram -->
-
-# Our expectations
-
-![Expected waterfall with capture-aligned timing: workflow, diagnostic agent, and HTTP client/server spans connecting the runbook service](assets/expected-waterfall.svg)
+# The promise of OpenTelemetry
 
 ---
 
 <!-- layout: diagram -->
 
-# The reality
+# Our application
 
-![All 22 spans from the saved Aspire trace, redrawn as a waterfall with captured nesting, services, and timing](assets/aspire-waterfall.svg)
+Investigates Kubernetes incidents: *"Why is checkout restarting, and what should I do?"*
+
+![Workflow, diagnostic agent, and runbook service architecture](assets/application-architecture.svg?v=2)
+
+---
+
+<!-- layout: branded-transition -->
+
+# Demo
+
+---
+
+<!-- layout: diagram -->
+
+# Three flavors, one broken trace
+
+![Captured trace with the first model call and tool call expanded](assets/aspire-span-noise.svg)
+
+---
+
+<!-- layout: diagram -->
+
+# One standard
+
+![Trace from OpenTelemetry instrumentations: model calls collapsed, and the runbook HTTP call expanded into the runbook service in the same trace](assets/otel-waterfall.svg?v=3)
 
 ---
 
@@ -56,7 +76,7 @@ WHERE trace_id = :trace_id
 
 # How did we instrument the application?
 
-![Workflow, diagnostic agent, and runbook service with OpenInference, native OTel, and LangSmith instrumentation](assets/instrumentation-architecture.svg)
+![Workflow, diagnostic agent, and runbook service with OpenInference, native OTel, and LangSmith instrumentation](assets/instrumentation-architecture.svg?v=2)
 
 ---
 
@@ -85,14 +105,6 @@ FROM calls;
 <tbody><tr><td>5</td><td>900</td></tr></tbody>
 </table>
 </div>
-
----
-
-<!-- layout: diagram -->
-
-# Why did the agent give bad advice?
-
-![Collapsed trace showing consult_runbook with no children and the detached runbook subtree at the bottom of the trace](assets/aspire-parent-gap.svg?v=collapsed)
 
 ---
 
@@ -209,10 +221,7 @@ FROM calls;
 <tbody>
 <tr><td>Input / output tokens</td><td class="fragment" data-fragment="data"><pre><code>sum(increase({"gen_ai.client.inference.usage.input_tokens"}[5m]))
 sum(increase({"gen_ai.client.inference.usage.output_tokens"}[5m]))</code></pre></td></tr>
-<tr><td>Cache usage</td><td class="fragment" data-fragment="data"><pre><code>sum(increase({"gen_ai.client.inference.usage.cache_read.input_tokens"}[5m]))
-sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</code></pre></td></tr>
-<tr><td>Input tokens by modality</td><td class="fragment" data-fragment="data"><pre><code>sum by ("gen_ai.token.modality") (increase(
-  {"gen_ai.client.inference.usage.input_tokens"}[5m]))</code></pre></td></tr>
+<tr><td>Cached input tokens</td><td class="fragment" data-fragment="data"><pre><code>sum(increase({"gen_ai.client.inference.usage.cache_read.input_tokens"}[5m]))</code></pre></td></tr>
 <tr><td>p95 time to first chunk</td><td class="fragment" data-fragment="data"><pre><code>histogram_quantile(0.95, sum(rate(
   {"gen_ai.client.inference.time_to_first_chunk"}[5m])))</code></pre></td></tr>
 <tr><td>p95 duration by operation</td><td class="fragment" data-fragment="data"><pre><code>histogram_quantile(0.95,
@@ -227,26 +236,26 @@ sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</c
 
 ---
 
-<!-- layout: branded-transition -->
-
-# From conventions to instrumentation
-
----
-
 # GenAI observability in 2026
 
 <ol class="project-timeline" aria-label="2026 project milestones">
 <li><div><time>February</time><p>GenAI support in OTel eBPF instrumentation</p></div></li>
 <li><div><time>March</time><p>OpenLLMetry adopts GenAI conventions</p></div></li>
-<li><div><time>May</time><p>Dedicated GenAI repositories</p><p>AAIF observability working group</p><p>OpenInference GenAI conventions export</p></div></li>
-<li><div><time>June</time><p>OpenInference instrumentation donated to OTel</p></div></li>
-<li><div><time>July</time><p>Python GenAI beta</p><p>Go GenAI instrumentation</p></div></li>
-<li><div><time>August</time><p>GenAI conformance tooling</p></div></li>
-<li><div><time>September</time><p>GenAI semconv stabilization starts</p><p>GenAI utilities for JavaScript</p></div></li>
+<li><div><time>May</time><p>Dedicated GenAI repositories</p></div></li>
+<li><div><time>June</time><p>OpenInference adopts conventions, contributes code</p></div></li>
+<li><div><time>July</time><p>Python GenAI beta</p><p>Go compile-time GenAI instrumentation</p></div></li>
+<li><div><time>August</time><p>Conformance tests</p></div></li>
+<li><div><time>September</time><p>GenAI semconv stabilization starts</p></div></li>
 <li><div><time>October-November</time><p>Native Anthropic tracing</p><p>More Java and JavaScript integrations</p></div></li>
 </ol>
 
-<!-- Sources and qualifications: sources.md, "Project timeline: slide 16". Milestones are selected events, spaced evenly rather than to a calendar scale. -->
+<!-- Sources and qualifications: sources.md, "Project timeline: slide 17". Milestones are selected events, spaced evenly rather than to a calendar scale. -->
+
+---
+
+<!-- layout: branded-transition -->
+
+# From conventions to instrumentation
 
 ---
 
@@ -268,18 +277,20 @@ sum(increase({"gen_ai.client.inference.usage.cache_write.input_tokens"}[5m]))</c
 
 ```python
 def traced_create(wrapped, instance, args, kwargs):
-    invocation = handler.inference(
+    # Starts the span; on exit ends it and
+    # records metrics and errors
+    with handler.inference(
         provider="anthropic", request_model=kwargs["model"]
-    )
-    invocation.input_messages = get_input_messages(kwargs)
-    try:
+    ) as invocation:
+
+        # Map Anthropic request to GenAI types
+        set_request_attributes(invocation, kwargs)
+
         result = wrapped(*args, **kwargs)
-    except BaseException as exc:
-        invocation.fail(exc)
-        raise
-    set_response_attributes(invocation, result)
-    invocation.stop()
-    return result
+
+        # Map response: model, usage, finish reasons
+        set_response_attributes(invocation, result)
+        return result
 ```
 
 </div>
@@ -295,7 +306,7 @@ def traced_create(wrapped, instance, args, kwargs):
 </div>
 </div>
 
-<!-- Simplified from opentelemetry-instrumentation-genai-anthropic patch.py (messages_create + _create_invocation): streaming, system instructions, tools, server address, beta resources, and raw responses omitted. -->
+<!-- Simplified from opentelemetry-instrumentation-genai-anthropic patch.py (messages_create + _create_invocation): set_request_attributes and set_response_attributes stand in for the request and response mapping; streaming, server address, beta resources, and raw responses omitted. The invocation's context manager calls stop() or fail() on exit; upstream calls them explicitly so streamed responses can finish after the call returns. -->
 
 
 ---
@@ -327,6 +338,39 @@ def traced_create(wrapped, instance, args, kwargs):
 <!-- layout: branded-transition -->
 
 # Every instrumentation needs conformance tests
+
+---
+
+# OpenTelemetry Weaver
+
+[open-telemetry/weaver](https://github.com/open-telemetry/weaver)
+
+<div class="adapter-grid" style="grid-template-columns: 1fr auto;">
+<div>
+
+- **Conventions** defined in machine-readable YAML
+- **Weaver** validates schemas and generates docs &amp; code
+- **Live check** verifies OTLP telemetry against the schema:
+  - required attributes, allowed attributes, types &amp; enums
+
+</div>
+<div>
+
+```yaml
+file_format: definition/2
+spans:
+  - type: gen_ai.client.inference
+    kind: client
+    brief: Client call to a GenAI model
+    attributes:
+      - ref: gen_ai.operation.name
+      - ref: gen_ai.provider.name
+      - ref: gen_ai.request.model
+      - ref: gen_ai.usage.input_tokens
+```
+
+</div>
+</div>
 
 ---
 
@@ -389,40 +433,6 @@ weaver registry live-check \
 
 ---
 
-# OpenTelemetry Weaver
-
-[open-telemetry/weaver](https://github.com/open-telemetry/weaver)
-
-<div class="adapter-grid" style="grid-template-columns: 1fr auto;">
-<div>
-
-- **Conventions** defined in machine-readable YAML
-- **Weaver** validates schemas and generates docs &amp; code
-- **Live check** verifies OTLP telemetry against the schema:
-  - required attributes, allowed attributes, types &amp; enums
-
-</div>
-<div>
-
-```yaml
-groups:
-  - id: span.gen_ai.client.inference
-    type: span
-    span_kind: client
-    attributes:
-      - ref: gen_ai.operation.name
-        requirement_level: required
-      - ref: gen_ai.provider.name
-        requirement_level: required
-      - ref: gen_ai.request.model
-      - ref: gen_ai.usage.input_tokens
-```
-
-</div>
-</div>
-
----
-
 # One library, five instrumentations, different spans
 
 <table class="conformance-grid" aria-label="Attributes on the gen_ai.client.inference span emitted by five Python instrumentations of the Anthropic SDK">
@@ -478,7 +488,7 @@ groups:
 </section>
 </div>
 
-<!-- Sources and qualifications: sources.md, "Roadmap: slide 26". Dates are targets; the middle and right columns are direction, not commitments. -->
+<!-- Sources and qualifications: sources.md, "Roadmap: slide 28". Dates are targets; the middle and right columns are direction, not commitments. -->
 
 ---
 
