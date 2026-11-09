@@ -126,7 +126,7 @@ FROM calls;
 <tr><td>Each library has its own content-capture switch</td><td class="fragment" data-fragment="semconv"><b>One content-capture setting</b></td></tr>
 <tr><td>No AI metrics, so counting tokens meant querying traces</td><td class="fragment" data-fragment="semconv"><b>Standard token and latency metrics</b></td></tr>
 <tr><th>High-quality</th><th class="fragment" data-fragment="instr">Instrumentation</th></tr>
-<tr class="later"><td>Duplicate spans and a broken trace</td><td class="fragment" data-fragment="instr">Coming up</td></tr>
+<tr class="later"><td>Duplicate spans and a broken trace</td><td class="fragment" data-fragment="instr">Later in the talk</td></tr>
 </tbody>
 </table>
 
