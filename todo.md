@@ -1,5 +1,48 @@
 # Slide TODOs
 
+Slide numbers match the viewer counter, where the cover is slide 1.
+
+## Slides 2-6 (Opening and demo)
+
+- [ ] Slide 2: Populate "The promise of OpenTelemetry" slide (consistent telemetry). Keep empty for now.
+- [x] Slide 3: Diagram for the demo application without instrumentations.
+- [x] Slide 4: Demo.
+- [x] Slide 5: Readable trace walkthrough with multi-step click (`fragment` steps).
+- [x] Fold "Why did the agent give bad advice?" into slide 5 and delete it.
+- [x] Swap slides 5 and 6; add HTTP spans from a real OTel trace to slide 6.
+- [x] Retitle slides 5 and 6: "Three flavors, one broken trace" and "One standard".
+
+## Slides 3 and 9 (Architecture diagrams)
+
+- [x] Label model calls OpenAI / Anthropic instead of ChatOpenAI / ChatAnthropic.
+
+## Slide 16 (Common metrics)
+
+- [x] Drop the cache write and tokens-by-modality queries; rename the cache row "Cached input tokens".
+
+## Slide 17 (2026 timeline)
+
+- [x] Move timeline before the instrumentation section.
+- [ ] Reframe the story: starts around March/April with the rise of agent platforms exposing the problem of incompatible telemetry flavors; timeline shows how we tackled it (conformance, stability effort).
+- [x] Move AAIF out of the May milestone to longer-term roadmap only.
+- [x] Merge OpenInference into a single milestone, phrased so it does not sound like the end of OpenInference.
+- [x] Drop JS GenAI utilities; label Go as compile-time and August as "Conformance tests".
+
+## Slide 20 (Inside an instrumentation)
+
+- [x] Trim the code snippet: context manager instead of try/except, `set_request_attributes` instead of the `input_messages` line, short comments.
+
+## Slides 24-25 (Weaver and conformance testing)
+
+- [x] Move OpenTelemetry Weaver (slide 24) before Conformance testing with Weaver (slide 25).
+- [x] Switch the Weaver YAML example to v2 schema.
+- [x] Drop requirement levels from the Weaver YAML; add a span brief.
+
+---
+
+# Completed
+
+Slide numbers in this section are from when each item was done.
 
 ## Slide 6:
 
