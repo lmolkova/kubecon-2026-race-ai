@@ -124,7 +124,7 @@ FROM calls;
 <tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="semconv"><b>Standard span and attribute names</b></td></tr>
 <tr><td>Each library records prompts and responses its own way</td><td class="fragment" data-fragment="semconv"><b>Structured inputs and outputs</b></td></tr>
 <tr><td>No AI metrics, so counting tokens meant querying traces</td><td class="fragment" data-fragment="semconv"><b>Standard token and latency metrics</b></td></tr>
-<tr><th>High-quality</th><th class="fragment" data-fragment="instr">Instrumentation</th></tr>
+<tr><th>High-quality</th><th class="fragment" data-fragment="instr">Instrumentation patterns</th></tr>
 <tr class="later"><td>Duplicate spans and a broken trace</td><td class="fragment" data-fragment="instr">Later in the talk</td></tr>
 </tbody>
 </table>
