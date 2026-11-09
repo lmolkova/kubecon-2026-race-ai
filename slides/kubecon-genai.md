@@ -122,8 +122,8 @@ FROM calls;
 <tbody>
 <tr><th colspan="2">Portable</th></tr>
 <tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="otel"><b>GenAI semantic conventions</b></td></tr>
+<tr><td>Each library records prompts and responses its own way</td><td class="fragment" data-fragment="otel"><b>Structured inputs and outputs</b></td></tr>
 <tr><th colspan="2">High-quality</th></tr>
-<tr><td>Duplicate spans, missing parents, and broken traces</td><td class="fragment" data-fragment="otel"><b>Context propagation</b>, suppression, and enrichment</td></tr>
 <tr><td>No AI metrics, so counting tokens meant querying traces</td><td class="fragment" data-fragment="otel"><b>Common metrics</b></td></tr>
 </tbody>
 </table>
