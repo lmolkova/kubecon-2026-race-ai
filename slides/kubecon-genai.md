@@ -121,7 +121,7 @@ FROM calls;
 <table class="mission-table">
 <tbody>
 <tr><th colspan="2">Portable</th></tr>
-<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="otel"><b>GenAI semantic conventions</b> + conformance tests</td></tr>
+<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="otel"><b>GenAI semantic conventions</b></td></tr>
 <tr><td>Each library configures content capture differently</td><td class="fragment" data-fragment="otel"><b>Standard content-capture settings</b></td></tr>
 <tr><th colspan="2">High-quality</th></tr>
 <tr><td>Duplicate spans, missing parents, and broken traces</td><td class="fragment" data-fragment="otel"><b>Context propagation</b>, suppression, and enrichment</td></tr>
