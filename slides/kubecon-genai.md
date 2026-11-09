@@ -116,7 +116,7 @@ FROM calls;
 
 <!-- layout: text -->
 
-# Back to the mission
+# Back to the OpenTelemetry mission
 
 <table class="mission-table">
 <tbody>
