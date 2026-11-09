@@ -8,7 +8,13 @@ KubeCon + CloudNativeCon North America 2026
 
 ---
 
+<!-- layout: quote -->
+
 # The promise of OpenTelemetry
+
+> To enable effective observability by making high-quality, portable telemetry ubiquitous.
+
+[open-telemetry/community](https://github.com/open-telemetry/community/blob/main/mission-vision-values.md#mission)
 
 ---
 
@@ -110,15 +116,16 @@ FROM calls;
 
 <!-- layout: text -->
 
-# How OpenTelemetry solves this
+# Back to the OpenTelemetry mission
 
-<table>
+<table class="mission-table">
 <tbody>
-<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="otel"><b>GenAI semantic conventions</b> + conformance tests</td></tr>
-<tr><td>Duplicate spans, missing parents, and broken traces</td><td class="fragment" data-fragment="otel"><b>Context propagation</b>, suppression, and enrichment</td></tr>
-<tr><td>Traces only - expensive to aggregate at scale</td><td class="fragment" data-fragment="otel"><b>Consistent signals</b>: spans and metrics</td></tr>
-<tr><td>Each library configures content capture differently</td><td class="fragment" data-fragment="otel"><b>Standard content-capture settings</b></td></tr>
-<tr><td>Prompts and tool outputs bloat traces</td><td class="fragment" data-fragment="otel"><b>Hooks</b> allowing to store content externally and link to it</td></tr>
+<tr><th>Portable</th><th class="fragment" data-fragment="semconv">GenAI semantic conventions</th></tr>
+<tr><td>Every library invents its own span and attribute names</td><td class="fragment" data-fragment="semconv"><b>Standard span and attribute names</b></td></tr>
+<tr><td>Each library records prompts and responses its own way</td><td class="fragment" data-fragment="semconv"><b>Structured inputs and outputs</b></td></tr>
+<tr><td>No AI metrics, so counting tokens meant querying traces</td><td class="fragment" data-fragment="semconv"><b>Standard token and latency metrics</b></td></tr>
+<tr><th>High-quality</th><th class="fragment" data-fragment="instr">Instrumentation patterns</th></tr>
+<tr class="later"><td>Duplicate spans and a broken trace</td><td class="fragment" data-fragment="instr">Later in the talk</td></tr>
 </tbody>
 </table>
 

@@ -1,5 +1,9 @@
 # Sources and notes
 
+## OpenTelemetry mission: slide 2
+
+- [Mission, vision, and values](https://github.com/open-telemetry/community/blob/main/mission-vision-values.md#mission), quoted verbatim with the first letter capitalized.
+
 ## Demo evidence: slides 3, 5-10, 13
 
 - Code: [demo](../demos/kubecon-genai/demo.py), [locked versions](../demos/kubecon-genai/uv.lock).
