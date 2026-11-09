@@ -4,7 +4,7 @@ Slide numbers match the viewer counter, where the cover is slide 1.
 
 ## Slides 2-6 (Opening and demo)
 
-- [ ] Slide 2: Populate "The promise of OpenTelemetry" slide (consistent telemetry). Keep empty for now.
+- [x] Slide 2: Populate "The promise of OpenTelemetry" slide with the OpenTelemetry mission.
 - [x] Slide 3: Diagram for the demo application without instrumentations.
 - [x] Slide 4: Demo.
 - [x] Slide 5: Readable trace walkthrough with multi-step click (`fragment` steps).

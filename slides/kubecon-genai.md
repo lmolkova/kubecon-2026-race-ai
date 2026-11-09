@@ -8,7 +8,13 @@ KubeCon + CloudNativeCon North America 2026
 
 ---
 
+<!-- layout: quote -->
+
 # The promise of OpenTelemetry
+
+> To enable effective observability by making high-quality, portable telemetry ubiquitous.
+
+[open-telemetry/community](https://github.com/open-telemetry/community/blob/main/mission-vision-values.md#mission)
 
 ---
 
