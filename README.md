@@ -1,18 +1,10 @@
 # The Race to Standardize AI Observability
 
-Talk materials by **Liudmila Molkova (Google)** and **Trask Stalnaker (Microsoft)**.
+Demo for the talk by **Liudmila Molkova (Google)** and **Trask Stalnaker (Microsoft)** at KubeCon + CloudNativeCon North America 2026, Salt Lake City.
 
-[Official session](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/program/schedule/?id=1246166): KubeCon + CloudNativeCon North America 2026, November 12, 13:50-14:20 MST, Salt Lake City. Observability track, any level.
-
-The repository name is `kubecon-2027-race-ai`; the linked session is on the 2026 schedule.
-
-## Start here
-
-- **[Slides](slides/kubecon-genai.md)**: the current Markdown deck, with screenshots, charts, SQL examples, and TODOs.
-- [Slide assets and sources](slides/README.md).
-- [Demo](demos/kubecon-genai/README.md): one application, mixed instrumentation and OTel variants.
-- [Research](kubecon-talk-research.md): adoption evidence, contributor statistics, and references.
-- [Outline](kubecon-talk-outline.md): planning material; the slides reflect the latest edits.
+- [Official session page](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/program/schedule/?id=1246166)
+- [Slides](https://docs.google.com/presentation/d/1nwmES8G-lnPtKkYeM_TrO1tkBLSkRjCOsPlz5rRYDiw/edit?usp=sharing)
+- [Demo details](demos/kubecon-genai/README.md): one application, mixed instrumentation and OTel variants.
 
 The talk follows a team trying to build dashboards from fragmented GenAI telemetry, then shows how semantic conventions, shared instrumentation utilities, and conformance testing help.
 
@@ -48,10 +40,6 @@ docker compose down
 docker compose -f compose.otel.yaml down
 ```
 
-## Editing the slides
-
-Edit `slides/kubecon-genai.md`. Slides use `---` separators, Mermaid diagrams, fenced code, and HTML layouts. Use a renderer that supports these features. Screenshots and charts are committed under `slides/assets/`, so viewing the deck does not require running the demo. TODOs remain visible; speaker notes have been removed.
-
 ## License
 
-[MIT](LICENSE) for the original talk materials and demo code. Referenced projects, dependencies, and third-party screenshots retain their respective licenses and trademarks.
+[MIT](LICENSE) for the demo code. Referenced projects and dependencies retain their respective licenses and trademarks.
