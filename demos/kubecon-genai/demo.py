@@ -69,9 +69,9 @@ def create_app(role):
                 requests.setdefault(run_id, []).append({
                     "model": model, "status": 503, "input_tokens": None, "output_tokens": None})
                 return JSONResponse({"type": "error", "error": {"message": "Injected local model outage", "type": "api_error"}}, status_code=503)
-            if model == "claude-sonnet-4-6":
+            if model == "claude-sonnet-5-5":
                 tokens, text = (200, 50), "checkout was OOMKilled; memory limit is 128Mi and peak usage is 192Mi."
-            elif model == "gpt-4.1-mini":
+            elif model == "gpt-6-luna":
                 tokens, text = (80, 20), "Inspect the memory regression; raise the limit only after checking cluster capacity."
             elif any(m.get("role") == "tool" for m in body["messages"]):
                 tokens, text = (300, 60), "Checkout exceeded its 128Mi memory limit. Investigate the regression and review capacity before changing limits."
@@ -116,7 +116,7 @@ def create_app(role):
                     """Inspect Kubernetes evidence for a workload."""
                     logger.info("Inspecting checkout: OOMKilled, limit 128Mi, peak 192Mi")
                     model = ChatAnthropic(
-                        model="claude-sonnet-4-6", base_url=MODEL_ROUTER,
+                        model="claude-sonnet-5-5", base_url=MODEL_ROUTER,
                         api_key="local-only", max_retries=0, max_tokens=256,
                         default_headers={"x-demo-run-id": run_id,
                                          "x-demo-fail": str(scenario == "tool-error").lower()},
@@ -142,7 +142,7 @@ def create_app(role):
 
                 with httpx.Client() as model_http:
                     model = ChatOpenAI(
-                        model="gpt-4.1", base_url=MODEL_ROUTER + "/v1",
+                        model="gpt-6.1-sol", base_url=MODEL_ROUTER + "/v1",
                         api_key="local-only", max_retries=0,
                         use_responses_api=False, http_client=model_http,
                         default_headers={"x-demo-run-id": run_id,

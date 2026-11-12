@@ -79,7 +79,7 @@ for scenario in ("mixed", "tool-error"):
         """, (result["trace_id"],)).fetchone()
         if not OTEL:
             assert {row["model"]: row["main_agent"] for row in normalized} == {
-                "gpt-4.1": None, "claude-sonnet-4-6": None, "gpt-4.1-mini": None
+                "gpt-6.1-sol": None, "claude-sonnet-5-5": None, "gpt-6-luna": None
             }, normalized
             # Preserve the observed callback-to-OTel context gap in the baseline.
             assert {row["tool"] for row in normalized} == {None, "inspect_workload"}, normalized
@@ -105,7 +105,7 @@ for scenario in ("mixed", "tool-error"):
         native = next(span for span in spans.values()
                       if span["scope"] == "com.anthropic.sdk.python")
         framework = spans[native["parent_id"]]
-        assert framework["name"] == "chat claude-sonnet-4-6", framework
+        assert framework["name"] == "chat claude-sonnet-5-5", framework
         assert framework["parent_id"] == agent["span_id"], framework
         for span in spans.values():
             attrs = json.loads(span["attrs"])
@@ -121,7 +121,7 @@ for scenario in ("mixed", "tool-error"):
                 ancestors.append(ancestor)
                 parent = ancestor["parent_id"]
             model = attrs.get("gen_ai.request.model")
-            expected_tool = {"claude-sonnet-4-6": "inspect_workload", "gpt-4.1-mini": "consult_runbook"}.get(model)
+            expected_tool = {"claude-sonnet-5-5": "inspect_workload", "gpt-6-luna": "consult_runbook"}.get(model)
             if expected_tool:
                 assert any(json.loads(a["attrs"]).get("gen_ai.tool.name") == expected_tool
                            for a in ancestors), (model, [a["name"] for a in ancestors])

@@ -3,8 +3,8 @@
 A Python LangGraph workflow calls local mock model APIs. Real instrumentations send
 traces, logs, and metrics to Aspire. No cloud account or model credentials needed.
 
-Model IDs: `gpt-4.1` for the agent, `claude-sonnet-4-6` for workload inspection,
-and `gpt-4.1-mini` for runbook advice. Responses and usage are local fixtures.
+Model IDs: `gpt-6.1-sol` for the agent, `claude-sonnet-5-5` for workload inspection,
+and `gpt-6-luna` for runbook advice. Responses and usage are local fixtures.
 Dependencies are locked in `uv.lock` and `runbook/uv.lock`; Aspire is pinned by image digest.
 
 ## Instrumentation
@@ -116,7 +116,7 @@ The diagnostic uses `create_agent` with `ChatAnthropic`. The OTel subtree is:
 ```text
 execute_tool inspect_workload
 └── invoke_agent diagnostic
-    └── chat claude-sonnet-4-6
+    └── chat claude-sonnet-5-5
         └── anthropic.messages.create
 ```
 
@@ -156,7 +156,7 @@ The two GPT-4.1 calls belong directly to the workflow, which OpenInference
 classifies as `CHAIN`; their null agent ancestry is expected.
 Normalization alone neither deduplicates inference spans nor repairs missing ancestry.
 HTTPX instrumentation is also enabled in runbook. In the OTel variant, its HTTP
-client span is a child of `chat gpt-4.1-mini`. In the LangSmith baseline, the HTTP
+client span is a child of `chat gpt-6-luna`. In the LangSmith baseline, the HTTP
 client span was exported in a different trace with an unexported parent.
 This is observed behavior in the locked versions, not an injected tracing fault.
 

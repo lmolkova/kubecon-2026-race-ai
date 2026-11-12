@@ -11,13 +11,13 @@
 - Orphan trace: `01a1a3cdcf8a74568f6fdd9c7c86e09f`, HTTP span `f88b071f40ee83f4`.
 - OpenTelemetry instrumentations trace: `36834b4c2a254ac26e29cecc1976d634`, from [compose.otel.yaml](../demos/kubecon-genai/compose.otel.yaml), 16 spans.
 - Two application services; local mocks; four successful model requests.
-- Model IDs: `gpt-4.1`, `claude-sonnet-4-6`, and `gpt-4.1-mini`.
+- Model IDs: `gpt-6.1-sol`, `claude-sonnet-5-5`, and `gpt-6-luna`.
 - Original Aspire screenshots recaptured in light mode on November 3, 2026; the full waterfall and separate orphan HTTP capture are retained in `assets/aspire-waterfall.png` and `assets/aspire-orphan-http.png`.
 - Slide 5 is a collapsed vector redraw of the saved main-trace capture, keeping displayed names, resources, nesting, and markers. It expands the first model call and the inspect_workload tool and hides the three root-level model HTTP spans and the separate orphan span. Original displayed durations are retained in SVG metadata, not a visible column. Bar shapes are traced from screenshot pixels; no exact start/end timestamps were recovered. Its three click steps box the expanded subtrees, the empty consult_runbook tool, and the detached runbook subtree, with an arrow to the intended parent; they do not change the captured hierarchy.
 - The three trace images on slides 5, 6, and 12 omit image titles, capture summaries, and footer captions. Provenance and interpretation remain in these notes and the SVG accessibility descriptions.
 - Slide 6's span names and nesting follow the OpenTelemetry instrumentations trace. Chat spans are collapsed, hiding the HTTP client span under each, like slide 5 hides its model HTTP spans; only the runbook call's HTTP client span is expanded. Its 12 bars follow the matching spans on slide 5's 0–0.7 s axis. These are screenshot positions, not recovered OTLP timestamps; the SVG metadata records the mapping, hidden children, and instrumentation scopes.
 - Slide 12's operation-coverage diagram retains illustrative timing and nesting; it is not a measured demo trace.
-- Slide 6 uses slide 5's layout, with the service column moved right to fit the longer names. HTTP client spans on slides 5 and 6 are labeled `POST 200`, Aspire's `HTTP POST 200` label without the prefix. The span hidden under `chat claude-sonnet-4-6` is the Anthropic SDK's native `anthropic.messages.create` span. Blue identifies diagnostic-agent and amber identifies runbook.
+- Slide 6 uses slide 5's layout, with the service column moved right to fit the longer names. HTTP client spans on slides 5 and 6 are labeled `POST 200`, Aspire's `HTTP POST 200` label without the prefix. The span hidden under `chat claude-sonnet-5-5` is the Anthropic SDK's native `anthropic.messages.create` span. Blue identifies diagnostic-agent and amber identifies runbook.
 - The query tool fetches OTLP JSON from Aspire into local SQLite without renaming or reparenting spans.
 - Two GPT-4.1 calls: 420 input / 90 output tokens, OpenInference schema.
 - ChatAnthropic also emits an OpenInference inference span: 200 / 50, duplicating the native Anthropic usage.

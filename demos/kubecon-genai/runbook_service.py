@@ -44,7 +44,7 @@ def create_app():
         with OpenAI(base_url=MODEL_ROUTER + "/v1", api_key="local-only", max_retries=0,
                     default_headers={"x-demo-run-id": payload["run_id"]}) as raw:
             client = prepare_openai(raw)
-            result = client.chat.completions.create(model="gpt-4.1-mini", messages=[
+            result = client.chat.completions.create(model="gpt-6-luna", messages=[
                 {"role": "user", "content": f"Recommend remediation for {payload['topic']}."}])
         logger.info("Runbook recommendation returned")
         return {"recommendation": result.choices[0].message.content}

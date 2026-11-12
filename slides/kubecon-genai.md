@@ -158,8 +158,8 @@ FROM calls;
 <tr style="--c: #d64545;"><th scope="row">gen_ai.agent.name</th><td>diagnostic</td></tr>
 <tr style="--c: #425cc7;"><th scope="row">gen_ai.operation.name</th><td>chat</td></tr>
 <tr style="--c: #425cc7;"><th scope="row">gen_ai.provider.name</th><td>openai</td></tr>
-<tr style="--c: #425cc7;"><th scope="row">gen_ai.request.model</th><td>gpt-4.1</td></tr>
-<tr style="--c: #425cc7;"><th scope="row">gen_ai.response.model</th><td>gpt-4.1</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.request.model</th><td>gpt-6.1-sol</td></tr>
+<tr style="--c: #425cc7;"><th scope="row">gen_ai.response.model</th><td>gpt-6.1-sol</td></tr>
 <tr style="--c: #425cc7;"><th scope="row">gen_ai.response.id</th><td>chatcmpl-4021efaa4f924ee6a425ecde938da86d</td></tr>
 <tr style="--c: #425cc7;"><th scope="row">gen_ai.response.finish_reasons</th><td>["tool_calls"]</td></tr>
 <tr style="--c: #f5a800;"><th scope="row">gen_ai.usage.input_tokens</th><td>120</td></tr>
@@ -200,7 +200,7 @@ FROM calls;
 # Conversation view
 
 <div class="aspire" role="group" aria-label="Aspire-style view of the final inference span">
-<div class="aspire-header"><span class="aspire-title">diagnostic-agent: chat gpt-4.1</span><span class="aspire-span-id">6483b37</span><span class="aspire-llm">LLM</span><span class="aspire-tabs"><span class="active">Input &amp; output</span><span>Tools 2</span><span>Details</span></span><span class="aspire-stats">Duration <b>1.88ms</b> · Tokens <b>360</b></span></div>
+<div class="aspire-header"><span class="aspire-title">diagnostic-agent: chat gpt-6.1-sol</span><span class="aspire-span-id">6483b37</span><span class="aspire-llm">LLM</span><span class="aspire-tabs"><span class="active">Input &amp; output</span><span>Tools 2</span><span>Details</span></span><span class="aspire-stats">Duration <b>1.88ms</b> · Tokens <b>360</b></span></div>
 <div class="aspire-body">
 <p class="aspire-section">Input</p>
 <div class="aspire-grid">
@@ -394,7 +394,7 @@ spans:
 from openai import OpenAI
 
 OpenAI().chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-6-luna",
     messages=[{
         "role": "user",
         "content": "Say hello",
