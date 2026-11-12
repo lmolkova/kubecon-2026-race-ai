@@ -1,6 +1,6 @@
 <svg id="span-noise-svg" xmlns="http://www.w3.org/2000/svg" width="1260" height="640" viewBox="0 0 1260 640" role="img" aria-labelledby="span-noise-title span-noise-desc">
 <title id="span-noise-title">Three flavors, one broken trace</title>
-<desc id="span-noise-desc">Captured demo trace with the first model call and the inspect_workload tool expanded and the other subtrees collapsed. Root-level model HTTP spans are hidden. Step 1 boxes the expanded model and tool subtrees, labeled Many spans, same scope. Step 2 replaces it with a dashed box on consult_runbook, labeled No child spans under tool. Step 3 boxes the detached runbook subtree at the bottom of the trace and draws an arrow back up to consult_runbook, labeled Detached - landed at root.</desc>
+<desc id="span-noise-desc">Captured demo trace with the first model call and the inspect_workload tool expanded and the other subtrees collapsed. Root-level model HTTP spans are hidden. Step 1 boxes the model and ChatOpenAI pair and the model and ChatAnthropic pair; the first is labeled Same model call, 2 spans. Step 2 replaces it with a dotted box on tools_condition labeled with a question mark. Step 3 replaces it with a dashed box on consult_runbook, labeled No child spans under tool. Step 4 boxes the detached runbook subtree at the bottom of the trace and draws an arrow back up to consult_runbook, labeled Detached.</desc>
 <metadata>{"kind":"screenshot-redraw-with-annotations","source_png_sha256":{"aspire-waterfall.png":"cebb81c3aaaf1b9b823c6259391757cb8f412d34394ea72103db219e544458ea"},"trace_id":"b2fb5dc7fc85244d41a7f3667beaec03","ticks":["0s","0.17s","0.35s","0.52s","0.7s"],"rows":[{"row":0,"name":"POST /run","depth":0,"duration":"0.7s","service":"diagnostic-agent"},{"row":1,"name":"diagnose_workload","depth":1,"duration":"0.38s","service":"diagnostic-agent"},{"row":2,"name":"model","depth":2,"duration":"15.35ms","service":"diagnostic-agent"},{"row":3,"name":"ChatOpenAI","depth":3,"duration":"14.15ms","service":"diagnostic-agent"},{"row":4,"name":"tools_condition","depth":3,"duration":"0.15ms","service":"diagnostic-agent"},{"row":5,"name":"tools","depth":2,"duration":"0.35s","service":"diagnostic-agent"},{"row":6,"name":"inspect_workload","depth":3,"duration":"38.59ms","service":"diagnostic-agent"},{"row":7,"name":"diagnostic","depth":4,"duration":"36.63ms","service":"diagnostic-agent"},{"row":8,"name":"model","depth":5,"duration":"35.47ms","service":"diagnostic-agent"},{"row":9,"name":"ChatAnthropic","depth":6,"duration":"34.7ms","service":"diagnostic-agent"},{"row":10,"name":"consult_runbook","depth":3,"duration":"0.35s","service":"diagnostic-agent"},{"row":11,"name":"model","depth":2,"duration":"3.2ms","service":"diagnostic-agent","collapsed":true},{"row":15,"name":"POST 200","depth":1,"duration":"0.34s","service":"diagnostic-agent"},{"row":16,"name":"POST /runbook","depth":2,"duration":"0.34s","service":"runbook"},{"row":17,"name":"runbook","depth":3,"duration":"0.34s","service":"runbook"},{"row":18,"name":"model","depth":4,"duration":"0.33s","service":"runbook","collapsed":true}],"hidden_rows":[12,13,14,19,20,21],"annotations":[{"step":1,"rows":[2,3,4,5,6,7,8,9],"label":"Many spans, same scope","hidden_from_step":2},{"step":2,"rows":[10],"label":"No child spans under tool"},{"step":3,"rows":[15,16,17,18],"label":"Detached - landed at root","intended_parent_row":10}]}</metadata>
 <style>
   #span-noise-svg text { font-family: Arial, sans-serif; fill: #172b4d; }
@@ -11,6 +11,7 @@
   #span-noise-svg .grid { fill: none; stroke: #e5e9f0; }
   #span-noise-svg .callout-badge { font-size: 21px; font-weight: 700; fill: #b42318; }
   #span-noise-svg #span-noise-step-1.shown:has(~ #span-noise-step-2.shown) { visibility: hidden; }
+  #span-noise-svg #span-noise-step-2.shown:has(~ #span-noise-step-3.shown) { visibility: hidden; }
 </style>
 <defs>
   <marker id="span-noise-red-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c62828"/></marker>
@@ -298,20 +299,26 @@
 </g>
 </g>
 <g id="span-noise-step-1" class="fragment" data-fragment="1">
-  <rect x="74" y="120" width="1170" height="288" rx="6" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
-  <rect x="646" y="299" width="282" height="32" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
-  <text x="658" y="322" class="callout-badge">Many spans, same scope</text>
+  <rect x="82" y="118" width="1162" height="74" rx="6" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <rect x="646" y="158" width="292" height="30" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
+  <text x="658" y="180" class="callout-badge">Same model call, 2 spans</text>
+  <rect x="166" y="334" width="1078" height="74" rx="6" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
 </g>
 <g id="span-noise-step-2" class="fragment" data-fragment="2">
+  <rect x="110" y="196" width="1134" height="34" rx="6" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="2 5"/>
+  <rect x="646" y="198" width="34" height="30" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
+  <text x="656" y="221" class="callout-badge">?</text>
+</g>
+<g id="span-noise-step-3" class="fragment" data-fragment="3">
   <rect x="102" y="406" width="1142" height="38" rx="6" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
   <rect x="646" y="409" width="282" height="32" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
   <text x="658" y="432" class="callout-badge">No child spans under tool</text>
 </g>
-<g id="span-noise-step-3" class="fragment" data-fragment="3">
+<g id="span-noise-step-4" class="fragment" data-fragment="4">
   <rect x="32" y="478" width="1212" height="146" rx="6" fill="none" stroke="#c62828" stroke-width="3.5"/>
   <path d="M32 500H10V424H98" fill="none" stroke="white" stroke-width="7" stroke-linejoin="round"/>
   <path data-intended-parent-row="10" d="M32 500H10V424H98" fill="none" stroke="#c62828" stroke-width="3.5" stroke-linejoin="round" marker-end="url(#span-noise-red-arrow)"/>
-  <rect x="646" y="484" width="282" height="32" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
-  <text x="658" y="507" class="callout-badge">Detached - landed at root</text>
+  <rect x="646" y="484" width="112" height="32" rx="6" fill="#fef3f2" stroke="#fecdca" stroke-width="1.5"/>
+  <text x="658" y="507" class="callout-badge">Detached</text>
 </g>
 </svg>
